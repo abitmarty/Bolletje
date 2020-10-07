@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BolletjeBolletje;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 class ReversiForm : Form
 {
+    // Visuals
     private Button buttonHelp;
     private Label labelTurn;
     private Label labelP1Name;
@@ -13,13 +15,15 @@ class ReversiForm : Form
     private Button buttonSettings;
     private Button buttonNewGame;
 
+    // Variables
+    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2");
+    private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name());
+
     public ReversiForm()
     {
         // Set at top to initialise components
         this.InitializeComponent();
         this.buttonSettings.Click += this.openSettings;
-
-        
     }
 
     static void Main()
@@ -30,7 +34,7 @@ class ReversiForm : Form
 
     public void openSettings(object obj, EventArgs pea)
     {
-        Settingsform screen = new Settingsform();
+        Settingsform screen = new Settingsform(currentSettings);
         screen.Show();
         Console.WriteLine("Settings");
     }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SettingsInitials.cs" />
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>
