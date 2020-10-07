@@ -38,8 +38,8 @@ class Settingsform : Form
         this.currentSettings.setP1Name(this.textBoxPlayer1.Text);
         this.currentSettings.setP2Name(this.textBoxPlayer2.Text);
 
-        this.currentSettings.setTilesX(Convert.ToInt32(this.textBoxXTiles.Text));
-        this.currentSettings.setTilesY(Convert.ToInt32(this.textBoxYTiles.Text));
+        this.currentSettings.setTilesX(Convert.ToInt32(this.textBoxXTiles.Text) - 1);
+        this.currentSettings.setTilesY(Convert.ToInt32(this.textBoxYTiles.Text) - 1);
     }
 
     private void setTextboxes()
