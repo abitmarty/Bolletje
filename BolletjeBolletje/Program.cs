@@ -39,7 +39,7 @@ class ReversiForm : Form
         Console.WriteLine("Settings");
     }
 
-    // int[,] fieldSize = new int [totalTiles];
+    //  int[,] fieldSize = new int [totalTiles];
 
     // fieldx * fieldy == totalTiles Ex. x6 * x6 = 36 tiles
     // totalTiles == total number of tiles
