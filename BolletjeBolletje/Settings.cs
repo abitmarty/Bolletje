@@ -27,12 +27,6 @@ class Settingsform : Form
 
     }
 
-    // TODO When creating new name game call this function current = this.
-    public SettingsInitials getSettings()
-    {
-        return this.currentSettings;
-    }
-
     public void saveSettings(Object obj, EventArgs ea)
     {
         this.currentSettings.setP1Name(textBoxPlayer1.Text);
