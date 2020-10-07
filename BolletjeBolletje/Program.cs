@@ -16,16 +16,16 @@ class ReversiForm : Form
     private Button buttonNewGame;
 
     // Variables
-    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2");
-    private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name());
+    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
+    private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY());
 
     public ReversiForm()
     {
         // Set at top to initialise components
         this.InitializeComponent();
         this.buttonSettings.Click += this.openSettings;
-
         this.buttonNewGame.Click += this.newGame;
+        this.setPlayerNames();
     }
 
     static void Main()
@@ -36,14 +36,19 @@ class ReversiForm : Form
 
     private void newGame(Object obj, EventArgs ea)
     {
+        this.setPlayerNames();
+    }
+
+    private void setPlayerNames()
+    {
         this.labelP1Name.Text = this.currentSettings.getP1Name();
+        this.labelP2Name.Text = this.currentSettings.getP2Name();
     }
 
     public void openSettings(object obj, EventArgs pea)
     {
         Settingsform screen = new Settingsform(currentSettings);
         screen.Show();
-        Console.WriteLine("Settings");
     }
 
     private void InitializeComponent()

@@ -11,6 +11,10 @@ class Settingsform : Form
     private Label labelPlayer1;
     private Button buttonSave;
     private Label labelPlayer2;
+    private Label labelXTiles;
+    private Label labelYTiles;
+    private TextBox textBoxXTiles;
+    private TextBox textBoxYTiles;
 
     // Variables
     private SettingsInitials currentSettings;
@@ -19,6 +23,8 @@ class Settingsform : Form
     {
         // Set at top to initialise components
         this.InitializeComponent();
+
+        // So the code can overwrite the currentsettings from the program.cs
         this.currentSettings = currentSettings;
 
         this.setTextboxes();
@@ -29,14 +35,23 @@ class Settingsform : Form
 
     public void saveSettings(Object obj, EventArgs ea)
     {
-        this.currentSettings.setP1Name(textBoxPlayer1.Text);
-        this.currentSettings.setP2Name(textBoxPlayer2.Text);
+        this.currentSettings.setP1Name(this.textBoxPlayer1.Text);
+        this.currentSettings.setP2Name(this.textBoxPlayer2.Text);
+
+        this.currentSettings.setTilesX(Convert.ToInt32(this.textBoxXTiles.Text));
+        this.currentSettings.setTilesY(Convert.ToInt32(this.textBoxYTiles.Text));
     }
 
     private void setTextboxes()
     {
+        // Player names
         this.textBoxPlayer1.Text = this.currentSettings.getP1Name();
         this.textBoxPlayer2.Text = this.currentSettings.getP2Name();
+
+        // X and Y tiles
+        // Do plus one to be user friendly
+        this.textBoxXTiles.Text = (this.currentSettings.getTilesX() + 1).ToString();
+        this.textBoxYTiles.Text = (this.currentSettings.getTilesY() + 1).ToString();
     }
 
     public void openSettings(object obj, EventArgs pea)
@@ -52,6 +67,10 @@ class Settingsform : Form
             this.labelPlayer1 = new System.Windows.Forms.Label();
             this.labelPlayer2 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.labelXTiles = new System.Windows.Forms.Label();
+            this.labelYTiles = new System.Windows.Forms.Label();
+            this.textBoxXTiles = new System.Windows.Forms.TextBox();
+            this.textBoxYTiles = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxPlayer1
@@ -88,16 +107,52 @@ class Settingsform : Form
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(297, 38);
+            this.buttonSave.Location = new System.Drawing.Point(297, 108);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
             this.buttonSave.Text = "buttonSave";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
+            // labelXTiles
+            // 
+            this.labelXTiles.AutoSize = true;
+            this.labelXTiles.Location = new System.Drawing.Point(144, 95);
+            this.labelXTiles.Name = "labelXTiles";
+            this.labelXTiles.Size = new System.Drawing.Size(35, 13);
+            this.labelXTiles.TabIndex = 8;
+            this.labelXTiles.Text = "X tiles";
+            // 
+            // labelYTiles
+            // 
+            this.labelYTiles.AutoSize = true;
+            this.labelYTiles.Location = new System.Drawing.Point(12, 95);
+            this.labelYTiles.Name = "labelYTiles";
+            this.labelYTiles.Size = new System.Drawing.Size(35, 13);
+            this.labelYTiles.TabIndex = 7;
+            this.labelYTiles.Text = "Y tiles";
+            // 
+            // textBoxXTiles
+            // 
+            this.textBoxXTiles.Location = new System.Drawing.Point(147, 111);
+            this.textBoxXTiles.Name = "textBoxXTiles";
+            this.textBoxXTiles.Size = new System.Drawing.Size(100, 20);
+            this.textBoxXTiles.TabIndex = 6;
+            // 
+            // textBoxYTiles
+            // 
+            this.textBoxYTiles.Location = new System.Drawing.Point(12, 111);
+            this.textBoxYTiles.Name = "textBoxYTiles";
+            this.textBoxYTiles.Size = new System.Drawing.Size(100, 20);
+            this.textBoxYTiles.TabIndex = 5;
+            // 
             // Settingsform
             // 
             this.ClientSize = new System.Drawing.Size(384, 361);
+            this.Controls.Add(this.labelXTiles);
+            this.Controls.Add(this.labelYTiles);
+            this.Controls.Add(this.textBoxXTiles);
+            this.Controls.Add(this.textBoxYTiles);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelPlayer2);
             this.Controls.Add(this.labelPlayer1);
