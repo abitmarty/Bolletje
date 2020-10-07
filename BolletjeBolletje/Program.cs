@@ -24,12 +24,19 @@ class ReversiForm : Form
         // Set at top to initialise components
         this.InitializeComponent();
         this.buttonSettings.Click += this.openSettings;
+
+        this.buttonNewGame.Click += this.newGame;
     }
 
     static void Main()
     {
         ReversiForm screen = new ReversiForm();
         Application.Run(screen);
+    }
+
+    private void newGame(Object obj, EventArgs ea)
+    {
+        this.labelP1Name.Text = this.currentSettings.getP1Name();
     }
 
     public void openSettings(object obj, EventArgs pea)
