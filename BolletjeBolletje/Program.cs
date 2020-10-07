@@ -39,6 +39,13 @@ class ReversiForm : Form
         Console.WriteLine("Settings");
     }
 
+    int[,] fieldSize = new int [totalTiles];
+
+    // fieldx * fieldy == totalTiles Ex. x6 * x6 = 36 tiles
+    // totalTiles == total number of tiles
+    // TODO totalTiles aanmaken
+
+
     private void InitializeComponent()
     {
             this.buttonNewGame = new System.Windows.Forms.Button();
