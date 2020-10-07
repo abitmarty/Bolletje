@@ -19,6 +19,11 @@ class ReversiForm : Form
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY());
 
+    public int tileWidth = 30;
+    public int tileHeight = 30;
+    public int diskWidth = 24;
+    public int diskHeight = 24;
+
     public ReversiForm()
     {
         // Set at top to initialise components
@@ -50,6 +55,26 @@ class ReversiForm : Form
         Settingsform screen = new Settingsform(currentSettings);
         screen.Show();
     }
+
+    //int[][] playField = new int [tilesx];
+    
+    // Declaring a value to a position in the playField
+    //playField [1][3] == 2
+
+
+    // tilesx * tilesy == totalTiles Ex. x6 * x6 = 36 tiles
+    // totalTiles == total number of tiles
+    // TODO totalTiles aanmaken
+
+
+
+
+
+
+
+
+
+
 
     private void InitializeComponent()
     {
