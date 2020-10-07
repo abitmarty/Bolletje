@@ -53,6 +53,7 @@ class ReversiForm : Form
     // TODO totalTiles aanmaken
 
 
+
     private void InitializeComponent()
     {
             this.buttonNewGame = new System.Windows.Forms.Button();
