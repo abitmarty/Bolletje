@@ -18,7 +18,7 @@ namespace BolletjeBolletje
             this.setP1Name(p1Name);
             this.setP2Name(p2Name);
             this.setTilesX(tilesX);
-            this.setTilesY(tiles);
+            this.setTilesY(tilesY);
         }
 
         public String getP1Name()
