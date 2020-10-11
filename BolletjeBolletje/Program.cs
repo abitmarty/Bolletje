@@ -33,7 +33,11 @@ class ReversiForm : Form
     public int tileHeight = 51;
     public int diskWidth = 24;
     public int diskHeight = 24;
-    private Panel panelGame;
+
+    private int rectangleWidth;
+    private int rectangleHeight;
+    private int rectangleX = 164;
+    private int rectangleY = 60;
 
     public ReversiForm()
     {
@@ -71,8 +75,8 @@ class ReversiForm : Form
 
     public void setScreenSize()
     {
-        int width = this.panelGame.Width + 200;
-        int height = this.panelGame.Height + 100;
+        int width = this.rectangleWidth + 200;
+        int height = this.rectangleHeight + 100;
         this.ClientSize = new System.Drawing.Size(width, height);
 
     }
@@ -83,27 +87,25 @@ class ReversiForm : Form
         int yTiles = this.currentSettings.getTilesY();
    
        
-        int panelWidth = this.tileWidth * (xTiles + 1) + 1;
-        int panelHeight = this.tileHeight * (yTiles + 1) + 1;
+        rectangleWidth = this.tileWidth * (xTiles + 1) + 1;
+        rectangleHeight = this.tileHeight * (yTiles + 1) + 1;
 
-        this.panelGame.Size = new System.Drawing.Size(panelWidth, panelHeight );
-        this.panelGame.BackColor = Color.White;
+        pea.Graphics.FillRectangle(Brushes.White, this.rectangleX, this.rectangleY, rectangleWidth, rectangleHeight);
 
         this.setScreenSize();
         this.drawGrid(obj, pea);
-
     }
 
     public void drawGrid(Object obj, PaintEventArgs pea)
     {
-        int defaultX = this.panelGame.Left;
-        int defaultY = this.panelGame.Top;
+        int defaultX = this.rectangleX;
+        int defaultY = this.rectangleY;
 
         Console.WriteLine(defaultX);
         Console.WriteLine(defaultY);
 
         // Vertical lines
-        pea.Graphics.DrawLine(Pens.Black, defaultX-10, defaultY, defaultX, this.panelGame.Height);
+        pea.Graphics.DrawLine(Pens.Black, defaultX-10, defaultY, defaultX, this.rectangleHeight);
         pea.Graphics.DrawLine(Pens.Black, 0, 0, 0, 150);
 
         // Horizontal lines
@@ -165,7 +167,6 @@ class ReversiForm : Form
             this.labelP2Points = new System.Windows.Forms.Label();
             this.labelP2Name = new System.Windows.Forms.Label();
             this.buttonSettings = new System.Windows.Forms.Button();
-            this.panelGame = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // buttonNewGame
@@ -241,17 +242,9 @@ class ReversiForm : Form
             this.buttonSettings.Text = "⚙";
             this.buttonSettings.UseVisualStyleBackColor = true;
             // 
-            // panelGame
-            // 
-            this.panelGame.Location = new System.Drawing.Point(164, 60);
-            this.panelGame.Name = "panelGame";
-            this.panelGame.Size = new System.Drawing.Size(266, 215);
-            this.panelGame.TabIndex = 0;
-            // 
             // ReversiForm
             // 
             this.ClientSize = new System.Drawing.Size(501, 429);
-            this.Controls.Add(this.panelGame);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.labelP2Points);
             this.Controls.Add(this.labelP2Name);
