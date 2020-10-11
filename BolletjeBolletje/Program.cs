@@ -106,8 +106,8 @@ class ReversiForm : Form
 
         // Vertical lines
         pea.Graphics.DrawLine(Pens.Black, this.rectangleX, this.rectangleY, this.rectangleX, this.rectangleHeight + this.rectangleY);
-        Console.WriteLine(this.currentSettings.getTilesX());
-        for (int x = 0; x <=  (this.currentSettings.getTilesX() + 1) * this.tileWidth; x++)
+
+        for (int x = 0; x <= (this.currentSettings.getTilesX() + 1) * this.tileWidth; x++)
         {
             if (x % 51 == 0)
             {
@@ -118,27 +118,22 @@ class ReversiForm : Form
             }
         }
 
-
-
-        // Horizontal lines
+            // Horizontal lines
         pea.Graphics.DrawLine(Pens.Black, this.rectangleX, this.rectangleY, this.rectangleWidth + this.rectangleX, this.rectangleY);
 
-        for (int x = 0; x < this.currentSettings.getTilesX(); x++)
+        for (int x = 0; x <= (this.currentSettings.getTilesY() + 1) * this.tileHeight; x++)
         {
-            int tempY = x + this.rectangleY;
 
             if (x % 51 == 0)
             {
-                pea.Graphics.DrawLine(Pens.Black, 0, 0, 0, 0);
+                int tempY = x + this.rectangleY;
+
+                pea.Graphics.DrawLine(Pens.Black, this.rectangleX, tempY, this.rectangleX, this.rectangleWidth + tempY);
+
 
             }
 
-
-
-
         }
-
-
     }
 
     //int[][] playField = new int [tilesx];
