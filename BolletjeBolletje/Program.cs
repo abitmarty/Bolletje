@@ -9,6 +9,7 @@
 using BolletjeBolletje;
 using System;
 using System.Drawing;
+using System.Windows.Controls.Panel
 using System.Windows.Forms;
 
 class ReversiForm : Form
@@ -68,10 +69,18 @@ class ReversiForm : Form
     {
         int xTiles = this.currentSettings.getTilesX();
         int yTiles = this.currentSettings.getTilesY();
+   
+
+        int tileWidth = 30;
+        int tileHeight = tileWidth;
+
+        Grid gameGrid = new Grid();
+        gameGrid.Width = xTiles * tileWidth;
+        gameGrid.Height = yTiles * tileHeight;
+        // gameGrid.HorizontalAlignment = HorizontalAlignment.Left;
+        // gameGrid.VerticalAlignment = VerticalAlignment.Top;
+        gameGrid.ShowGridLines = true;
     }
-
-
-    Grid gameGrid = new Grid();
 
 
 
