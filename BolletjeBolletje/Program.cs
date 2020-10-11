@@ -1,4 +1,13 @@
-﻿using BolletjeBolletje;
+﻿
+/*
+__  __  __  __
+|  \/  ||  \/  | ©
+| |\/| || |\/| | 
+|_|  |_||_|  |_|
+
+*/
+
+using BolletjeBolletje;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -66,14 +75,6 @@ class ReversiForm : Form
     // totalTiles == total number of tiles
     // TODO totalTiles aanmaken
 
-
-    /*
-    __  __  __  __
-   |  \/  ||  \/  | ©
-   | |\/| || |\/| | 
-   |_|  |_||_|  |_|
-
-   */
 
 
 
