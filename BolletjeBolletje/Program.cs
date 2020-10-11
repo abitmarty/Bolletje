@@ -64,6 +64,12 @@ class ReversiForm : Form
         screen.Show();
     }
 
+    public void example()
+    {
+        int xTiles = this.currentSettings.getTilesX();
+        int yTiles = this.currentSettings.getTilesY();
+    }
+
     //int[][] playField = new int [tilesx];
 
     // Declaring a value to a position in the playField
