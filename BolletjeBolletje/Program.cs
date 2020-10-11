@@ -70,6 +70,12 @@ class ReversiForm : Form
         int yTiles = this.currentSettings.getTilesY();
     }
 
+
+    Grid gameGrid = new Grid();
+
+
+
+
     //int[][] playField = new int [tilesx];
 
     // Declaring a value to a position in the playField
