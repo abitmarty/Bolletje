@@ -57,7 +57,7 @@ class ReversiForm : Form
     }
 
     //int[][] playField = new int [tilesx];
-    
+
     // Declaring a value to a position in the playField
     //playField [1][3] == 2
 
@@ -67,7 +67,13 @@ class ReversiForm : Form
     // TODO totalTiles aanmaken
 
 
+    /*
+    __  __  __  __
+   |  \/  ||  \/  | ©
+   | |\/| || |\/| | 
+   |_|  |_||_|  |_|
 
+   */
 
 
 
