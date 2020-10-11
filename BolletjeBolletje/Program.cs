@@ -105,17 +105,27 @@ class ReversiForm : Form
         Console.WriteLine(defaultY);
 
         // Vertical lines
-        pea.Graphics.DrawLine(Pens.Black, defaultX-10, defaultY, defaultX, this.rectangleHeight);
-        pea.Graphics.DrawLine(Pens.Black, 0, 0, 0, 150);
+        pea.Graphics.DrawLine(Pens.Black, this.rectangleX, this.rectangleY, this.rectangleX, this.rectangleHeight + this.rectangleY);
+        Console.WriteLine(this.currentSettings.getTilesX());
+        for (int x = 0; x <=  (this.currentSettings.getTilesX() + 1) * this.tileWidth; x++)
+        {
+            if (x % 51 == 0)
+            {
+                int tempX = x + this.rectangleX;
+                
+                pea.Graphics.DrawLine(Pens.Black, tempX, this.rectangleY, tempX, this.rectangleHeight + this.rectangleY);
+
+            }
+        }
+
+
 
         // Horizontal lines
-
-
+        pea.Graphics.DrawLine(Pens.Black, this.rectangleX, this.rectangleY, this.rectangleWidth + this.rectangleX, this.rectangleY);
 
         for (int x = 0; x < this.currentSettings.getTilesX(); x++)
         {
-
-
+            int tempY = x + this.rectangleY;
 
             if (x % 51 == 0)
             {
