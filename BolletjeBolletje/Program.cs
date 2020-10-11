@@ -29,11 +29,11 @@ class ReversiForm : Form
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY());
 
-    public int tileWidth = 30;
-    public int tileHeight = 30;
+    public int tileWidth = 51;
+    public int tileHeight = 51;
     public int diskWidth = 24;
-    private Panel panelGame;
     public int diskHeight = 24;
+    private Panel panelGame;
 
     public ReversiForm()
     {
@@ -42,7 +42,7 @@ class ReversiForm : Form
         this.buttonSettings.Click += this.openSettings;
         this.buttonNewGame.Click += this.newGame;
         this.setPlayerNames();
-        this.buildPanel();
+        this.Paint += this.buildPanel;
     }
 
     static void Main()
@@ -54,7 +54,7 @@ class ReversiForm : Form
     private void newGame(Object obj, EventArgs ea)
     {
         this.setPlayerNames();
-        this.buildPanel();
+        this.Invalidate();
     }
 
     private void setPlayerNames()
@@ -77,30 +77,49 @@ class ReversiForm : Form
 
     }
 
-    public void buildPanel()
+    public void buildPanel(Object obj, PaintEventArgs pea)
     {
         int xTiles = this.currentSettings.getTilesX();
         int yTiles = this.currentSettings.getTilesY();
    
-        int tileWidth = 51;
-        int tileHeight = tileWidth;
-        int panelWidth = tileWidth * (xTiles + 1);
-        int panelHeight = tileHeight * (yTiles + 1);
+       
+        int panelWidth = this.tileWidth * (xTiles + 1) + 1;
+        int panelHeight = this.tileHeight * (yTiles + 1) + 1;
 
         this.panelGame.Size = new System.Drawing.Size(panelWidth, panelHeight );
         this.panelGame.BackColor = Color.White;
 
         this.setScreenSize();
-        this.drawGrid(hier);
+        this.drawGrid(obj, pea);
 
     }
 
-    public void drawGrid(PaintEventArgs pea)
+    public void drawGrid(Object obj, PaintEventArgs pea)
     {
-        pea.Graphics.DrawLine(Pens.Black, 0,0 , 0,0);
+        int defaultX = this.panelGame.Left;
+        int defaultY = this.panelGame.Top;
+
+        Console.WriteLine(defaultX);
+        Console.WriteLine(defaultY);
+
+        // Vertical lines
+        pea.Graphics.DrawLine(Pens.Black, defaultX-10, defaultY, defaultX, this.panelGame.Height);
+        pea.Graphics.DrawLine(Pens.Black, 0, 0, 0, 150);
+
+        // Horizontal lines
+
+
 
         for (int x = 0; x < this.currentSettings.getTilesX(); x++)
         {
+
+
+
+            if (x % 51 == 0)
+            {
+                pea.Graphics.DrawLine(Pens.Black, 0, 0, 0, 0);
+
+            }
 
 
 
@@ -119,6 +138,14 @@ class ReversiForm : Form
     // tilesx * tilesy == totalTiles Ex. x6 * x6 = 36 tiles
     // totalTiles == total number of tiles
     // TODO totalTiles aanmaken
+
+
+    // New game start position
+
+
+
+    // 1 turn
+
 
 
 
