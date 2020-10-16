@@ -117,7 +117,7 @@ class ReversiForm : Form
             }
         }
 
-            // Horizontal lines
+        // Horizontal lines
         pea.Graphics.DrawLine(Pens.Black, this.rectangleX, this.rectangleY, this.rectangleWidth + this.rectangleX, this.rectangleY);
         for (int x = 0; x <= (this.currentSettings.getTilesY() + 1) * this.tileHeight; x++)
         {
@@ -127,7 +127,6 @@ class ReversiForm : Form
 
                 pea.Graphics.DrawLine(Pens.Black, this.rectangleX, tempY, this.rectangleWidth + this.rectangleX, tempY);
             }
-
         }
     }
 
