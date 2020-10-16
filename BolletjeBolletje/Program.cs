@@ -5,7 +5,6 @@
 |_|  |_||_|  |_|
 
 */
-// Try
 
 using BolletjeBolletje;
 using System;
@@ -166,12 +165,11 @@ class ReversiForm : Form
         }
 
         this.fillField();
+        this.drawField();
     }
 
     public void fillField()
     {
-        Console.WriteLine("");
-        Console.WriteLine("==========");
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
             String temp = "";
@@ -179,9 +177,12 @@ class ReversiForm : Form
             {
                 temp += this.field[x, y];
             }
-            Console.WriteLine(temp);
-            Console.WriteLine();
         }
+    }
+
+    public void drawField()
+    {
+
     }
 
     //int[][] playField = new int [tilesx];
