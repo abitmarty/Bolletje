@@ -31,13 +31,15 @@ class ReversiForm : Form
 
     public int tileWidth = 51;
     public int tileHeight = 51;
-    public int diskWidth = 24;
-    public int diskHeight = 24;
+    // public int diskWidth = 24;
+    // public int diskHeight = 24;
 
     private int rectangleWidth;
     private int rectangleHeight;
     private int rectangleX = 164;
     private int rectangleY = 60;
+
+    private int[,] field;
 
     public ReversiForm()
     {
@@ -47,6 +49,9 @@ class ReversiForm : Form
         this.buttonNewGame.Click += this.newGame;
         this.setPlayerNames();
         this.Paint += this.buildPanel;
+
+
+        field = new int[this.currentSettings.getTilesX(), this.currentSettings.getTilesY()];
     }
 
     static void Main()
@@ -78,7 +83,6 @@ class ReversiForm : Form
         int width = this.rectangleWidth + 200;
         int height = this.rectangleHeight + 100;
         this.ClientSize = new System.Drawing.Size(width, height);
-
     }
 
     public void buildPanel(Object obj, PaintEventArgs pea)
@@ -86,9 +90,8 @@ class ReversiForm : Form
         int xTiles = this.currentSettings.getTilesX();
         int yTiles = this.currentSettings.getTilesY();
    
-       
-        rectangleWidth = this.tileWidth * (xTiles + 1) + 1;
-        rectangleHeight = this.tileHeight * (yTiles + 1) + 1;
+        rectangleWidth = this.tileWidth * (xTiles + 1);
+        rectangleHeight = this.tileHeight * (yTiles + 1);
 
         pea.Graphics.FillRectangle(Brushes.White, this.rectangleX, this.rectangleY, rectangleWidth, rectangleHeight);
 
@@ -98,36 +101,31 @@ class ReversiForm : Form
 
     public void drawGrid(Object obj, PaintEventArgs pea)
     {
-        int defaultX = this.rectangleX;
-        int defaultY = this.rectangleY;
-
-        // Console.WriteLine(defaultX);
-        // Console.WriteLine(defaultY);
-
         // Vertical lines
-        pea.Graphics.DrawLine(Pens.Black, this.rectangleX, this.rectangleY, this.rectangleX, this.rectangleHeight + this.rectangleY);
         for (int x = 0; x <= (this.currentSettings.getTilesX() + 1) * this.tileWidth; x++)
         {
             if (x % this.tileWidth == 0)
             {
                 int tempX = x + this.rectangleX;
-                
                 pea.Graphics.DrawLine(Pens.Black, tempX, this.rectangleY, tempX, this.rectangleHeight + this.rectangleY);
 
             }
         }
 
         // Horizontal lines
-        pea.Graphics.DrawLine(Pens.Black, this.rectangleX, this.rectangleY, this.rectangleWidth + this.rectangleX, this.rectangleY);
         for (int x = 0; x <= (this.currentSettings.getTilesY() + 1) * this.tileHeight; x++)
         {
             if (x % this.tileHeight == 0)
             {
                 int tempY = x + this.rectangleY;
-
                 pea.Graphics.DrawLine(Pens.Black, this.rectangleX, tempY, this.rectangleWidth + this.rectangleX, tempY);
             }
         }
+    }
+
+    public void drawDisk(object obj, PaintEventArgs pea)
+    {
+
     }
 
     //int[][] playField = new int [tilesx];
