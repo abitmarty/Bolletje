@@ -136,18 +136,6 @@ class ReversiForm : Form
         this.drawGrid();
     }
 
-    public void drawDisk(Brush currentBrush, int x, int y)
-    {
-        int offsetX = 5;
-        int offsetY = offsetX;
-
-        // Devide by 51 ro roundoff to a full numer
-        int tempX = (x / 51) * 51 + offsetX;
-        int tempY = (y / 51) * 51 + offsetY;
-
-        panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
-    }
-
     private void panelGame_MouseClick(object sender, MouseEventArgs e)
     {
         int x = e.X;
@@ -182,7 +170,31 @@ class ReversiForm : Form
 
     public void drawField()
     {
+        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
+        {
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                if (this.field[x, y] == 1)
+                {
+                    this.drawDisk(Brushes.Red, x, y);
+                }
+                if (this.field[x, y] == 2)
+                {
+                    this.drawDisk(Brushes.Blue, x, y);
+                }
+            }
+        }
+    }
 
+    public void drawDisk(Brush currentBrush, int x, int y)
+    {
+        int offsetX = 5;
+        int offsetY = offsetX;
+
+        int tempX = x * 51 + offsetX;
+        int tempY = y * 51 + offsetY;
+
+        panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
     }
 
     //int[][] playField = new int [tilesx];
