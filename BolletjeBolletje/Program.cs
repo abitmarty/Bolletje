@@ -28,6 +28,7 @@ class ReversiForm : Form
     private Panel panelGame;
 
 
+
     // Variables
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY());
@@ -36,6 +37,8 @@ class ReversiForm : Form
     public int tileHeight = 51;
     // public int diskWidth = 24;
     // public int diskHeight = 24;
+    Brush coolBlue = new SolidBrush(Color.FromArgb(107, 200, 252));
+    Brush coolRed = new SolidBrush(Color.FromArgb(252,107, 107));
 
     private int rectangleX = 164;
     private int rectangleY = 60;
@@ -52,6 +55,8 @@ class ReversiForm : Form
         this.setPlayerNames();
         this.Paint += this.buildPanel;
         this.createFieldArray();
+        this.BackColor = Color.FromArgb(251, 239, 217);
+        this.startEnvironment();
     }
 
     static void Main()
@@ -66,12 +71,21 @@ class ReversiForm : Form
         this.Invalidate();
         this.panelGame.Invalidate();
         this.createFieldArray();
+        this.startEnvironment();
 
         this.play1Turn = true;
     }
 
     private void startEnvironment()
     {
+        int startX = this.currentSettings.getTilesX() / 2;
+        int startY = this.currentSettings.getTilesY() / 2;
+
+        this.field[startX , startY ] = 1;
+        this.field[startX , startY + 1] = 2;
+        this.field[startX + 1 , startY] = 2;
+        this.field[startX +1 , startY +1 ] = 1;
+
 
     }
 
@@ -187,11 +201,11 @@ class ReversiForm : Form
             {
                 if (this.field[x, y] == 1)
                 {
-                    this.drawDisk(Brushes.Blue, x, y);
+                    this.drawDisk(this.coolBlue, x, y);
                 }
                 if (this.field[x, y] == 2)
                 {
-                    this.drawDisk(Brushes.Red, x, y);
+                    this.drawDisk(this.coolRed, x, y);
                 }
             }
         }
