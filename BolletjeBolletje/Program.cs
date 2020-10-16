@@ -12,6 +12,8 @@ using System;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
+using System.Threading;
 
 class ReversiForm : Form
 {
@@ -24,6 +26,8 @@ class ReversiForm : Form
     private Label labelP2Name;
     private Button buttonSettings;
     private Button buttonNewGame;
+    private Panel panelGame;
+
 
     // Variables
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
@@ -34,12 +38,11 @@ class ReversiForm : Form
     // public int diskWidth = 24;
     // public int diskHeight = 24;
 
-    private int rectangleWidth;
-    private int rectangleHeight;
     private int rectangleX = 164;
     private int rectangleY = 60;
-
     private int[,] field;
+    Graphics panelGraphics;
+    private Boolean play1Turn = true;
 
     public ReversiForm()
     {
@@ -49,9 +52,7 @@ class ReversiForm : Form
         this.buttonNewGame.Click += this.newGame;
         this.setPlayerNames();
         this.Paint += this.buildPanel;
-
-
-        field = new int[this.currentSettings.getTilesX(), this.currentSettings.getTilesY()];
+        this.createFieldArray();
     }
 
     static void Main()
@@ -64,6 +65,13 @@ class ReversiForm : Form
     {
         this.setPlayerNames();
         this.Invalidate();
+        this.panelGame.Invalidate();
+        this.createFieldArray();
+    }
+
+    public void createFieldArray()
+    {
+        field = new int[this.currentSettings.getTilesX() + 1, this.currentSettings.getTilesY() + 1];
     }
 
     private void setPlayerNames()
@@ -80,8 +88,8 @@ class ReversiForm : Form
 
     public void setScreenSize()
     {
-        int width = this.rectangleWidth + 200;
-        int height = this.rectangleHeight + 100;
+        int width = this.panelGame.Width + 200;
+        int height = this.panelGame.Height + 100;
         this.ClientSize = new System.Drawing.Size(width, height);
     }
 
@@ -90,42 +98,90 @@ class ReversiForm : Form
         int xTiles = this.currentSettings.getTilesX();
         int yTiles = this.currentSettings.getTilesY();
    
-        rectangleWidth = this.tileWidth * (xTiles + 1);
-        rectangleHeight = this.tileHeight * (yTiles + 1);
+        int rectangleWidth = this.tileWidth * (xTiles + 1);
+        int rectangleHeight = this.tileHeight * (yTiles + 1);
 
-        pea.Graphics.FillRectangle(Brushes.White, this.rectangleX, this.rectangleY, rectangleWidth, rectangleHeight);
+        // Panel do + 1 for the last line
+        this.panelGame.Location = new Point(this.rectangleX, this.rectangleY);
+        this.panelGame.Size = new Size(rectangleWidth + 1, rectangleHeight + 1);
+        this.panelGame.BackColor = Color.White;
 
         this.setScreenSize();
-        this.drawGrid(obj, pea);
     }
 
-    public void drawGrid(Object obj, PaintEventArgs pea)
+    public void drawGrid()
     {
         // Vertical lines
         for (int x = 0; x <= (this.currentSettings.getTilesX() + 1) * this.tileWidth; x++)
         {
             if (x % this.tileWidth == 0)
             {
-                int tempX = x + this.rectangleX;
-                pea.Graphics.DrawLine(Pens.Black, tempX, this.rectangleY, tempX, this.rectangleHeight + this.rectangleY);
+                this.panelGraphics.DrawLine(Pens.Black, x, 0, x, this.panelGame.Height);
 
             }
         }
 
         // Horizontal lines
-        for (int x = 0; x <= (this.currentSettings.getTilesY() + 1) * this.tileHeight; x++)
+        for (int y = 0; y <= (this.currentSettings.getTilesY() + 1) * this.tileHeight; y++)
         {
-            if (x % this.tileHeight == 0)
+            if (y % this.tileHeight == 0)
             {
-                int tempY = x + this.rectangleY;
-                pea.Graphics.DrawLine(Pens.Black, this.rectangleX, tempY, this.rectangleWidth + this.rectangleX, tempY);
+                this.panelGraphics.DrawLine(Pens.Black, 0, y, this.panelGame.Width + this.rectangleX, y);
             }
         }
     }
 
-    public void drawDisk(object obj, PaintEventArgs pea)
+    private void createPanelGameField(object sender, PaintEventArgs e)
     {
+        panelGraphics = panelGame.CreateGraphics();
+        this.drawGrid();
+    }
 
+    public void drawDisk(Brush currentBrush, int x, int y)
+    {
+        int offsetX = 5;
+        int offsetY = offsetX;
+
+        // Devide by 51 ro roundoff to a full numer
+        int tempX = (x / 51) * 51 + offsetX;
+        int tempY = (y / 51) * 51 + offsetY;
+
+        panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
+    }
+
+    private void panelGame_MouseClick(object sender, MouseEventArgs e)
+    {
+        int x = e.X;
+        int y = e.Y;
+
+        if (play1Turn)
+        {
+            field[x / 51, y / 51] = 1;
+            this.play1Turn = false;
+        }
+        else
+        {
+            field[x / 51, y / 51] = 2;
+            this.play1Turn = true;
+        }
+
+        this.fillField();
+    }
+
+    public void fillField()
+    {
+        Console.WriteLine("");
+        Console.WriteLine("==========");
+        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
+        {
+            String temp = "";
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                temp += this.field[x, y];
+            }
+            Console.WriteLine(temp);
+            Console.WriteLine();
+        }
     }
 
     //int[][] playField = new int [tilesx];
@@ -133,26 +189,13 @@ class ReversiForm : Form
     // Declaring a value to a position in the playField
     //playField [1][3] == 2
 
-
     // tilesx * tilesy == totalTiles Ex. x6 * x6 = 36 tiles
     // totalTiles == total number of tiles
     // TODO totalTiles aanmaken
 
-
     // New game start position
 
-
-
     // 1 turn
-
-
-
-
-
-
-
-
-
 
     private void InitializeComponent()
     {
@@ -164,6 +207,7 @@ class ReversiForm : Form
             this.labelP2Points = new System.Windows.Forms.Label();
             this.labelP2Name = new System.Windows.Forms.Label();
             this.buttonSettings = new System.Windows.Forms.Button();
+            this.panelGame = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // buttonNewGame
@@ -189,7 +233,7 @@ class ReversiForm : Form
             this.labelTurn.AutoSize = true;
             this.labelTurn.Location = new System.Drawing.Point(21, 60);
             this.labelTurn.Name = "labelTurn";
-            this.labelTurn.Size = new System.Drawing.Size(38, 17);
+            this.labelTurn.Size = new System.Drawing.Size(29, 13);
             this.labelTurn.TabIndex = 2;
             this.labelTurn.Text = "Turn";
             // 
@@ -198,7 +242,7 @@ class ReversiForm : Form
             this.labelP1Name.AutoSize = true;
             this.labelP1Name.Location = new System.Drawing.Point(21, 91);
             this.labelP1Name.Name = "labelP1Name";
-            this.labelP1Name.Size = new System.Drawing.Size(64, 17);
+            this.labelP1Name.Size = new System.Drawing.Size(49, 13);
             this.labelP1Name.TabIndex = 3;
             this.labelP1Name.Text = "P1 name";
             // 
@@ -207,7 +251,7 @@ class ReversiForm : Form
             this.labelP1Points.AutoSize = true;
             this.labelP1Points.Location = new System.Drawing.Point(21, 114);
             this.labelP1Points.Name = "labelP1Points";
-            this.labelP1Points.Size = new System.Drawing.Size(67, 17);
+            this.labelP1Points.Size = new System.Drawing.Size(51, 13);
             this.labelP1Points.TabIndex = 4;
             this.labelP1Points.Text = "P1 points";
             // 
@@ -216,7 +260,7 @@ class ReversiForm : Form
             this.labelP2Points.AutoSize = true;
             this.labelP2Points.Location = new System.Drawing.Point(94, 114);
             this.labelP2Points.Name = "labelP2Points";
-            this.labelP2Points.Size = new System.Drawing.Size(64, 17);
+            this.labelP2Points.Size = new System.Drawing.Size(49, 13);
             this.labelP2Points.TabIndex = 6;
             this.labelP2Points.Text = "P2 name";
             // 
@@ -225,7 +269,7 @@ class ReversiForm : Form
             this.labelP2Name.AutoSize = true;
             this.labelP2Name.Location = new System.Drawing.Point(94, 91);
             this.labelP2Name.Name = "labelP2Name";
-            this.labelP2Name.Size = new System.Drawing.Size(67, 17);
+            this.labelP2Name.Size = new System.Drawing.Size(51, 13);
             this.labelP2Name.TabIndex = 5;
             this.labelP2Name.Text = "P2 points";
             // 
@@ -239,9 +283,19 @@ class ReversiForm : Form
             this.buttonSettings.Text = "⚙";
             this.buttonSettings.UseVisualStyleBackColor = true;
             // 
+            // panelGame
+            // 
+            this.panelGame.Location = new System.Drawing.Point(237, 70);
+            this.panelGame.Name = "panelGame";
+            this.panelGame.Size = new System.Drawing.Size(200, 100);
+            this.panelGame.TabIndex = 8;
+            this.panelGame.Paint += new System.Windows.Forms.PaintEventHandler(this.createPanelGameField);
+            this.panelGame.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelGame_MouseClick);
+            // 
             // ReversiForm
             // 
             this.ClientSize = new System.Drawing.Size(501, 429);
+            this.Controls.Add(this.panelGame);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.labelP2Points);
             this.Controls.Add(this.labelP2Name);
@@ -255,4 +309,5 @@ class ReversiForm : Form
             this.PerformLayout();
 
     }
+
 }
