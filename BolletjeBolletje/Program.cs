@@ -66,6 +66,13 @@ class ReversiForm : Form
         this.Invalidate();
         this.panelGame.Invalidate();
         this.createFieldArray();
+
+        this.play1Turn = true;
+    }
+
+    private void startEnvironment()
+    {
+
     }
 
     public void createFieldArray()
@@ -141,15 +148,19 @@ class ReversiForm : Form
         int x = e.X;
         int y = e.Y;
 
-        if (play1Turn)
+        // Only allow to play if value is empty
+        if (field[x / 51, y / 51] == 0 )
         {
-            field[x / 51, y / 51] = 1;
-            this.play1Turn = false;
-        }
-        else
-        {
-            field[x / 51, y / 51] = 2;
-            this.play1Turn = true;
+            if (play1Turn)
+            {
+                field[x / 51, y / 51] = 1;
+                this.play1Turn = false;
+            }
+            else
+            {
+                field[x / 51, y / 51] = 2;
+                this.play1Turn = true;
+            }
         }
 
         this.fillField();
@@ -176,11 +187,11 @@ class ReversiForm : Form
             {
                 if (this.field[x, y] == 1)
                 {
-                    this.drawDisk(Brushes.Red, x, y);
+                    this.drawDisk(Brushes.Blue, x, y);
                 }
                 if (this.field[x, y] == 2)
                 {
-                    this.drawDisk(Brushes.Blue, x, y);
+                    this.drawDisk(Brushes.Red, x, y);
                 }
             }
         }
