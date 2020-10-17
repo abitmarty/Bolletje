@@ -158,6 +158,7 @@ class ReversiForm : Form
 
     private void createPanelGameField(object sender, PaintEventArgs e)
     {
+        // All draw methods that are performed on the label
         this.drawGrid();
         this.drawField();
     }
