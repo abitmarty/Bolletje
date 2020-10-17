@@ -26,6 +26,8 @@ class ReversiForm : Form
     private Button buttonSettings;
     private Button buttonNewGame;
     private Panel panelGame;
+    private Label p1Label;
+    private Label p2Label;
 
     // Variables
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
@@ -43,8 +45,6 @@ class ReversiForm : Form
     private int[,] field;
     private int[,] validMoveField;
     private Graphics panelGraphics;
-    private Label p1Label;
-    private Label p2Label;
     private Boolean play1Turn = true;
 
     public ReversiForm()
@@ -210,6 +210,20 @@ class ReversiForm : Form
         }
     }
 
+    private void removePossibleMoves()
+    {
+        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
+        {
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                if (this.field[x, y] == 3)
+                {
+                    this.field[x, y] = 0;
+                }
+            }
+        }
+    }
+
     private void calculatePossibleMoves()
     {
         // Removes all 3 values
@@ -245,20 +259,6 @@ class ReversiForm : Form
         this.drawPossibleMoves();
     }
 
-    private void removePossibleMoves()
-    {
-        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
-        {
-            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
-            {
-                if (this.field[x, y] == 3)
-                {
-                    this.field[x, y] = 0;
-                }
-            }
-        }
-    }
-
     private Boolean isValidMove(int xCoord, int yCoord)
     {
         // Its alwyas player 1's turn. That makes player 2 is the opposition
@@ -271,20 +271,24 @@ class ReversiForm : Form
             currentPlayer = 2;
         }
 
+        // If placed off the board x
         if (xCoord < 0 || xCoord > this.currentSettings.getTilesX())
         {
             return false;
         }
+
+        // If placed of the board y
         if (yCoord < 0 || yCoord > this.currentSettings.getTilesY())
         {
             return false;
         }
 
         // Check if current value is the opps
-        if (this.field[xCoord, yCoord] == opposition)
+        if (this.field[xCoord, yCoord] != opposition)
         {
+            return false;
             // Check if current player is in x row
-            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            /*for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
                 Console.WriteLine("Value x: " + x);
                 Console.WriteLine("yCoord: " + yCoord);
@@ -298,10 +302,15 @@ class ReversiForm : Form
 
                     return true;
                 }
-            }
+            }*/
         }
 
-        return false;
+        if (xCoord - 1 < 0 || xCoord + 1 > this.currentSettings.getTilesX())
+        {
+
+        }
+
+            return true;
     }
     // In progress
 
