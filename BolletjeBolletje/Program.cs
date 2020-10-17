@@ -41,6 +41,7 @@ class ReversiForm : Form
     private int rectangleX = 164;
     private int rectangleY = 60;
     private int[,] field;
+    private int[,] validMoveField;
     private Graphics panelGraphics;
     private Boolean play1Turn = true;
 
@@ -161,6 +162,7 @@ class ReversiForm : Form
         // All draw methods that are performed on the label
         this.drawGrid();
         this.drawField();
+        this.calculatePossibleMoves();
     }
 
     private void panelGame_MouseClick(object sender, MouseEventArgs e)
@@ -187,6 +189,81 @@ class ReversiForm : Form
 
         this.drawField();
     }
+
+    // In progress
+    // TODO: Store possible move elipses in array
+    public void drawPossibleMoves()
+    {
+        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
+        {
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                // If a move is possible its 1
+                if (this.validMoveField[x, y] == 1)
+                {
+                    Console.WriteLine("Found valid move");
+                    this.drawDisk(Brushes.Gray, x, y);
+                }
+            }
+        }
+    }
+
+    private void calculatePossibleMoves()
+    {
+        // Create empty feeld with same sizes as current feeld
+        validMoveField = new int[this.currentSettings.getTilesX() + 1, this.currentSettings.getTilesY() + 1];
+
+        // Loop through actual field
+        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
+        {
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                // Check if field value has the value is empty
+                if (this.field[x, y] == 0)
+                {
+                    Console.WriteLine("Found empty space");
+                    Boolean nw = this.isValidMove(x - 1, y + 1);
+                    Boolean nn = this.isValidMove(x, y + 1);
+                    Boolean ne = this.isValidMove(x + 1, y + 1);
+
+                    if (nw || nn || ne)
+                    {
+                        validMoveField[x, y] = 1;
+                    }
+                }
+            }
+        }
+        this.drawPossibleMoves();
+    }
+
+    private Boolean isValidMove(int x, int y)
+    {
+        // Its alwyas player 1's turn. That makes player 2 is the opposition
+        // Exept if its not
+        int opposition = 2;
+        if (!this.play1Turn)
+        {
+            opposition = 1;
+        }
+
+        if (x < 0 || x > this.currentSettings.getTilesX())
+        {
+            return false;
+        }
+        if (y < 0 || y > this.currentSettings.getTilesY())
+        {
+            return false;
+        }
+
+        // If a value around an empty field is the opposition
+        if (this.field[x, y] == opposition)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    // In progress
 
     // TODO: Remove visualisers (console)
     public void drawField()
