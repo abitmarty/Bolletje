@@ -172,8 +172,8 @@ class ReversiForm : Form
         int y = e.Y;
 
         // Only allow move if value is empty
-        // TODO: Take this code: isMoveAllowed();
-        if (field[x / 51, y / 51] == 0 )
+        // TODO: If there are no possible moves. Next person is at turn
+        if (field[x / 51, y / 51] == 3)
         {
             if (play1Turn)
             {
@@ -188,6 +188,7 @@ class ReversiForm : Form
         }
 
         this.drawField();
+        this.panelGame.Invalidate();
     }
 
     // In progress
@@ -199,9 +200,8 @@ class ReversiForm : Form
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
                 // If a move is possible its 1
-                if (this.validMoveField[x, y] == 1)
+                if (this.field[x, y] == 3)
                 {
-                    Console.WriteLine("Found valid move");
                     this.drawDisk(Brushes.Gray, x, y);
                 }
             }
@@ -210,8 +210,8 @@ class ReversiForm : Form
 
     private void calculatePossibleMoves()
     {
-        // Create empty feeld with same sizes as current feeld
-        validMoveField = new int[this.currentSettings.getTilesX() + 1, this.currentSettings.getTilesY() + 1];
+        // Removes all 3 values
+        this.removePossibleMoves();
 
         // Loop through actual field
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
@@ -219,16 +219,23 @@ class ReversiForm : Form
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
                 // Check if field value has the value is empty
-                if (this.field[x, y] == 0)
+                if (this.field[x, y] == 0)   
                 {
-                    Console.WriteLine("Found empty space");
                     Boolean nw = this.isValidMove(x - 1, y + 1);
                     Boolean nn = this.isValidMove(x, y + 1);
                     Boolean ne = this.isValidMove(x + 1, y + 1);
 
-                    if (nw || nn || ne)
+                    Boolean ee = this.isValidMove(x + 1, y);
+                    Boolean ww = this.isValidMove(x - 1, y);
+
+
+                    Boolean sw = this.isValidMove(x - 1, y - 1);
+                    Boolean ss = this.isValidMove(x, y - 1);
+                    Boolean se = this.isValidMove(x + 1, y - 1);
+
+                    if (nw || nn || ne || sw || ss || se || ee || ww) 
                     {
-                        validMoveField[x, y] = 1;
+                        this.field[x, y] = 3;
                     }
                 }
             }
@@ -236,29 +243,60 @@ class ReversiForm : Form
         this.drawPossibleMoves();
     }
 
-    private Boolean isValidMove(int x, int y)
+    private void removePossibleMoves()
+    {
+        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
+        {
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                if (this.field[x, y] == 3)
+                {
+                    this.field[x, y] = 0;
+                }
+            }
+        }
+    }
+
+    private Boolean isValidMove(int xCoord, int yCoord)
     {
         // Its alwyas player 1's turn. That makes player 2 is the opposition
         // Exept if its not
         int opposition = 2;
+        int currentPlayer = 1;
         if (!this.play1Turn)
         {
             opposition = 1;
+            currentPlayer = 2;
         }
 
-        if (x < 0 || x > this.currentSettings.getTilesX())
+        if (xCoord < 0 || xCoord > this.currentSettings.getTilesX())
         {
             return false;
         }
-        if (y < 0 || y > this.currentSettings.getTilesY())
+        if (yCoord < 0 || yCoord > this.currentSettings.getTilesY())
         {
             return false;
         }
 
-        // If a value around an empty field is the opposition
-        if (this.field[x, y] == opposition)
+        // Check if current value is the opps
+        if (this.field[xCoord, yCoord] == opposition)
         {
-            return true;
+            // Check if current player is in x row
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                Console.WriteLine("Value x: " + x);
+                Console.WriteLine("yCoord: " + yCoord);
+                Console.WriteLine("Value array: " + this.field[x, yCoord]);
+
+                if (this.field[x, yCoord] == currentPlayer)
+                {
+                    Console.WriteLine("Found");
+                    Console.Write(this.field[x, yCoord]);
+                    Console.WriteLine();
+
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -291,7 +329,6 @@ class ReversiForm : Form
 
     public void drawDisk(Brush currentBrush, int x, int y)
     {
-        Console.WriteLine("Draw a disk");
         int offsetX = 5;
         int offsetY = offsetX;
 
