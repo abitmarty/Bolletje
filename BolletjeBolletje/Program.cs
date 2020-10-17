@@ -307,6 +307,7 @@ class ReversiForm : Form
             return false;
         }
          
+        //TODO: test following code
         // If two moves is out of field x
         if ((xCoord + xMove + xMove < 0) || (xCoord + xMove + xMove > this.currentSettings.getTilesX()))
         {
