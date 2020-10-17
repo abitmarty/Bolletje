@@ -299,7 +299,7 @@ class ReversiForm : Form
         int tempY = y * 51 + offsetY;
         this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
     }
-
+    
     //int[][] playField = new int [tilesx];
 
     // Declaring a value to a position in the playField
