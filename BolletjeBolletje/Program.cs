@@ -27,8 +27,6 @@ class ReversiForm : Form
     private Button buttonNewGame;
     private Panel panelGame;
 
-
-
     // Variables
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY());
@@ -36,14 +34,14 @@ class ReversiForm : Form
     public int tileWidth = 51;
     public int tileHeight = 51;
     // public int diskWidth = 24;
-    // public int diskHeight = 24;
+    // public int diskHeight = diskWidth;
     Brush coolBlue = new SolidBrush(Color.FromArgb(107, 200, 252));
     Brush coolRed = new SolidBrush(Color.FromArgb(252,107, 107));
 
     private int rectangleX = 164;
     private int rectangleY = 60;
     private int[,] field;
-    Graphics panelGraphics;
+    private Graphics panelGraphics;
     private Boolean play1Turn = true;
 
     public ReversiForm()
@@ -52,11 +50,10 @@ class ReversiForm : Form
         this.InitializeComponent();
         this.buttonSettings.Click += this.openSettings;
         this.buttonNewGame.Click += this.newGame;
-        this.setPlayerNames();
-        this.Paint += this.buildPanel;
-        this.createFieldArray();
+
         this.BackColor = Color.FromArgb(251, 239, 217);
-        this.startEnvironment();
+
+        this.startAMatch();
     }
 
     static void Main()
@@ -67,13 +64,24 @@ class ReversiForm : Form
 
     private void newGame(Object obj, EventArgs ea)
     {
+        this.play1Turn = true;
+        this.startAMatch();
+    }
+
+    private void startAMatch()
+    {
+        // Build panel with graphics
+        this.buildPanel();
+        this.panelGraphics = panelGame.CreateGraphics();
+
+        // Set variables
         this.setPlayerNames();
-        this.Invalidate();
-        this.panelGame.Invalidate();
         this.createFieldArray();
         this.startEnvironment();
 
-        this.play1Turn = true;
+        // Field and form invalidation
+        this.panelGame.Invalidate();
+        this.Invalidate();
     }
 
     private void startEnvironment()
@@ -85,8 +93,6 @@ class ReversiForm : Form
         this.field[startX , startY + 1] = 2;
         this.field[startX + 1 , startY] = 2;
         this.field[startX +1 , startY +1 ] = 1;
-
-
     }
 
     public void createFieldArray()
@@ -113,7 +119,7 @@ class ReversiForm : Form
         this.ClientSize = new System.Drawing.Size(width, height);
     }
 
-    public void buildPanel(Object obj, PaintEventArgs pea)
+    public void buildPanel()
     {
         int xTiles = this.currentSettings.getTilesX();
         int yTiles = this.currentSettings.getTilesY();
@@ -121,7 +127,7 @@ class ReversiForm : Form
         int rectangleWidth = this.tileWidth * (xTiles + 1);
         int rectangleHeight = this.tileHeight * (yTiles + 1);
 
-        // Panel do + 1 for the last line
+        // Panel do + 1 for the last line of the grid
         this.panelGame.Location = new Point(this.rectangleX, this.rectangleY);
         this.panelGame.Size = new Size(rectangleWidth + 1, rectangleHeight + 1);
         this.panelGame.BackColor = Color.White;
@@ -137,7 +143,6 @@ class ReversiForm : Form
             if (x % this.tileWidth == 0)
             {
                 this.panelGraphics.DrawLine(Pens.Black, x, 0, x, this.panelGame.Height);
-
             }
         }
 
@@ -153,16 +158,18 @@ class ReversiForm : Form
 
     private void createPanelGameField(object sender, PaintEventArgs e)
     {
-        panelGraphics = panelGame.CreateGraphics();
         this.drawGrid();
+        this.drawField();
     }
 
     private void panelGame_MouseClick(object sender, MouseEventArgs e)
     {
+        // Get mouse coords
         int x = e.X;
         int y = e.Y;
 
-        // Only allow to play if value is empty
+        // Only allow move if value is empty
+        // TODO: Take this code: isMoveAllowed();
         if (field[x / 51, y / 51] == 0 )
         {
             if (play1Turn)
@@ -177,28 +184,20 @@ class ReversiForm : Form
             }
         }
 
-        this.fillField();
         this.drawField();
     }
 
-    public void fillField()
+    // TODO: Remove visualisers (console)
+    public void drawField()
     {
+        Console.WriteLine("New field");
+        Console.WriteLine("=========");
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
             String temp = "";
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
                 temp += this.field[x, y];
-            }
-        }
-    }
-
-    public void drawField()
-    {
-        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
-        {
-            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
-            {
                 if (this.field[x, y] == 1)
                 {
                     this.drawDisk(this.coolBlue, x, y);
@@ -208,18 +207,19 @@ class ReversiForm : Form
                     this.drawDisk(this.coolRed, x, y);
                 }
             }
+            Console.WriteLine(temp + "\n");
         }
     }
 
     public void drawDisk(Brush currentBrush, int x, int y)
     {
+        Console.WriteLine("Draw a disk");
         int offsetX = 5;
         int offsetY = offsetX;
 
         int tempX = x * 51 + offsetX;
         int tempY = y * 51 + offsetY;
-
-        panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
+        this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
     }
 
     //int[][] playField = new int [tilesx];
