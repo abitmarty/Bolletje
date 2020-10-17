@@ -19,15 +19,19 @@ class ReversiForm : Form
     // Visuals
     private Button buttonHelp;
     private Label labelTurn;
+
     private Label labelP1Name;
+    private Label labelP2Name;
+
     private Label labelP1Points;
     private Label labelP2Points;
-    private Label labelP2Name;
+
+    private Label p1Label;
+    private Label p2Label;
+
     private Button buttonSettings;
     private Button buttonNewGame;
     private Panel panelGame;
-    private Label p1Label;
-    private Label p2Label;
 
     // Variables
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
@@ -165,8 +169,21 @@ class ReversiForm : Form
         this.drawGrid();
         this.drawField();
         this.calculatePossibleMoves();
+        this.setTurnName();
     }
 
+    private void setTurnName()
+    {
+        // Set player turn
+        if (this.play1Turn)
+        {
+            this.labelTurn.Text = this.currentSettings.getP1Name() + "'s turn";
+        }
+        else
+        {
+            this.labelTurn.Text = this.currentSettings.getP2Name() + "'s turn";
+        }
+    }
     private void panelGame_MouseClick(object sender, MouseEventArgs e)
     {
         // Get mouse coords
@@ -237,18 +254,19 @@ class ReversiForm : Form
                 // Check if field value has the value is empty
                 if (this.field[x, y] == 0)   
                 {
-                    Boolean nw = this.isValidMove(x - 1, y + 1);
-                    Boolean nn = this.isValidMove(x, y + 1);
-                    Boolean ne = this.isValidMove(x + 1, y + 1);
+                    // All values around empty value in field
+                    Boolean nw = this.isValidMove(x, - 1, y, -1);
+                    Boolean nn = this.isValidMove(x, 0, y, -1);
+                    Boolean ne = this.isValidMove(x, 1, y, -1);
 
-                    Boolean ee = this.isValidMove(x + 1, y);
-                    Boolean ww = this.isValidMove(x - 1, y);
+                    Boolean ee = this.isValidMove(x, 1, y, 0);
+                    Boolean ww = this.isValidMove(x, - 1, y, 0);
 
+                    Boolean sw = this.isValidMove(x, - 1, y, 1);
+                    Boolean ss = this.isValidMove(x, 0, y, 1);
+                    Boolean se = this.isValidMove(x, 1, y, 1);
 
-                    Boolean sw = this.isValidMove(x - 1, y - 1);
-                    Boolean ss = this.isValidMove(x, y - 1);
-                    Boolean se = this.isValidMove(x + 1, y - 1);
-
+                    // If any of the values is true
                     if (nw || nn || ne || sw || ss || se || ee || ww) 
                     {
                         this.field[x, y] = 3;
@@ -259,7 +277,7 @@ class ReversiForm : Form
         this.drawPossibleMoves();
     }
 
-    private Boolean isValidMove(int xCoord, int yCoord)
+    private Boolean isValidMove(int xCoord, int xMove, int yCoord, int yMove)
     {
         // Its alwyas player 1's turn. That makes player 2 is the opposition
         // Exept if its not
@@ -272,45 +290,60 @@ class ReversiForm : Form
         }
 
         // If placed off the board x
-        if (xCoord < 0 || xCoord > this.currentSettings.getTilesX())
+        if ((xCoord + xMove < 0) || (xCoord + xMove > this.currentSettings.getTilesX()))
         {
             return false;
         }
 
         // If placed of the board y
-        if (yCoord < 0 || yCoord > this.currentSettings.getTilesY())
+        if ((yCoord + yMove < 0) || (yCoord + yMove > this.currentSettings.getTilesY()))
         {
             return false;
         }
 
         // Check if current value is the opps
-        if (this.field[xCoord, yCoord] != opposition)
+        if (this.field[xCoord + xMove, yCoord + yMove] != opposition)
         {
             return false;
-            // Check if current player is in x row
-            /*for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
-            {
-                Console.WriteLine("Value x: " + x);
-                Console.WriteLine("yCoord: " + yCoord);
-                Console.WriteLine("Value array: " + this.field[x, yCoord]);
-
-                if (this.field[x, yCoord] == currentPlayer)
-                {
-                    Console.WriteLine("Found");
-                    Console.Write(this.field[x, yCoord]);
-                    Console.WriteLine();
-
-                    return true;
-                }
-            }*/
         }
-
-        if (xCoord - 1 < 0 || xCoord + 1 > this.currentSettings.getTilesX())
+         
+        // If two moves is out of field x
+        if ((xCoord + xMove + xMove < 0) || (xCoord + xMove + xMove > this.currentSettings.getTilesX()))
         {
-
+            return false;
         }
 
+        // If two moves is out of field y
+        if ((yCoord + yMove + yMove < 0) || (yCoord + yMove + yMove > this.currentSettings.getTilesY()))
+        {
+            return false;
+        }
+
+        return checkLine(currentPlayer, xCoord, xMove, yCoord, yMove);
+    }
+
+    public Boolean checkLine(int currentPlayer, int xCoord, int xMove, int yCoord, int yMove)
+    {
+        // Check if current player is on x or y depending on the situation
+        if(this.field[xCoord, yCoord] == currentPlayer)
+        {
             return true;
+        }
+
+        // If placed off the board x
+        if ((xCoord + xMove < 0) || (xCoord + xMove > this.currentSettings.getTilesX()))
+        {
+            return false;
+        }
+
+        // If placed of the board y
+        if ((yCoord + yMove < 0) || (yCoord + yMove > this.currentSettings.getTilesY()))
+        {
+            return false;
+        }
+
+        // Keep recursing function until either the player is found. Or we moved of th
+        return checkLine(currentPlayer, xCoord + xMove, xMove, yCoord + yMove, yMove);
     }
     // In progress
 
@@ -378,10 +411,11 @@ class ReversiForm : Form
             // 
             // buttonNewGame
             // 
+            this.buttonNewGame.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonNewGame.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonNewGame.FlatAppearance.BorderSize = 0;
             this.buttonNewGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNewGame.Font = new System.Drawing.Font("Colfax", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonNewGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.buttonNewGame.Location = new System.Drawing.Point(0, 220);
             this.buttonNewGame.Name = "buttonNewGame";
             this.buttonNewGame.Size = new System.Drawing.Size(150, 40);
@@ -391,9 +425,10 @@ class ReversiForm : Form
             // 
             // buttonHelp
             // 
+            this.buttonHelp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonHelp.FlatAppearance.BorderSize = 0;
             this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonHelp.Font = new System.Drawing.Font("Colfax", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHelp.Location = new System.Drawing.Point(0, 265);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(150, 40);
@@ -406,53 +441,54 @@ class ReversiForm : Form
             this.labelTurn.AutoSize = true;
             this.labelTurn.Location = new System.Drawing.Point(32, 153);
             this.labelTurn.Name = "labelTurn";
-            this.labelTurn.Size = new System.Drawing.Size(38, 17);
+            this.labelTurn.Size = new System.Drawing.Size(29, 13);
             this.labelTurn.TabIndex = 2;
             this.labelTurn.Text = "Turn";
             // 
             // labelP1Name
             // 
             this.labelP1Name.AutoSize = true;
-            this.labelP1Name.Location = new System.Drawing.Point(12, 20);
+            this.labelP1Name.Location = new System.Drawing.Point(22, 20);
             this.labelP1Name.Name = "labelP1Name";
-            this.labelP1Name.Size = new System.Drawing.Size(64, 17);
+            this.labelP1Name.Size = new System.Drawing.Size(49, 13);
             this.labelP1Name.TabIndex = 3;
             this.labelP1Name.Text = "P1 name";
             // 
             // labelP1Points
             // 
             this.labelP1Points.AutoSize = true;
-            this.labelP1Points.Font = new System.Drawing.Font("Recoleta Bold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelP1Points.Location = new System.Drawing.Point(35, 102);
+            this.labelP1Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP1Points.Location = new System.Drawing.Point(22, 102);
             this.labelP1Points.Name = "labelP1Points";
-            this.labelP1Points.Size = new System.Drawing.Size(68, 19);
+            this.labelP1Points.Size = new System.Drawing.Size(60, 13);
             this.labelP1Points.TabIndex = 4;
             this.labelP1Points.Text = "P1 points";
             // 
             // labelP2Points
             // 
             this.labelP2Points.AutoSize = true;
-            this.labelP2Points.Location = new System.Drawing.Point(82, 20);
+            this.labelP2Points.Location = new System.Drawing.Point(83, 115);
             this.labelP2Points.Name = "labelP2Points";
-            this.labelP2Points.Size = new System.Drawing.Size(64, 17);
+            this.labelP2Points.Size = new System.Drawing.Size(49, 13);
             this.labelP2Points.TabIndex = 6;
             this.labelP2Points.Text = "P2 name";
             // 
             // labelP2Name
             // 
             this.labelP2Name.AutoSize = true;
-            this.labelP2Name.Font = new System.Drawing.Font("Recoleta Bold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelP2Name.Location = new System.Drawing.Point(98, 102);
+            this.labelP2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP2Name.Location = new System.Drawing.Point(83, 20);
             this.labelP2Name.Name = "labelP2Name";
-            this.labelP2Name.Size = new System.Drawing.Size(66, 18);
+            this.labelP2Name.Size = new System.Drawing.Size(60, 13);
             this.labelP2Name.TabIndex = 5;
             this.labelP2Name.Text = "P2 points";
             // 
             // buttonSettings
             // 
+            this.buttonSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonSettings.FlatAppearance.BorderSize = 0;
             this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSettings.Font = new System.Drawing.Font("Colfax", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSettings.Location = new System.Drawing.Point(0, 310);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(150, 40);
