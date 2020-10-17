@@ -44,6 +44,7 @@ class ReversiForm : Form
     private int[,] validMoveField;
     private Graphics panelGraphics;
     private Label p1Label;
+    private Label p2Label;
     private Boolean play1Turn = true;
 
     public ReversiForm()
@@ -363,6 +364,7 @@ class ReversiForm : Form
             this.buttonSettings = new System.Windows.Forms.Button();
             this.panelGame = new System.Windows.Forms.Panel();
             this.p1Label = new System.Windows.Forms.Label();
+            this.p2Label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonNewGame
@@ -371,7 +373,7 @@ class ReversiForm : Form
             this.buttonNewGame.FlatAppearance.BorderSize = 0;
             this.buttonNewGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNewGame.Font = new System.Drawing.Font("Colfax", 10F, System.Drawing.FontStyle.Bold);
-            this.buttonNewGame.Location = new System.Drawing.Point(3, 229);
+            this.buttonNewGame.Location = new System.Drawing.Point(0, 220);
             this.buttonNewGame.Name = "buttonNewGame";
             this.buttonNewGame.Size = new System.Drawing.Size(150, 40);
             this.buttonNewGame.TabIndex = 0;
@@ -383,7 +385,7 @@ class ReversiForm : Form
             this.buttonHelp.FlatAppearance.BorderSize = 0;
             this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHelp.Font = new System.Drawing.Font("Colfax", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHelp.Location = new System.Drawing.Point(3, 268);
+            this.buttonHelp.Location = new System.Drawing.Point(0, 265);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(150, 40);
             this.buttonHelp.TabIndex = 1;
@@ -402,7 +404,7 @@ class ReversiForm : Form
             // labelP1Name
             // 
             this.labelP1Name.AutoSize = true;
-            this.labelP1Name.Location = new System.Drawing.Point(21, 91);
+            this.labelP1Name.Location = new System.Drawing.Point(12, 20);
             this.labelP1Name.Name = "labelP1Name";
             this.labelP1Name.Size = new System.Drawing.Size(64, 17);
             this.labelP1Name.TabIndex = 3;
@@ -411,16 +413,17 @@ class ReversiForm : Form
             // labelP1Points
             // 
             this.labelP1Points.AutoSize = true;
-            this.labelP1Points.Location = new System.Drawing.Point(21, 114);
+            this.labelP1Points.Font = new System.Drawing.Font("Recoleta Bold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP1Points.Location = new System.Drawing.Point(35, 102);
             this.labelP1Points.Name = "labelP1Points";
-            this.labelP1Points.Size = new System.Drawing.Size(67, 17);
+            this.labelP1Points.Size = new System.Drawing.Size(68, 19);
             this.labelP1Points.TabIndex = 4;
             this.labelP1Points.Text = "P1 points";
             // 
             // labelP2Points
             // 
             this.labelP2Points.AutoSize = true;
-            this.labelP2Points.Location = new System.Drawing.Point(94, 114);
+            this.labelP2Points.Location = new System.Drawing.Point(82, 20);
             this.labelP2Points.Name = "labelP2Points";
             this.labelP2Points.Size = new System.Drawing.Size(64, 17);
             this.labelP2Points.TabIndex = 6;
@@ -429,9 +432,10 @@ class ReversiForm : Form
             // labelP2Name
             // 
             this.labelP2Name.AutoSize = true;
-            this.labelP2Name.Location = new System.Drawing.Point(94, 91);
+            this.labelP2Name.Font = new System.Drawing.Font("Recoleta Bold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP2Name.Location = new System.Drawing.Point(98, 102);
             this.labelP2Name.Name = "labelP2Name";
-            this.labelP2Name.Size = new System.Drawing.Size(67, 17);
+            this.labelP2Name.Size = new System.Drawing.Size(66, 18);
             this.labelP2Name.TabIndex = 5;
             this.labelP2Name.Text = "P2 points";
             // 
@@ -440,7 +444,7 @@ class ReversiForm : Form
             this.buttonSettings.FlatAppearance.BorderSize = 0;
             this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSettings.Font = new System.Drawing.Font("Colfax", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSettings.Location = new System.Drawing.Point(3, 307);
+            this.buttonSettings.Location = new System.Drawing.Point(0, 310);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(150, 40);
             this.buttonSettings.TabIndex = 7;
@@ -458,17 +462,30 @@ class ReversiForm : Form
             // 
             // p1Label
             // 
-            this.p1Label.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.p1Label.Location = new System.Drawing.Point(25, 32);
+            this.p1Label.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+            this.p1Label.Location = new System.Drawing.Point(22, 46);
+            this.p1Label.Margin = new System.Windows.Forms.Padding(0);
             this.p1Label.Name = "p1Label";
             this.p1Label.Size = new System.Drawing.Size(45, 45);
             this.p1Label.TabIndex = 9;
-            this.p1Label.Text = "😁";
+            this.p1Label.Text = "👨🏼";
             this.p1Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // p2Label
+            // 
+            this.p2Label.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.p2Label.Location = new System.Drawing.Point(83, 46);
+            this.p2Label.Margin = new System.Windows.Forms.Padding(0);
+            this.p2Label.Name = "p2Label";
+            this.p2Label.Size = new System.Drawing.Size(45, 45);
+            this.p2Label.TabIndex = 10;
+            this.p2Label.Text = "🐟";
+            this.p2Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ReversiForm
             // 
             this.ClientSize = new System.Drawing.Size(501, 429);
+            this.Controls.Add(this.p2Label);
             this.Controls.Add(this.p1Label);
             this.Controls.Add(this.panelGame);
             this.Controls.Add(this.buttonSettings);
