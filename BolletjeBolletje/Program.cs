@@ -313,7 +313,7 @@ class ReversiForm : Form
         }
 
         // Check if current value is empty
-        if (this.field[xCoord + xMove, yCoord + yMove] == 0)
+        if (this.field[xCoord + xMove, yCoord + yMove] == 0 || this.field[xCoord + xMove, yCoord + yMove] == 3)
         {
             return false;
         }
@@ -378,7 +378,7 @@ class ReversiForm : Form
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
                 // Check if field value has the value is empty
-                if (this.field[x, y] == 0)   
+                if (this.field[x, y] == 0 || this.field[x, y] == 3)   
                 {
                     // All values around empty value in field
                     Boolean nw = this.isValidMove(x, - 1, y, -1);
