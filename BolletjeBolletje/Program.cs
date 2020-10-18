@@ -97,13 +97,13 @@ class ReversiForm : Form
         pea.Graphics.FillRectangle(coolBlue, 23, 69, 44, 50);
         pea.Graphics.FillEllipse(Brushes.White, 18, 42, 52, 52);
         pea.Graphics.FillEllipse(coolBlue, 22, 46, 44, 44);
-        pea.Graphics.FillEllipse(coolBlue, 22, 95, 44, 44);
+        pea.Graphics.FillEllipse(coolBlue, 23, 95, 44, 44);
 
         // Draw right stats
         pea.Graphics.FillRectangle(coolRed, 84, 69, 44, 50);
         pea.Graphics.FillEllipse(Brushes.White, 79, 42, 52, 52);
         pea.Graphics.FillEllipse(coolRed, 83, 46, 44, 44);
-        pea.Graphics.FillEllipse(coolRed, 83, 95, 44, 44);
+        pea.Graphics.FillEllipse(coolRed, 84, 95, 44, 44);
 
     }
 
@@ -590,16 +590,16 @@ class ReversiForm : Form
             this.labelTurn.AutoSize = true;
             this.labelTurn.Location = new System.Drawing.Point(32, 153);
             this.labelTurn.Name = "labelTurn";
-            this.labelTurn.Size = new System.Drawing.Size(29, 13);
+            this.labelTurn.Size = new System.Drawing.Size(38, 17);
             this.labelTurn.TabIndex = 2;
             this.labelTurn.Text = "Turn";
             // 
             // labelP1Name
             // 
             this.labelP1Name.AutoSize = true;
-            this.labelP1Name.Location = new System.Drawing.Point(22, 20);
+            this.labelP1Name.Location = new System.Drawing.Point(37, 45);
             this.labelP1Name.Name = "labelP1Name";
-            this.labelP1Name.Size = new System.Drawing.Size(49, 13);
+            this.labelP1Name.Size = new System.Drawing.Size(64, 17);
             this.labelP1Name.TabIndex = 3;
             this.labelP1Name.Text = "P1 name";
             // 
@@ -610,7 +610,7 @@ class ReversiForm : Form
             this.labelP1Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP1Points.Location = new System.Drawing.Point(35, 102);
             this.labelP1Points.Name = "labelP1Points";
-            this.labelP1Points.Size = new System.Drawing.Size(96, 24);
+            this.labelP1Points.Size = new System.Drawing.Size(122, 29);
             this.labelP1Points.TabIndex = 4;
             this.labelP1Points.Text = "P1 points";
             this.labelP1Points.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -622,7 +622,7 @@ class ReversiForm : Form
             this.labelP2Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP2Points.Location = new System.Drawing.Point(98, 102);
             this.labelP2Points.Name = "labelP2Points";
-            this.labelP2Points.Size = new System.Drawing.Size(96, 24);
+            this.labelP2Points.Size = new System.Drawing.Size(122, 29);
             this.labelP2Points.TabIndex = 6;
             this.labelP2Points.Text = "P2 points";
             this.labelP2Points.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -630,9 +630,9 @@ class ReversiForm : Form
             // labelP2Name
             // 
             this.labelP2Name.AutoSize = true;
-            this.labelP2Name.Location = new System.Drawing.Point(125, 20);
+            this.labelP2Name.Location = new System.Drawing.Point(120, 45);
             this.labelP2Name.Name = "labelP2Name";
-            this.labelP2Name.Size = new System.Drawing.Size(49, 13);
+            this.labelP2Name.Size = new System.Drawing.Size(64, 17);
             this.labelP2Name.TabIndex = 5;
             this.labelP2Name.Text = "P2 name";
             // 
@@ -661,7 +661,7 @@ class ReversiForm : Form
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 373);
+            this.pictureBox1.Location = new System.Drawing.Point(210, 160);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(121, 106);
             this.pictureBox1.TabIndex = 9;
