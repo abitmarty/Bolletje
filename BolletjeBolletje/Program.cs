@@ -204,9 +204,11 @@ class ReversiForm : Form
 
         Console.WriteLine(player1Icon);
 
-        this.pictureBox1.Image = (BolletjeBolletje.Properties.Resources.Frog);
+        string temp = System.Convert.ToString(player1Icon);
 
-        
+        this.pictureBox1.Image = BolletjeBolletje.Properties.Resources.Frog;
+
+      
     }
 
     public void openSettings(object obj, EventArgs pea)
