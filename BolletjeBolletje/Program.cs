@@ -74,6 +74,7 @@ class ReversiForm : Form
 
     public void setScoreboard(object obj, PaintEventArgs pea)
     {
+        pea.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         pea.Graphics.FillRectangle(coolBlue, 23, 69, 44, 50);
         pea.Graphics.FillEllipse(Brushes.White, 18, 42, 52, 52);
         pea.Graphics.FillEllipse(coolBlue, 22, 46, 44, 44);
@@ -123,6 +124,8 @@ class ReversiForm : Form
         // Build panel with graphics
         this.buildPanel();
         this.panelGraphics = panelGame.CreateGraphics();
+        this.panelGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+
 
         // Set variables
         this.setPlayerNames();
