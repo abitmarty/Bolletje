@@ -39,6 +39,7 @@ class ReversiForm : Form
 
     public int player1Score = 0;
     public int player2Score = 0;
+    public Boolean helpOn = false;
 
     // public int diskWidth = 24;
     // public int diskHeight = diskWidth;
@@ -59,6 +60,7 @@ class ReversiForm : Form
         this.InitializeComponent();
         this.buttonSettings.Click += this.openSettings;
         this.buttonNewGame.Click += this.newGame;
+        this.buttonHelp.Click += this.sethelp;
         this.Paint += this.setScoreboard;
 
         this.BackColor = Color.FromArgb(251, 239, 217);
@@ -70,6 +72,12 @@ class ReversiForm : Form
     {
         ReversiForm screen = new ReversiForm();
         Application.Run(screen);
+    }
+
+    public void sethelp(object obj, EventArgs ea)
+    {
+        this.helpOn = !this.helpOn;
+        this.panelGame.Invalidate();
     }
 
     public void setScoreboard(object obj, PaintEventArgs pea)
@@ -265,6 +273,9 @@ class ReversiForm : Form
         this.drawField();
         this.panelGame.Invalidate();
 
+        // Give each player the possibility to set it off
+        // this.helpOn = false;
+
         // Updates player scores on click
         this.keepPlayerScore();
     }
@@ -345,7 +356,7 @@ class ReversiForm : Form
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
                 // If a move is possible its 1
-                if (this.field[x, y] == 3)
+                if (this.field[x, y] == 3 && this.helpOn)
                 {
                     this.drawDisk(Brushes.Gray, x, y);
                 }
@@ -400,8 +411,8 @@ class ReversiForm : Form
                 }
             }
         }
-        this.drawPossibleMoves();
 
+        this.drawPossibleMoves();
         //TODO: Als geen possible moves dan skip beurt :) #anglicismen
     }
 
