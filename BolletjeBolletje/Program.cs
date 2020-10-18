@@ -241,20 +241,90 @@ class ReversiForm : Form
             if (play1Turn)
             {
                 field[x / 51, y / 51] = 1;
+                this.setOverTakenDisk(x, y);
                 this.play1Turn = false;
             }
             else
             {
                 field[x / 51, y / 51] = 2;
+                this.setOverTakenDisk(x, y);
                 this.play1Turn = true;
             }
         }
 
+        // Draw field and invalidate panel only
         this.drawField();
         this.panelGame.Invalidate();
 
-        //Updates player scores on click
+        // Updates player scores on click
         this.keepPlayerScore();
+    }
+
+    public void setOverTakenDisk(int x, int y)
+    {
+        // Setting pixels to the corresponding array position
+        x = x / 51;
+        y = y / 51;
+
+        // Similar to calculating surrounding disks
+        // But now we overtake the disks
+        this.overtakeLine(x, -1, y, -1);
+        this.overtakeLine(x, 0, y, -1);
+        this.overtakeLine(x, 1, y, -1);
+
+        this.overtakeLine(x, 1, y, 0);
+        this.overtakeLine(x, -1, y, 0);
+
+        this.overtakeLine(x, -1, y, 1);
+        this.overtakeLine(x, 0, y, 1);
+        this.overtakeLine(x, 1, y, 1);
+    }
+
+    public Boolean overtakeLine(int xCoord, int xMove, int yCoord, int yMove)
+    {
+        // Its always player 1's turn
+        // Exept if its not
+        int currentPlayer = 1;
+        if (!this.play1Turn)
+        {
+            currentPlayer = 2;
+        }
+
+        // Go to each line to check if its the opps
+        // If placed off the board x
+        if ((xCoord + xMove < 0) || (xCoord + xMove > this.currentSettings.getTilesX()))
+        {
+            return false;
+        }
+
+        // If placed of the board y
+        if ((yCoord + yMove < 0) || (yCoord + yMove > this.currentSettings.getTilesY()))
+        {
+            return false;
+        }
+
+        // Check if current value is empty
+        if (this.field[xCoord + xMove, yCoord + yMove] == 0)
+        {
+            return false;
+        }
+
+        if (this.field[xCoord + xMove, yCoord + yMove] == currentPlayer)
+        {
+            return true;
+        }
+        else
+        {
+            if (overtakeLine(xCoord + xMove, xMove, yCoord + yMove, yMove))
+            {
+                // Recursing the function till we find the valid move
+                // Or return false if the function breaks
+                this.field[xCoord + xMove, yCoord + yMove] = currentPlayer;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // In progress
@@ -492,7 +562,7 @@ class ReversiForm : Form
             this.labelTurn.AutoSize = true;
             this.labelTurn.Location = new System.Drawing.Point(32, 153);
             this.labelTurn.Name = "labelTurn";
-            this.labelTurn.Size = new System.Drawing.Size(38, 17);
+            this.labelTurn.Size = new System.Drawing.Size(29, 13);
             this.labelTurn.TabIndex = 2;
             this.labelTurn.Text = "Turn";
             // 
@@ -501,7 +571,7 @@ class ReversiForm : Form
             this.labelP1Name.AutoSize = true;
             this.labelP1Name.Location = new System.Drawing.Point(22, 20);
             this.labelP1Name.Name = "labelP1Name";
-            this.labelP1Name.Size = new System.Drawing.Size(64, 17);
+            this.labelP1Name.Size = new System.Drawing.Size(49, 13);
             this.labelP1Name.TabIndex = 3;
             this.labelP1Name.Text = "P1 name";
             // 
@@ -512,7 +582,7 @@ class ReversiForm : Form
             this.labelP1Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP1Points.Location = new System.Drawing.Point(35, 102);
             this.labelP1Points.Name = "labelP1Points";
-            this.labelP1Points.Size = new System.Drawing.Size(122, 29);
+            this.labelP1Points.Size = new System.Drawing.Size(96, 24);
             this.labelP1Points.TabIndex = 4;
             this.labelP1Points.Text = "P1 points";
             this.labelP1Points.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -524,7 +594,7 @@ class ReversiForm : Form
             this.labelP2Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP2Points.Location = new System.Drawing.Point(98, 102);
             this.labelP2Points.Name = "labelP2Points";
-            this.labelP2Points.Size = new System.Drawing.Size(122, 29);
+            this.labelP2Points.Size = new System.Drawing.Size(96, 24);
             this.labelP2Points.TabIndex = 6;
             this.labelP2Points.Text = "P2 points";
             this.labelP2Points.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -534,7 +604,7 @@ class ReversiForm : Form
             this.labelP2Name.AutoSize = true;
             this.labelP2Name.Location = new System.Drawing.Point(125, 20);
             this.labelP2Name.Name = "labelP2Name";
-            this.labelP2Name.Size = new System.Drawing.Size(64, 17);
+            this.labelP2Name.Size = new System.Drawing.Size(49, 13);
             this.labelP2Name.TabIndex = 5;
             this.labelP2Name.Text = "P2 name";
             // 
@@ -563,7 +633,7 @@ class ReversiForm : Form
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(68, 120);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 373);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(121, 106);
             this.pictureBox1.TabIndex = 9;
