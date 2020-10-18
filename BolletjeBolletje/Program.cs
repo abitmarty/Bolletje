@@ -204,11 +204,7 @@ class ReversiForm : Form
 
         Console.WriteLine(player1Icon);
 
-        string temp = System.Convert.ToString(player1Icon);
-
-
-        string imageINeed = "Man";
-        object O = Resources.ResourceManager.GetObject(imageINeed);
+        object O = Resources.ResourceManager.GetObject(player1Icon);
         this.pictureBox1.Image = (Image)O;
 
 
