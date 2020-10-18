@@ -22,11 +22,16 @@ class Settingsform : Form
     // Variables
     private SettingsInitials currentSettings;
 
-
     public Settingsform(SettingsInitials currentSettings)
     {
         // Set at top to initialise components
         this.InitializeComponent();
+        this.BackColor = Color.FromArgb(251, 239, 217);
+        this.Paint += drawingSettingsLine;
+   
+
+
+
 
         // Select player icons from dropdown
         this.comboBox1.Items.AddRange(new object[] {
@@ -51,6 +56,11 @@ class Settingsform : Form
         this.comboBox1.Text = "Man";
 
 
+    }
+
+    private void drawingSettingsLine(object obj, PaintEventArgs pea)
+    {
+        pea.Graphics.DrawLine(Pens.Black, 10, 130, 290, 130);
     }
 
     private void comboBox1GetString(object obj, EventArgs e)
@@ -149,7 +159,7 @@ class Settingsform : Form
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(269, 164);
+            this.buttonSave.Location = new System.Drawing.Point(261, 153);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
@@ -168,7 +178,7 @@ class Settingsform : Form
             // labelYTiles
             // 
             this.labelYTiles.AutoSize = true;
-            this.labelYTiles.Location = new System.Drawing.Point(144, 145);
+            this.labelYTiles.Location = new System.Drawing.Point(144, 133);
             this.labelYTiles.Name = "labelYTiles";
             this.labelYTiles.Size = new System.Drawing.Size(46, 17);
             this.labelYTiles.TabIndex = 7;
@@ -183,7 +193,7 @@ class Settingsform : Form
             // 
             // textBoxYTiles
             // 
-            this.textBoxYTiles.Location = new System.Drawing.Point(147, 165);
+            this.textBoxYTiles.Location = new System.Drawing.Point(143, 153);
             this.textBoxYTiles.Name = "textBoxYTiles";
             this.textBoxYTiles.Size = new System.Drawing.Size(100, 22);
             this.textBoxYTiles.TabIndex = 5;
@@ -200,15 +210,18 @@ class Settingsform : Form
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Colfax", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             this.label1.Location = new System.Drawing.Point(13, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 17);
+            this.label1.Size = new System.Drawing.Size(65, 18);
             this.label1.TabIndex = 10;
             this.label1.Text = "Player 1";
             // 
             // Settingsform
             // 
-            this.ClientSize = new System.Drawing.Size(384, 361);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(382, 253);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.labelXTiles);
@@ -220,9 +233,19 @@ class Settingsform : Form
             this.Controls.Add(this.labelPlayer1);
             this.Controls.Add(this.textBoxPlayer2);
             this.Controls.Add(this.textBoxPlayer1);
+            this.MinimumSize = new System.Drawing.Size(400, 200);
             this.Name = "Settingsform";
+            this.RightToLeftLayout = true;
+            this.ShowIcon = false;
+            this.Text = "Reversi Settings";
+            this.Load += new System.EventHandler(this.Settingsform_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
+    }
+
+    private void Settingsform_Load(object sender, EventArgs e)
+    {
 
     }
 }
