@@ -4,14 +4,18 @@
 | |\/| || |\/| | 
 |_|  |_||_|  |_|
 
-
+[ ] Make player2 in settings blue
 [ ] Winner indication
 [ ] Game mechanics finished (mistakes in allowed fields)
-[X] Scalable buttons fall of when 3×3
 [ ] Score centre
 [ ] Settings screen -> pretty
 [ ] Emoji for player 2
+[ ] Background emoji
 [ ] Gray dot => Colour of player who's turn it is
+[ ] Settings buttons alignen
+[X] Dropdown player twomad
+[X] Scalable buttons fall of when 3×3
+
 
 Extra extra
 [ ] Turn indicator -> pretty
@@ -44,6 +48,9 @@ class ReversiForm : Form
     private Button buttonNewGame;
     private Panel panelGame;
 
+    private PictureBox pictureBox1;
+    private PictureBox pictureBox2;
+
     // Variables
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish");
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY(), defaultSettings.getP1Icon(), defaultSettings.getP2Icon());
@@ -65,7 +72,6 @@ class ReversiForm : Form
     private int[,] field;
     private int[,] validMoveField;
     private Graphics panelGraphics;
-    private PictureBox pictureBox1;
     private Boolean play1Turn = true;
 
     public ReversiForm()
@@ -143,9 +149,9 @@ class ReversiForm : Form
     {
         try
         {
-            SoundPlayer victoryLap = new SoundPlayer(BolletjeBolletje.Properties.Resources.fortnite);
-            Console.WriteLine("Play victory");
-            victoryLap.Play();
+            //SoundPlayer victoryLap = new SoundPlayer(BolletjeBolletje.Properties.Resources.fortnite);
+            //Console.WriteLine("Play victory");
+            //victoryLap.Play();
         }
         catch (Exception ex)
         {
@@ -198,18 +204,20 @@ class ReversiForm : Form
         /*this.labelP1Name.Text = this.currentSettings.getP1Name();
         this.labelP2Name.Text = this.currentSettings.getP2Name();*/
 
-        this.labelP1Name.Text = this.currentSettings.getP1Icon();
-        this.labelP2Name.Text = this.currentSettings.getP2Icon();
+        this.labelP1Name.Text = this.currentSettings.getP1Name();
+        this.labelP2Name.Text = this.currentSettings.getP2Name();
 
 
         // Load corresponding image
 
         string player1Icon = this.currentSettings.getP1Icon();
-
-        Console.WriteLine(player1Icon);
+        string player2Icon = this.currentSettings.getP2Icon();
 
         object O = Resources.ResourceManager.GetObject(player1Icon);
         this.pictureBox1.Image = (Image)O;
+
+        object B = Resources.ResourceManager.GetObject(player2Icon);
+        this.pictureBox2.Image = (Image)B;
 
 
     }
@@ -586,7 +594,9 @@ class ReversiForm : Form
             this.buttonSettings = new System.Windows.Forms.Button();
             this.panelGame = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonNewGame
@@ -656,7 +666,7 @@ class ReversiForm : Form
             this.labelP2Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP2Points.Location = new System.Drawing.Point(98, 102);
             this.labelP2Points.Name = "labelP2Points";
-            this.labelP2Points.Size = new System.Drawing.Size(122, 29);
+            this.labelP2Points.Size = new System.Drawing.Size(96, 24);
             this.labelP2Points.TabIndex = 6;
             this.labelP2Points.Text = "P2 points";
             this.labelP2Points.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -702,10 +712,20 @@ class ReversiForm : Form
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(94, 57);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(22, 22);
+            this.pictureBox2.TabIndex = 10;
+            this.pictureBox2.TabStop = false;
+            // 
             // ReversiForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(488, 359);
+            this.ClientSize = new System.Drawing.Size(490, 367);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelGame);
             this.Controls.Add(this.buttonSettings);
@@ -724,6 +744,7 @@ class ReversiForm : Form
             this.ShowInTaskbar = false;
             this.Text = "Reversi";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

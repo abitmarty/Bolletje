@@ -17,6 +17,7 @@ class Settingsform : Form
     private TextBox textBoxYTiles;
     private ComboBox comboBox1;
     private Label label1;
+    private ComboBox comboBox2;
 
     // Variables
     private SettingsInitials currentSettings;
@@ -29,21 +30,22 @@ class Settingsform : Form
         this.Paint += drawingSettingsLine;
    
 
-
-
-
-        // Select player icons from dropdown
-        this.comboBox1.Items.AddRange(new object[] {
+        Object[] allThings = new object[] {
                         "Balloon",
                         "Carrot",
                         "Clown",
                         "Dog",
+                        "Fish",
                         "Frog",
                         "Man",
                         "Pizza",
                         "Robot",
-                        "Rocket"
-        });
+                        "Rocket",
+        };
+
+        // Select player icons from dropdown
+        this.comboBox1.Items.AddRange(allThings);
+        this.comboBox2.Items.AddRange(allThings);
 
         // So the code can overwrite the currentsettings from the program.cs
         this.currentSettings = currentSettings;
@@ -52,9 +54,9 @@ class Settingsform : Form
 
         this.buttonSave.Click += this.saveSettings;
 
+        // Standard icon is Man and Fish
         this.comboBox1.Text = "Man";
-
-
+        this.comboBox2.Text = "Fish";
     }
 
     private void drawingSettingsLine(object obj, PaintEventArgs pea)
@@ -65,19 +67,20 @@ class Settingsform : Form
     private void comboBox1GetString(object obj, EventArgs e)
     {
 
-        // Standard icon is Man and Fish
-
         // When selected in dropdown, change to chosen name
-
         // Set the chosen image as player name
-
         Object selectedItem = comboBox1.SelectedItem;
-
         string icon1String = selectedItem.ToString();
-
         this.currentSettings.setP1Icon(icon1String);
-        
+    }
 
+    private void comboBox2GetString(object obj, EventArgs e)
+    {
+        // When selected in dropdown, change to chosen name
+        // Set the chosen image as player name
+        Object selectedItem = comboBox2.SelectedItem;
+        string icon2String = selectedItem.ToString();
+        this.currentSettings.setP2Icon(icon2String);
     }
 
     public void saveSettings(Object obj, EventArgs ea)
@@ -121,20 +124,21 @@ class Settingsform : Form
             this.textBoxYTiles = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxPlayer1
             // 
             this.textBoxPlayer1.Location = new System.Drawing.Point(11, 43);
             this.textBoxPlayer1.Name = "textBoxPlayer1";
-            this.textBoxPlayer1.Size = new System.Drawing.Size(100, 22);
+            this.textBoxPlayer1.Size = new System.Drawing.Size(100, 20);
             this.textBoxPlayer1.TabIndex = 0;
             // 
             // textBoxPlayer2
             // 
             this.textBoxPlayer2.Location = new System.Drawing.Point(147, 38);
             this.textBoxPlayer2.Name = "textBoxPlayer2";
-            this.textBoxPlayer2.Size = new System.Drawing.Size(100, 22);
+            this.textBoxPlayer2.Size = new System.Drawing.Size(100, 20);
             this.textBoxPlayer2.TabIndex = 1;
             // 
             // labelPlayer2
@@ -142,7 +146,7 @@ class Settingsform : Form
             this.labelPlayer2.AutoSize = true;
             this.labelPlayer2.Location = new System.Drawing.Point(144, 22);
             this.labelPlayer2.Name = "labelPlayer2";
-            this.labelPlayer2.Size = new System.Drawing.Size(99, 17);
+            this.labelPlayer2.Size = new System.Drawing.Size(74, 13);
             this.labelPlayer2.TabIndex = 3;
             this.labelPlayer2.Text = "Player 2 name";
             // 
@@ -160,7 +164,7 @@ class Settingsform : Form
             this.labelXTiles.AutoSize = true;
             this.labelXTiles.Location = new System.Drawing.Point(8, 133);
             this.labelXTiles.Name = "labelXTiles";
-            this.labelXTiles.Size = new System.Drawing.Size(46, 17);
+            this.labelXTiles.Size = new System.Drawing.Size(35, 13);
             this.labelXTiles.TabIndex = 8;
             this.labelXTiles.Text = "X tiles";
             // 
@@ -169,7 +173,7 @@ class Settingsform : Form
             this.labelYTiles.AutoSize = true;
             this.labelYTiles.Location = new System.Drawing.Point(144, 133);
             this.labelYTiles.Name = "labelYTiles";
-            this.labelYTiles.Size = new System.Drawing.Size(46, 17);
+            this.labelYTiles.Size = new System.Drawing.Size(35, 13);
             this.labelYTiles.TabIndex = 7;
             this.labelYTiles.Text = "Y tiles";
             // 
@@ -177,14 +181,14 @@ class Settingsform : Form
             // 
             this.textBoxXTiles.Location = new System.Drawing.Point(11, 153);
             this.textBoxXTiles.Name = "textBoxXTiles";
-            this.textBoxXTiles.Size = new System.Drawing.Size(100, 22);
+            this.textBoxXTiles.Size = new System.Drawing.Size(100, 20);
             this.textBoxXTiles.TabIndex = 6;
             // 
             // textBoxYTiles
             // 
             this.textBoxYTiles.Location = new System.Drawing.Point(143, 153);
             this.textBoxYTiles.Name = "textBoxYTiles";
-            this.textBoxYTiles.Size = new System.Drawing.Size(100, 22);
+            this.textBoxYTiles.Size = new System.Drawing.Size(100, 20);
             this.textBoxYTiles.TabIndex = 5;
             // 
             // comboBox1
@@ -192,25 +196,35 @@ class Settingsform : Form
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(11, 71);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 24);
+            this.comboBox1.Size = new System.Drawing.Size(100, 21);
             this.comboBox1.TabIndex = 9;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1GetString);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Colfax", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             this.label1.Location = new System.Drawing.Point(27, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 18);
+            this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 10;
             this.label1.Text = "Player 1";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(147, 71);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(100, 21);
+            this.comboBox2.TabIndex = 11;
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2GetString);
             // 
             // Settingsform
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(382, 253);
+            this.ClientSize = new System.Drawing.Size(384, 253);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.labelXTiles);
