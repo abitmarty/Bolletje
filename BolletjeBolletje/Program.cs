@@ -74,12 +74,16 @@ class ReversiForm : Form
 
     public void setScoreboard(object obj, PaintEventArgs pea)
     {
+        // Draw smooth so we'll add anti aliassing
         pea.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+        // Draw left stats
         pea.Graphics.FillRectangle(coolBlue, 23, 69, 44, 50);
         pea.Graphics.FillEllipse(Brushes.White, 18, 42, 52, 52);
         pea.Graphics.FillEllipse(coolBlue, 22, 46, 44, 44);
         pea.Graphics.FillEllipse(coolBlue, 22, 95, 44, 44);
 
+        // Draw right stats
         pea.Graphics.FillRectangle(coolRed, 84, 69, 44, 50);
         pea.Graphics.FillEllipse(Brushes.White, 79, 42, 52, 52);
         pea.Graphics.FillEllipse(coolRed, 83, 46, 44, 44);
@@ -123,6 +127,8 @@ class ReversiForm : Form
     {
         // Build panel with graphics
         this.buildPanel();
+
+        // Draw smooth so we'll add anti aliassing
         this.panelGraphics = panelGame.CreateGraphics();
         this.panelGraphics.SmoothingMode = SmoothingMode.AntiAlias;
 
