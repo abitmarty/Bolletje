@@ -9,7 +9,6 @@ class Settingsform : Form
     // Visuals
     private TextBox textBoxPlayer1;
     private TextBox textBoxPlayer2;
-    private Label labelPlayer1;
     private Button buttonSave;
     private Label labelPlayer2;
     private Label labelXTiles;
@@ -114,7 +113,6 @@ class Settingsform : Form
     {
             this.textBoxPlayer1 = new System.Windows.Forms.TextBox();
             this.textBoxPlayer2 = new System.Windows.Forms.TextBox();
-            this.labelPlayer1 = new System.Windows.Forms.Label();
             this.labelPlayer2 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.labelXTiles = new System.Windows.Forms.Label();
@@ -127,7 +125,7 @@ class Settingsform : Form
             // 
             // textBoxPlayer1
             // 
-            this.textBoxPlayer1.Location = new System.Drawing.Point(12, 38);
+            this.textBoxPlayer1.Location = new System.Drawing.Point(11, 43);
             this.textBoxPlayer1.Name = "textBoxPlayer1";
             this.textBoxPlayer1.Size = new System.Drawing.Size(100, 22);
             this.textBoxPlayer1.TabIndex = 0;
@@ -138,15 +136,6 @@ class Settingsform : Form
             this.textBoxPlayer2.Name = "textBoxPlayer2";
             this.textBoxPlayer2.Size = new System.Drawing.Size(100, 22);
             this.textBoxPlayer2.TabIndex = 1;
-            // 
-            // labelPlayer1
-            // 
-            this.labelPlayer1.AutoSize = true;
-            this.labelPlayer1.Location = new System.Drawing.Point(12, 22);
-            this.labelPlayer1.Name = "labelPlayer1";
-            this.labelPlayer1.Size = new System.Drawing.Size(99, 17);
-            this.labelPlayer1.TabIndex = 2;
-            this.labelPlayer1.Text = "Player 1 name";
             // 
             // labelPlayer2
             // 
@@ -201,7 +190,7 @@ class Settingsform : Form
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(11, 88);
+            this.comboBox1.Location = new System.Drawing.Point(11, 71);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 24);
             this.comboBox1.TabIndex = 9;
@@ -212,7 +201,7 @@ class Settingsform : Form
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Colfax", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
-            this.label1.Location = new System.Drawing.Point(13, 68);
+            this.label1.Location = new System.Drawing.Point(27, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 18);
             this.label1.TabIndex = 10;
@@ -230,7 +219,6 @@ class Settingsform : Form
             this.Controls.Add(this.textBoxYTiles);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelPlayer2);
-            this.Controls.Add(this.labelPlayer1);
             this.Controls.Add(this.textBoxPlayer2);
             this.Controls.Add(this.textBoxPlayer1);
             this.MinimumSize = new System.Drawing.Size(400, 200);

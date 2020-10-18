@@ -4,13 +4,17 @@
 | |\/| || |\/| | 
 |_|  |_||_|  |_|
 
-[ ] Settings screen -> pretty
+
 [ ] Winner indication
-[ ] Turn indicator -> pretty
-[ ] Scalable buttons fall of when 3×3
+[ ] Game mechanics finished (mistakes in allowed fields)
+[X] Scalable buttons fall of when 3×3
 [ ] Score centre
-[ ] Emoji for players
+[ ] Settings screen -> pretty
+[ ] Emoji for player 2
 [ ] Gray dot => Colour of player who's turn it is
+
+Extra extra
+[ ] Turn indicator -> pretty
 
 */
 
@@ -614,30 +618,33 @@ class ReversiForm : Form
             // 
             // labelTurn
             // 
-            this.labelTurn.AutoSize = true;
-            this.labelTurn.Location = new System.Drawing.Point(32, 153);
+            this.labelTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTurn.Location = new System.Drawing.Point(150, 12);
+            this.labelTurn.Margin = new System.Windows.Forms.Padding(0);
             this.labelTurn.Name = "labelTurn";
-            this.labelTurn.Size = new System.Drawing.Size(38, 17);
+            this.labelTurn.Size = new System.Drawing.Size(200, 25);
             this.labelTurn.TabIndex = 2;
             this.labelTurn.Text = "Turn";
+            this.labelTurn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelP1Name
             // 
-            this.labelP1Name.AutoSize = true;
-            this.labelP1Name.Location = new System.Drawing.Point(17, 40);
+            this.labelP1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP1Name.Location = new System.Drawing.Point(23, 142);
             this.labelP1Name.Name = "labelP1Name";
-            this.labelP1Name.Size = new System.Drawing.Size(64, 17);
+            this.labelP1Name.Size = new System.Drawing.Size(45, 25);
             this.labelP1Name.TabIndex = 3;
             this.labelP1Name.Text = "P1 name";
+            this.labelP1Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelP1Points
             // 
-            this.labelP1Points.AutoSize = true;
             this.labelP1Points.BackColor = System.Drawing.Color.Transparent;
+            this.labelP1Points.Cursor = System.Windows.Forms.Cursors.Default;
             this.labelP1Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelP1Points.Location = new System.Drawing.Point(35, 102);
+            this.labelP1Points.Location = new System.Drawing.Point(21, 102);
             this.labelP1Points.Name = "labelP1Points";
-            this.labelP1Points.Size = new System.Drawing.Size(122, 29);
+            this.labelP1Points.Size = new System.Drawing.Size(45, 45);
             this.labelP1Points.TabIndex = 4;
             this.labelP1Points.Text = "P1 points";
             this.labelP1Points.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -656,12 +663,13 @@ class ReversiForm : Form
             // 
             // labelP2Name
             // 
-            this.labelP2Name.AutoSize = true;
-            this.labelP2Name.Location = new System.Drawing.Point(94, 40);
+            this.labelP2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.labelP2Name.Location = new System.Drawing.Point(83, 142);
             this.labelP2Name.Name = "labelP2Name";
-            this.labelP2Name.Size = new System.Drawing.Size(64, 17);
+            this.labelP2Name.Size = new System.Drawing.Size(45, 25);
             this.labelP2Name.TabIndex = 5;
             this.labelP2Name.Text = "P2 name";
+            this.labelP2Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonSettings
             // 
@@ -697,7 +705,7 @@ class ReversiForm : Form
             // ReversiForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(501, 429);
+            this.ClientSize = new System.Drawing.Size(488, 359);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelGame);
             this.Controls.Add(this.buttonSettings);
@@ -709,8 +717,11 @@ class ReversiForm : Form
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.buttonNewGame);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(506, 406);
             this.Name = "ReversiForm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Reversi";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
