@@ -21,6 +21,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Threading;
+using System.Media;
 
 class ReversiForm : Form
 {
@@ -135,6 +136,17 @@ class ReversiForm : Form
 
     private void newGame(Object obj, EventArgs ea)
     {
+        try
+        {
+            SoundPlayer victoryLap = new SoundPlayer(BolletjeBolletje.Properties.Resources.fortnite);
+            Console.WriteLine("Play victory");
+            victoryLap.Play();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("No workey");
+        }
+
         this.play1Turn = true;
         this.startAMatch();
     }
