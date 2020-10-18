@@ -206,9 +206,12 @@ class ReversiForm : Form
 
         string temp = System.Convert.ToString(player1Icon);
 
-        this.pictureBox1.Image = BolletjeBolletje.Properties.Resources.Frog;
 
-      
+        string imageINeed = "Man";
+        object O = Resources.ResourceManager.GetObject(imageINeed);
+        this.pictureBox1.Image = (Image)O;
+
+
     }
 
     public void openSettings(object obj, EventArgs pea)
