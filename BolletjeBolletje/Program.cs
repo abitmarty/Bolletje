@@ -4,6 +4,14 @@
 | |\/| || |\/| | 
 |_|  |_||_|  |_|
 
+[ ] Settings screen -> pretty
+[ ] Winner indication
+[ ] Turn indicator -> pretty
+[ ] Scalable buttons fall of when 3×3
+[ ] Score centre
+[ ] Emoji for players
+[ ] Gray dot => Colour of player who's turn it is
+
 */
 
 using BolletjeBolletje;
