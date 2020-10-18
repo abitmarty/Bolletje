@@ -253,17 +253,17 @@ class ReversiForm : Form
 
         // Only allow move if value is empty
         // TODO: If there are no possible moves. Next person is at turn
-        if (field[x / 51, y / 51] == 3)
+        if (field[x / this.tileWidth, y / this.tileHeight] == 3)
         {
             if (play1Turn)
             {
-                field[x / 51, y / 51] = 1;
+                field[x / this.tileWidth, y / this.tileHeight] = 1;
                 this.setOverTakenDisk(x, y);
                 this.play1Turn = false;
             }
             else
             {
-                field[x / 51, y / 51] = 2;
+                field[x / this.tileWidth, y / this.tileHeight] = 2;
                 this.setOverTakenDisk(x, y);
                 this.play1Turn = true;
             }
@@ -283,8 +283,8 @@ class ReversiForm : Form
     public void setOverTakenDisk(int x, int y)
     {
         // Setting pixels to the corresponding array position
-        x = x / 51;
-        y = y / 51;
+        x = x / this.tileWidth;
+        y = y / this.tileHeight;
 
         // Similar to calculating surrounding disks
         // But now we overtake the disks
@@ -516,8 +516,8 @@ class ReversiForm : Form
         int offsetX = 5;
         int offsetY = offsetX;
 
-        int tempX = x * 51 + offsetX;
-        int tempY = y * 51 + offsetY;
+        int tempX = x * this.tileWidth + offsetX;
+        int tempY = y * this.tileHeight + offsetY;
         this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
     }
     
