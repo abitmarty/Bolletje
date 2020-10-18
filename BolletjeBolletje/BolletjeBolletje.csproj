@@ -92,5 +92,35 @@
   <ItemGroup>
     <None Include="Resources\fortnite.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Carrot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Frog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pizza.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Robot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rocket.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

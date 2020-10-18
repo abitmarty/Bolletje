@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Threading;
 using System.Media;
+using BolletjeBolletje.Properties;
 
 class ReversiForm : Form
 {
@@ -40,8 +41,8 @@ class ReversiForm : Form
     private Panel panelGame;
 
     // Variables
-    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5);
-    private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY());
+    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish");
+    private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY(), defaultSettings.getP1Icon(), defaultSettings.getP2Icon());
 
     public int tileWidth = 51;
     public int tileHeight = 51;
@@ -162,7 +163,7 @@ class ReversiForm : Form
 
 
         // Set variables
-        this.setPlayerNames();
+        this.setPlayerIcons();
         this.createFieldArray();
         this.startEnvironment();
         this.keepPlayerScore();
@@ -188,10 +189,24 @@ class ReversiForm : Form
         field = new int[this.currentSettings.getTilesX() + 1, this.currentSettings.getTilesY() + 1];
     }
 
-    private void setPlayerNames()
+    private void setPlayerIcons()
     {
-        this.labelP1Name.Text = this.currentSettings.getP1Name();
-        this.labelP2Name.Text = this.currentSettings.getP2Name();
+        /*this.labelP1Name.Text = this.currentSettings.getP1Name();
+        this.labelP2Name.Text = this.currentSettings.getP2Name();*/
+
+        this.labelP1Name.Text = this.currentSettings.getP1Icon();
+        this.labelP2Name.Text = this.currentSettings.getP2Icon();
+
+
+        // Load corresponding image
+
+        string player1Icon = this.currentSettings.getP1Icon();
+
+        Console.WriteLine(player1Icon);
+
+        this.pictureBox1.Image = (BolletjeBolletje.Properties.Resources.Frog);
+
+        
     }
 
     public void openSettings(object obj, EventArgs pea)
@@ -556,7 +571,6 @@ class ReversiForm : Form
 
     private void InitializeComponent()
     {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReversiForm));
             this.buttonNewGame = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.labelTurn = new System.Windows.Forms.Label();
@@ -609,7 +623,7 @@ class ReversiForm : Form
             // labelP1Name
             // 
             this.labelP1Name.AutoSize = true;
-            this.labelP1Name.Location = new System.Drawing.Point(37, 45);
+            this.labelP1Name.Location = new System.Drawing.Point(17, 40);
             this.labelP1Name.Name = "labelP1Name";
             this.labelP1Name.Size = new System.Drawing.Size(64, 17);
             this.labelP1Name.TabIndex = 3;
@@ -642,7 +656,7 @@ class ReversiForm : Form
             // labelP2Name
             // 
             this.labelP2Name.AutoSize = true;
-            this.labelP2Name.Location = new System.Drawing.Point(120, 45);
+            this.labelP2Name.Location = new System.Drawing.Point(94, 40);
             this.labelP2Name.Name = "labelP2Name";
             this.labelP2Name.Size = new System.Drawing.Size(64, 17);
             this.labelP2Name.TabIndex = 5;
@@ -672,10 +686,10 @@ class ReversiForm : Form
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(210, 160);
+            this.pictureBox1.Location = new System.Drawing.Point(33, 57);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(121, 106);
+            this.pictureBox1.Size = new System.Drawing.Size(22, 22);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 

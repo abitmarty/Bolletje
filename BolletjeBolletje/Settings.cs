@@ -50,6 +50,7 @@ class Settingsform : Form
 
         this.comboBox1.Text = "Man";
 
+
     }
 
     private void comboBox1GetString(object obj, EventArgs e)
@@ -63,9 +64,10 @@ class Settingsform : Form
 
         Object selectedItem = comboBox1.SelectedItem;
 
-        string tempString = selectedItem.ToString();
+        string icon1String = selectedItem.ToString();
 
-        Console.WriteLine(tempString);
+        this.currentSettings.setP1Icon(icon1String);
+        
 
     }
 

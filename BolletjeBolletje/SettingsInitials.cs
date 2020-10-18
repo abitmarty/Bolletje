@@ -10,18 +10,23 @@ namespace BolletjeBolletje
     {
         private String p1Name;
         private String p2Name;
+        private string p1Icon;
+        private string p2Icon;
         private int tilesX;
         private int tilesY;
 
         private int minimalX = 2;
         private int minimalY = 2;
 
-        public SettingsInitials(String p1Name, String p2Name, int tilesX, int tilesY)
+        public SettingsInitials(String p1Name, String p2Name, int tilesX, int tilesY, string p1Icon, string p2Icon)
         {
             this.setP1Name(p1Name);
             this.setP2Name(p2Name);
             this.setTilesX(tilesX);
             this.setTilesY(tilesY);
+
+            this.setP1Icon(p1Icon);
+            this.setP2Icon(p2Icon);
         }
 
         public String getP1Name()
@@ -76,6 +81,26 @@ namespace BolletjeBolletje
             {
                 this.tilesY = tilesY;
             }
+        }
+
+        public String getP1Icon()
+        {
+            return this.p1Icon;
+        }
+
+        public void setP1Icon(String p1Icon)
+        {
+            this.p1Icon = p1Icon;
+        }
+
+        public String getP2Icon()
+        {
+            return this.p2Icon;
+        }
+
+        public void setP2Icon(String p2Icon)
+        {
+            this.p2Icon = p2Icon;
         }
     }
 }
