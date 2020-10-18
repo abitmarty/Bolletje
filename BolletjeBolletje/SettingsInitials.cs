@@ -13,6 +13,9 @@ namespace BolletjeBolletje
         private int tilesX;
         private int tilesY;
 
+        private int minimalX = 2;
+        private int minimalY = 2;
+
         public SettingsInitials(String p1Name, String p2Name, int tilesX, int tilesY)
         {
             this.setP1Name(p1Name);
@@ -48,7 +51,14 @@ namespace BolletjeBolletje
 
         public void setTilesX(int tilesX)
         {
-            this.tilesX = tilesX;
+            if (tilesX < this.minimalX)
+            {
+                this.tilesX = this.minimalX;
+            }
+            else
+            {
+                this.tilesX = tilesX;
+            }
         }
 
         public int getTilesY()
@@ -58,7 +68,14 @@ namespace BolletjeBolletje
 
         public void setTilesY(int tilesY)
         {
-            this.tilesY = tilesY;
+            if (tilesY < this.tilesY)
+            {
+                this.tilesY = this.minimalY;
+            }
+            else
+            {
+                this.tilesY = tilesY;
+            }
         }
     }
 }

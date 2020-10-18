@@ -44,6 +44,8 @@ class Settingsform : Form
 
     private void setTextboxes()
     {
+        //TODO: If smaller than 3 give red error
+
         // Player names
         this.textBoxPlayer1.Text = this.currentSettings.getP1Name();
         this.textBoxPlayer2.Text = this.currentSettings.getP2Name();
