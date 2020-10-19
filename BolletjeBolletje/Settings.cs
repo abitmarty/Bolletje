@@ -55,8 +55,8 @@ class Settingsform : Form
         this.buttonSave.Click += this.saveSettings;
 
         // Standard icon is Man and Fish
-        this.comboBox1.Text = "Man";
-        this.comboBox2.Text = "Fish";
+        this.comboBox1.Text = this.currentSettings.getP1Icon();
+        this.comboBox2.Text = this.currentSettings.getP2Icon();
     }
 
     private void drawingSettingsLine(object obj, PaintEventArgs pea)
