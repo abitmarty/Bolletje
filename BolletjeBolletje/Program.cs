@@ -4,7 +4,8 @@
 | |\/| || |\/| | 
 |_|  |_||_|  |_|
 
-[ ] Make player2 in settings blue
+[ ] Make player2 in settings red
+[ ] Make Player 1 name label != label1
 [ ] Winner indication
 [ ] Game mechanics finished (mistakes in allowed fields)
 [ ] Score centre

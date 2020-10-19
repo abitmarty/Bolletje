@@ -131,30 +131,37 @@ class Settingsform : Form
             // 
             this.textBoxPlayer1.Location = new System.Drawing.Point(11, 43);
             this.textBoxPlayer1.Name = "textBoxPlayer1";
-            this.textBoxPlayer1.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPlayer1.Size = new System.Drawing.Size(100, 22);
             this.textBoxPlayer1.TabIndex = 0;
             // 
             // textBoxPlayer2
             // 
             this.textBoxPlayer2.Location = new System.Drawing.Point(147, 38);
             this.textBoxPlayer2.Name = "textBoxPlayer2";
-            this.textBoxPlayer2.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPlayer2.Size = new System.Drawing.Size(100, 22);
             this.textBoxPlayer2.TabIndex = 1;
             // 
             // labelPlayer2
             // 
             this.labelPlayer2.AutoSize = true;
+            this.labelPlayer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPlayer2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             this.labelPlayer2.Location = new System.Drawing.Point(144, 22);
             this.labelPlayer2.Name = "labelPlayer2";
-            this.labelPlayer2.Size = new System.Drawing.Size(74, 13);
+            this.labelPlayer2.Size = new System.Drawing.Size(112, 17);
             this.labelPlayer2.TabIndex = 3;
             this.labelPlayer2.Text = "Player 2 name";
             // 
             // buttonSave
             // 
+            this.buttonSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSave.FlatAppearance.BorderSize = 0;
+            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSave.Location = new System.Drawing.Point(261, 153);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.Size = new System.Drawing.Size(100, 26);
             this.buttonSave.TabIndex = 4;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -164,31 +171,31 @@ class Settingsform : Form
             this.labelXTiles.AutoSize = true;
             this.labelXTiles.Location = new System.Drawing.Point(8, 133);
             this.labelXTiles.Name = "labelXTiles";
-            this.labelXTiles.Size = new System.Drawing.Size(35, 13);
+            this.labelXTiles.Size = new System.Drawing.Size(101, 17);
             this.labelXTiles.TabIndex = 8;
-            this.labelXTiles.Text = "X tiles";
+            this.labelXTiles.Text = "Horizontal tiles";
             // 
             // labelYTiles
             // 
             this.labelYTiles.AutoSize = true;
             this.labelYTiles.Location = new System.Drawing.Point(144, 133);
             this.labelYTiles.Name = "labelYTiles";
-            this.labelYTiles.Size = new System.Drawing.Size(35, 13);
+            this.labelYTiles.Size = new System.Drawing.Size(84, 17);
             this.labelYTiles.TabIndex = 7;
-            this.labelYTiles.Text = "Y tiles";
+            this.labelYTiles.Text = "Vertical tiles";
             // 
             // textBoxXTiles
             // 
             this.textBoxXTiles.Location = new System.Drawing.Point(11, 153);
             this.textBoxXTiles.Name = "textBoxXTiles";
-            this.textBoxXTiles.Size = new System.Drawing.Size(100, 20);
+            this.textBoxXTiles.Size = new System.Drawing.Size(100, 22);
             this.textBoxXTiles.TabIndex = 6;
             // 
             // textBoxYTiles
             // 
             this.textBoxYTiles.Location = new System.Drawing.Point(143, 153);
             this.textBoxYTiles.Name = "textBoxYTiles";
-            this.textBoxYTiles.Size = new System.Drawing.Size(100, 20);
+            this.textBoxYTiles.Size = new System.Drawing.Size(100, 22);
             this.textBoxYTiles.TabIndex = 5;
             // 
             // comboBox1
@@ -196,7 +203,7 @@ class Settingsform : Form
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(11, 71);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
+            this.comboBox1.Size = new System.Drawing.Size(100, 24);
             this.comboBox1.TabIndex = 9;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1GetString);
             // 
@@ -207,7 +214,7 @@ class Settingsform : Form
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             this.label1.Location = new System.Drawing.Point(27, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 15);
+            this.label1.Size = new System.Drawing.Size(69, 18);
             this.label1.TabIndex = 10;
             this.label1.Text = "Player 1";
             // 
@@ -216,7 +223,7 @@ class Settingsform : Form
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(147, 71);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(100, 21);
+            this.comboBox2.Size = new System.Drawing.Size(100, 24);
             this.comboBox2.TabIndex = 11;
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2GetString);
             // 
