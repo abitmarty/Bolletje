@@ -293,17 +293,32 @@ class ReversiForm : Form
     // Panel event handeler
     private void createPanelGameField(object sender, PaintEventArgs e)
     {
-        // TODO: If there are no possible moves. Next person is at turn
+        // Updates player scores on click
+        this.keepPlayerScore();
+
+        // First calculate the possible moves for the current player
+        this.calculatePossibleMoves();
+
+        // If there are no possible moves for the current player
         if (!this.possibleMovesAvailable())
         {
-            /*if (this.play1Turn)
+            // Give the opposition an extra turn
+            // And set the ability to move for the current player to false
+            if (this.play1Turn)
             {
                 this.player1CanPlay = false;
             } else
             {
                 this.player2CanPlay = false;
             }
-            this.play1Turn = !this.play1Turn;*/
+            this.play1Turn = !this.play1Turn;
+
+            // In case either player 1 or player 2 can move invalidate the field
+            // This is a recursing function. Since createPanelGameField is the paint method called on invalidate
+            if ((!this.player2CanPlay && this.player1CanPlay)|| (!this.player1CanPlay && this.player2CanPlay))
+            {
+                this.panelGame.Invalidate();
+            }
         }
         else
         {
@@ -311,42 +326,47 @@ class ReversiForm : Form
             this.player1CanPlay = true;
         }
 
-        if (!this.player2CanPlay && !this.player1CanPlay)
-        {
-            Console.WriteLine("Its game over");
-        }
-
         // All draw methods that are performed on the label
         this.drawGrid();
-        this.calculatePossibleMoves();
         this.drawField();
         this.setTurnName();
 
-        // Updates player scores on click
-        this.keepPlayerScore();
+        // Check if anyone won
+        if (!this.player2CanPlay && !this.player1CanPlay)
+        {
+            this.gameOver();
+        }
+    }
+
+    public void gameOver()
+    {
+        if (this.player1Score > this.player2Score)
+        {
+            this.labelTurn.Text = this.currentSettings.getP1Name() + " won the game!";
+        }
+        else if (this.player1Score < this.player2Score)
+        {
+            this.labelTurn.Text = this.currentSettings.getP2Name() + " won the game!";
+        }
+        else
+        {
+            this.labelTurn.Text = "Unfortunately a tie has occurred";
+        }
     }
 
     public bool possibleMovesAvailable()
     {
-        Console.WriteLine("New field");
-        Console.WriteLine("=========");
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
-            String temp = "";
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
-                temp += this.field[x, y];
                 if (this.field[x, y] == 3)
                 {
-                    Console.WriteLine("Move available");
                     return true;
                 }
             }
-            Console.WriteLine(temp + "\n");
         }
-        Console.WriteLine("No more moves");
         return false;
-
     }
 
     private void setTurnName()
