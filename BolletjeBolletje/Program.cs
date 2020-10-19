@@ -4,39 +4,36 @@
 | |\/| || |\/| | 
 |_|  |_||_|  |_|
 
-// Reversi Game by MM
-// Authors: Martijn Totté and Maarten Gerritse
-// Studentnumbers: 1235002 and 8845874
+// Prakticum 2:     Reversi Game by MM
+// Authors:         Martijn Totté and Maarten Gerritse
+// Studentnumbers:  1235002 and 8845874
 // C# Imperatief Programmeren
 
 De standaard functionaliteiten als de huidige score, de status/beurtindicator, schaalbaarheid van het bord,
 het in het midden plaatsen van de startstenen, beurt overslaan de knoppen voor een nieuw spel en de help knop met de mogelijke stappen staan allemaal in het programma.
 
 Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het volgende toegevoegd:
-+ Een settings knop waar de instellingen mooi in een apart pop-up scherm zitten.
++ Een settings knop waar de instellingen in een apart pop-up scherm zitten.
 + Spelers kunnen zelf een naam kiezen
 + Spelers kunnen zelf een emoji kiezen om mee te spelen uit een lijst van 10 opties.
++ Spelers kunnen zelf de grootte van de tiles bepalen
++ De invoer van de settings velden wordt gechecked. Op het moment dat een foutieve waarde wordt ingevoerd sluit het settings scherm niet na het klikken op de save knop. Bij juiste waardes sluit de settings wel na het klikken op de save knop.
 + Flat design in de knoppen, on hover en in het speelbord
++ Anti alliassing op alle getekende objecten
++ Het veld en scherm zijn schaalbaar op basis van de bij de settings ingevoerde informatie
++ Speciale speler indicatie rondom de emoticons
++ Zet u geluid aan :) (Victory royale geluids effect bij winst)
++ U vind het project op github https://github.com/abitmarty/Bolletje
 
+
+
+
+
+
+@Maarten zie de commits https://github.com/abitmarty/Bolletje
 [ ] Game mechanics finished (mistakes in allowed fields)
-[X] Added check input to settings
-[X] Set variables private and  test all functionalities; NOT THE PRESET AND FIELD
-[X] Change tile sizes in settings
-[X] Turn indication background circle
-[X] Winner indication
-[X] Make player2 in settings red
-[X] Make Player 1 name label != label1
-[X] Score centre
-[X] Settings screen -> pretty
-[X] Emoji for player 2
-[X] Background emoji
-[-] Gray dot => Colour of player who's turn it is
-[X] Settings buttons alignen
-[X] Dropdown player two
-[X] Scalable buttons fall of when 3×3
 
-
-Extra extra
+Extra
 [ ] Turn indicator -> pretty
 
 */
