@@ -69,7 +69,7 @@ class ReversiForm : Form
     private PictureBox pictureBox2;
 
     // Variables
-    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish", 51, 51);
+    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish", 1, 1);
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY(), defaultSettings.getP1Icon(), defaultSettings.getP2Icon(), defaultSettings.getTileSizeX(), defaultSettings.getTileSizeY());
 
     private int player1Score = 0;
@@ -637,12 +637,15 @@ class ReversiForm : Form
 
     public void drawDisk(Brush currentBrush, int x, int y)
     {
-        int offsetX = 5;
-        int offsetY = offsetX;
+        int offsetX = this.currentSettings.getTileSizeX()/10;
+        int offsetY = this.currentSettings.getTileSizeY() / 10;
 
         int tempX = x * this.currentSettings.getTileSizeX() + offsetX;
         int tempY = y * this.currentSettings.getTileSizeY() + offsetY;
-        this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
+
+        // This way no matter how big the field or tile gets
+        // The disk will stay centered and fill the tile
+        this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, (this.currentSettings.getTileSizeX() -1) - (2*offsetX), (this.currentSettings.getTileSizeY() - 1) - (2 * offsetY));
     }
 
     private void InitializeComponent()

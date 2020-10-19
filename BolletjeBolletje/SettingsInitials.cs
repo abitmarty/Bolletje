@@ -117,7 +117,14 @@ namespace BolletjeBolletje
 
         public void setTileSizeX(int tileSizeX)
         {
-            this.tileSizeX = tileSizeX;
+            if (tileSizeX < this.minimalTileSizeX)
+            {
+                this.tileSizeX = this.minimalTileSizeX;
+            }
+            else
+            {
+                this.tileSizeX = tileSizeX;
+            }
         }
         public int getTileSizeY()
         {
@@ -126,7 +133,14 @@ namespace BolletjeBolletje
 
         public void setTileSizeY(int tileSizeY)
         {
-            this.tileSizeY = tileSizeY;
+            if (tileSizeY < this.minimalTileSizeY)
+            {
+                this.tileSizeY = this.minimalTileSizeY;
+            }
+            else
+            {
+                this.tileSizeY = tileSizeY;
+            }
         }
     }
 }
