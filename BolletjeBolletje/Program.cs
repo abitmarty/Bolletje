@@ -275,11 +275,25 @@ class ReversiForm : Form
 
     private void createPanelGameField(object sender, PaintEventArgs e)
     {
+        /*// TODO: If there are no possible moves. Next person is at turn
+        if (!this.possibleMovesAvailable())
+        {
+            this.play1Turn = !this.play1Turn;
+            this.calculatePossibleMoves();
+        }
+        else
+        {
+            Console.WriteLine("Playing");
+        }*/
+
         // All draw methods that are performed on the label
         this.drawGrid();
         this.calculatePossibleMoves();
         this.drawField();
         this.setTurnName();
+
+        // Updates player scores on click
+        this.keepPlayerScore();
     }
 
     public bool possibleMovesAvailable()
@@ -306,16 +320,6 @@ class ReversiForm : Form
 
     private void setTurnName()
     {
-        // TODO: If there are no possible moves. Next person is at turn
-        if (!this.possibleMovesAvailable())
-        {
-            this.play1Turn = !this.play1Turn;
-            this.calculatePossibleMoves();
-        }
-        else
-        {
-            Console.WriteLine("Playing");
-        }
         // Set player turn
         if (this.play1Turn)
         {
@@ -350,14 +354,10 @@ class ReversiForm : Form
         }
 
         // Draw field and invalidate panel only
-        this.drawField();
         this.panelGame.Invalidate();
 
         // Give each player the possibility to turn help off. (Uncomment the next line to enable)
         // this.helpOn = false;
-
-        // Updates player scores on click
-        this.keepPlayerScore();
     }
 
     public void setOverTakenDisk(int x, int y)
