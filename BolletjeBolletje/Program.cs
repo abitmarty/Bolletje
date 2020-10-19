@@ -32,6 +32,9 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 
 @Maarten zie de commits https://github.com/abitmarty/Bolletje
 [ ] Game mechanics finished (mistakes in allowed fields)
+[ ] Less invalidation ont the form's paint event: this.invalidate();
+[ ] Show logbook with moves with the list. Add to list. Get last tree moves from list. Show those moves
+
 
 Extra
 [ ] Turn indicator -> pretty
@@ -119,7 +122,7 @@ class ReversiForm : Form
         // Draw smooth so we'll add anti aliassing
         pea.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-        // Draw left stats
+        // Draw left stats (active player gets highlighted)
         pea.Graphics.FillRectangle(coolBlue, 23, 69, 44, 50);
         pea.Graphics.FillEllipse(coolBlue, 23, 95, 44, 44);
         if (this.play1Turn)
@@ -129,7 +132,7 @@ class ReversiForm : Form
         pea.Graphics.FillEllipse(Brushes.White, 18, 42, 52, 52);
         pea.Graphics.FillEllipse(coolBlue, 22, 46, 44, 44);
 
-        // Draw right stats
+        // Draw right stats (active player gets highlighted)
         pea.Graphics.FillRectangle(coolRed, 84, 69, 44, 50);
         pea.Graphics.FillEllipse(coolRed, 84, 95, 44, 44);
         if (!this.play1Turn)
@@ -138,8 +141,19 @@ class ReversiForm : Form
         }
         pea.Graphics.FillEllipse(Brushes.White, 79, 42, 52, 52);
         pea.Graphics.FillEllipse(coolRed, 83, 46, 44, 44);
-    }
 
+        // Draw scorebar
+        double totalScore = this.player1Score + this.player2Score;
+        double factor = this.panelGame.Height / totalScore;
+        double doubleLengthP1 = factor * this.player1Score;
+        double doubleLengthP2 = factor * this.player2Score;
+
+        int lengthP1 = (int)(Math.Ceiling(doubleLengthP1));
+        int lengthP2 = (int)(Math.Floor(doubleLengthP2));
+
+        pea.Graphics.FillRectangle(coolRed, this.rectangleX + this.panelGame.Width + 20, this.rectangleY + lengthP1, 5, lengthP2);
+        pea.Graphics.FillRectangle(coolBlue, this.rectangleX + this.panelGame.Width + 20, this.rectangleY, 5, lengthP1);
+    }
 
     public void keepPlayerScore()
     {
@@ -322,6 +336,7 @@ class ReversiForm : Form
         this.drawGrid();
         this.drawField();
         this.setTurnName();
+        this.Invalidate();
 
         // Check if anyone won
         if (!this.player2CanPlay && !this.player1CanPlay)
