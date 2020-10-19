@@ -281,8 +281,40 @@ class ReversiForm : Form
         this.setTurnName();
     }
 
+    public bool possibleMovesAvailable()
+    {
+        //Console.WriteLine("New field");
+        //Console.WriteLine("=========");
+        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
+        {
+            String temp = "";
+            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
+            {
+                temp += this.field[x, y];
+                if (this.field[x, y] == 3)
+                {
+                    //Console.WriteLine("Found a 3");
+                    return true;
+                }
+            }
+            //Console.WriteLine(temp + "\n");
+        }
+        return false;
+
+    }
+
     private void setTurnName()
     {
+        // TODO: If there are no possible moves. Next person is at turn
+        if (!this.possibleMovesAvailable())
+        {
+            this.play1Turn = !this.play1Turn;
+        }
+        else
+        {
+            Console.WriteLine("Playing");
+        }
+
         // Set player turn
         if (this.play1Turn)
         {
@@ -299,8 +331,7 @@ class ReversiForm : Form
         int x = e.X;
         int y = e.Y;
 
-        // Only allow move if value is empty
-        // TODO: If there are no possible moves. Next person is at turn
+        // Only allow move if value is empty and eligible for a move (3)
         if (field[x / this.tileWidth, y / this.tileHeight] == 3)
         {
             if (play1Turn)
@@ -321,7 +352,7 @@ class ReversiForm : Form
         this.drawField();
         this.panelGame.Invalidate();
 
-        // Give each player the possibility to set it off
+        // Give each player the possibility to turn help off. (Uncomment the next line to enable)
         // this.helpOn = false;
 
         // Updates player scores on click
@@ -538,14 +569,14 @@ class ReversiForm : Form
     // TODO: Remove visualisers (console)
     public void drawField()
     {
-        Console.WriteLine("New field");
-        Console.WriteLine("=========");
+        //Console.WriteLine("New field");
+        //Console.WriteLine("=========");
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
-            String temp = "";
+            //String temp = "";
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
-                temp += this.field[x, y];
+                //temp += this.field[x, y];
                 if (this.field[x, y] == 1)
                 {
                     this.drawDisk(this.coolBlue, x, y);
@@ -555,7 +586,7 @@ class ReversiForm : Form
                     this.drawDisk(this.coolRed, x, y);
                 }
             }
-            Console.WriteLine(temp + "\n");
+            //Console.WriteLine(temp + "\n");
         }
     }
 
