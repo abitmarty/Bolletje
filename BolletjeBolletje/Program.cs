@@ -4,16 +4,16 @@
 | |\/| || |\/| | 
 |_|  |_||_|  |_|
 
-[ ] Make player2 in settings red
-[ ] Make Player 1 name label != label1
+[X] Make player2 in settings red
+[X] Make Player 1 name label != label1
 [ ] Winner indication
 [ ] Game mechanics finished (mistakes in allowed fields)
-[ ] Score centre
-[ ] Settings screen -> pretty
-[ ] Emoji for player 2
-[ ] Background emoji
-[ ] Gray dot => Colour of player who's turn it is
-[ ] Settings buttons alignen
+[X] Score centre
+[X] Settings screen -> pretty
+[X] Emoji for player 2
+[X] Background emoji
+[-] Gray dot => Colour of player who's turn it is
+[X] Settings buttons alignen
 [X] Dropdown player twomad
 [X] Scalable buttons fall of when 3×3
 
@@ -624,8 +624,8 @@ class ReversiForm : Form
             this.buttonNewGame.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonNewGame.FlatAppearance.BorderSize = 0;
             this.buttonNewGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNewGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.buttonNewGame.Location = new System.Drawing.Point(0, 220);
+            this.buttonNewGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNewGame.Location = new System.Drawing.Point(0, 227);
             this.buttonNewGame.Name = "buttonNewGame";
             this.buttonNewGame.Size = new System.Drawing.Size(150, 40);
             this.buttonNewGame.TabIndex = 0;
@@ -638,7 +638,7 @@ class ReversiForm : Form
             this.buttonHelp.FlatAppearance.BorderSize = 0;
             this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHelp.Location = new System.Drawing.Point(0, 265);
+            this.buttonHelp.Location = new System.Drawing.Point(0, 272);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(150, 40);
             this.buttonHelp.TabIndex = 1;
@@ -647,7 +647,7 @@ class ReversiForm : Form
             // 
             // labelTurn
             // 
-            this.labelTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTurn.Location = new System.Drawing.Point(150, 12);
             this.labelTurn.Margin = new System.Windows.Forms.Padding(0);
             this.labelTurn.Name = "labelTurn";
@@ -671,7 +671,7 @@ class ReversiForm : Form
             this.labelP1Points.BackColor = System.Drawing.Color.Transparent;
             this.labelP1Points.Cursor = System.Windows.Forms.Cursors.Default;
             this.labelP1Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelP1Points.Location = new System.Drawing.Point(21, 102);
+            this.labelP1Points.Location = new System.Drawing.Point(23, 94);
             this.labelP1Points.Name = "labelP1Points";
             this.labelP1Points.Size = new System.Drawing.Size(45, 45);
             this.labelP1Points.TabIndex = 4;
@@ -680,12 +680,12 @@ class ReversiForm : Form
             // 
             // labelP2Points
             // 
-            this.labelP2Points.AutoSize = true;
             this.labelP2Points.BackColor = System.Drawing.Color.Transparent;
             this.labelP2Points.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelP2Points.Location = new System.Drawing.Point(98, 102);
+            this.labelP2Points.Location = new System.Drawing.Point(84, 94);
             this.labelP2Points.Name = "labelP2Points";
-            this.labelP2Points.Size = new System.Drawing.Size(96, 24);
+            this.labelP2Points.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelP2Points.Size = new System.Drawing.Size(45, 45);
             this.labelP2Points.TabIndex = 6;
             this.labelP2Points.Text = "P2 points";
             this.labelP2Points.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -706,7 +706,7 @@ class ReversiForm : Form
             this.buttonSettings.FlatAppearance.BorderSize = 0;
             this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSettings.Location = new System.Drawing.Point(0, 310);
+            this.buttonSettings.Location = new System.Drawing.Point(0, 317);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(150, 40);
             this.buttonSettings.TabIndex = 7;
@@ -724,6 +724,7 @@ class ReversiForm : Form
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             this.pictureBox1.Location = new System.Drawing.Point(33, 57);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
@@ -733,7 +734,8 @@ class ReversiForm : Form
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(94, 57);
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.pictureBox2.Location = new System.Drawing.Point(95, 57);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(22, 22);
@@ -765,7 +767,6 @@ class ReversiForm : Form
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
     }
 

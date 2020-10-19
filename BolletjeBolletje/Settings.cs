@@ -61,7 +61,7 @@ class Settingsform : Form
 
     private void drawingSettingsLine(object obj, PaintEventArgs pea)
     {
-        pea.Graphics.DrawLine(Pens.Black, 10, 130, 290, 130);
+        pea.Graphics.DrawLine(Pens.Black, 10, 120, 360, 120);
     }
 
     private void comboBox1GetString(object obj, EventArgs e)
@@ -160,7 +160,7 @@ class Settingsform : Form
             this.buttonSave.FlatAppearance.BorderSize = 0;
             this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.Location = new System.Drawing.Point(261, 152);
+            this.buttonSave.Location = new System.Drawing.Point(260, 152);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(100, 22);
             this.buttonSave.TabIndex = 4;
@@ -170,18 +170,20 @@ class Settingsform : Form
             // labelXTiles
             // 
             this.labelXTiles.AutoSize = true;
+            this.labelXTiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelXTiles.Location = new System.Drawing.Point(8, 133);
             this.labelXTiles.Name = "labelXTiles";
-            this.labelXTiles.Size = new System.Drawing.Size(101, 17);
+            this.labelXTiles.Size = new System.Drawing.Size(122, 18);
             this.labelXTiles.TabIndex = 8;
             this.labelXTiles.Text = "Horizontal tiles";
             // 
             // labelYTiles
             // 
             this.labelYTiles.AutoSize = true;
+            this.labelYTiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelYTiles.Location = new System.Drawing.Point(144, 133);
             this.labelYTiles.Name = "labelYTiles";
-            this.labelYTiles.Size = new System.Drawing.Size(84, 17);
+            this.labelYTiles.Size = new System.Drawing.Size(100, 18);
             this.labelYTiles.TabIndex = 7;
             this.labelYTiles.Text = "Vertical tiles";
             // 
