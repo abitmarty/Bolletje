@@ -23,6 +23,9 @@ class Settingsform : Form
     private TextBox textBoxTileWidth;
     private TextBox textBoxTileHeight;
 
+    private Color colorNormal = default(Color);
+    private Color colorError = Color.Red;
+
     // Variables
     private SettingsInitials currentSettings;
 
@@ -85,16 +88,77 @@ class Settingsform : Form
 
     public void saveSettings(Object obj, EventArgs ea)
     {
-        this.currentSettings.setP1Name(this.textBoxPlayer1.Text);
-        this.currentSettings.setP2Name(this.textBoxPlayer2.Text);
+        Boolean noErrors = true;
 
-        this.currentSettings.setTilesX(Convert.ToInt32(this.textBoxXTiles.Text) - 1);
-        this.currentSettings.setTilesY(Convert.ToInt32(this.textBoxYTiles.Text) - 1);
+        try
+        {
+            this.currentSettings.setP1Name(this.textBoxPlayer1.Text);
+            this.textBoxPlayer1.BackColor = this.colorNormal;
+        } catch (Exception e)
+        {
+            this.textBoxPlayer1.BackColor = this.colorError;
+            noErrors = false;
+        }
 
-        this.currentSettings.setTileSizeX(Convert.ToInt32(this.textBoxTileWidth.Text));
-        this.currentSettings.setTileSizeY(Convert.ToInt32(this.textBoxTileHeight.Text));
+        try
+        {
+            this.currentSettings.setP2Name(this.textBoxPlayer2.Text);
+            this.textBoxPlayer2.BackColor = this.colorNormal;
+        }
+        catch (Exception e)
+        {
+            this.textBoxPlayer2.BackColor = this.colorError;
+            noErrors = false;
+        }
 
-        this.Close();
+        try
+        {
+            this.currentSettings.setTilesX(Convert.ToInt32(this.textBoxXTiles.Text) - 1);
+            this.textBoxXTiles.BackColor = this.colorNormal;
+        }
+        catch (Exception e)
+        {
+            this.textBoxXTiles.BackColor = this.colorError;
+            noErrors = false;
+        }
+
+        try
+        {
+            this.currentSettings.setTilesY(Convert.ToInt32(this.textBoxYTiles.Text) - 1);
+            this.textBoxYTiles.BackColor = this.colorNormal;
+        }
+        catch (Exception e)
+        {
+            this.textBoxYTiles.BackColor = this.colorError;
+            noErrors = false;
+        }
+
+        try
+        {
+            this.currentSettings.setTileSizeX(Convert.ToInt32(this.textBoxTileWidth.Text));
+            this.textBoxTileWidth.BackColor = this.colorNormal;
+        }
+        catch (Exception e)
+        {
+            this.textBoxTileWidth.BackColor = this.colorError;
+            noErrors = false;
+        }
+
+        try
+        {
+            this.currentSettings.setTileSizeY(Convert.ToInt32(this.textBoxTileHeight.Text));
+            this.textBoxTileHeight.BackColor = this.colorNormal;
+        }
+        catch (Exception e)
+        {
+            this.textBoxTileHeight.BackColor = this.colorError;
+            noErrors = false;
+        }
+
+        if (noErrors)
+        {
+            this.Close();
+        }
     }
 
     private void setTextboxes()

@@ -19,7 +19,9 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 + Flat design in de knoppen, on hover en in het speelbord
 
 [ ] Game mechanics finished (mistakes in allowed fields)
-[ ] Set variables private and  test all functionalities; NOT THE PRESET AND FIELD
+[X] Added check input to settings
+[X] Set variables private and  test all functionalities; NOT THE PRESET AND FIELD
+[X] Change tile sizes in settings
 [X] Turn indication background circle
 [X] Winner indication
 [X] Make player2 in settings red
@@ -79,8 +81,6 @@ class ReversiForm : Form
     private Boolean player1CanPlay = true;
     private Boolean player2CanPlay = true;
 
-    // public int diskWidth = 24;
-    // public int diskHeight = diskWidth;
     private Brush coolBlue = new SolidBrush(Color.FromArgb(107, 200, 252));
     private Brush coolRed = new SolidBrush(Color.FromArgb(252, 107, 107));
 
@@ -637,7 +637,7 @@ class ReversiForm : Form
 
     public void drawDisk(Brush currentBrush, int x, int y)
     {
-        int offsetX = this.currentSettings.getTileSizeX()/10;
+        int offsetX = this.currentSettings.getTileSizeX() / 10;
         int offsetY = this.currentSettings.getTileSizeY() / 10;
 
         int tempX = x * this.currentSettings.getTileSizeX() + offsetX;
@@ -645,7 +645,7 @@ class ReversiForm : Form
 
         // This way no matter how big the field or tile gets
         // The disk will stay centered and fill the tile
-        this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, (this.currentSettings.getTileSizeX() -1) - (2*offsetX), (this.currentSettings.getTileSizeY() - 1) - (2 * offsetY));
+        this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, (this.currentSettings.getTileSizeX() - 1) - (2 * offsetX), (this.currentSettings.getTileSizeY() - 1) - (2 * offsetY));
     }
 
     private void InitializeComponent()
