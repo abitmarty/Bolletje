@@ -127,15 +127,23 @@ class ReversiForm : Form
 
         // Draw left stats
         pea.Graphics.FillRectangle(coolBlue, 23, 69, 44, 50);
+        pea.Graphics.FillEllipse(coolBlue, 23, 95, 44, 44);
+        if (this.play1Turn)
+        {
+            pea.Graphics.FillEllipse(coolBlue, 16, 40, 56, 56);
+        }
         pea.Graphics.FillEllipse(Brushes.White, 18, 42, 52, 52);
         pea.Graphics.FillEllipse(coolBlue, 22, 46, 44, 44);
-        pea.Graphics.FillEllipse(coolBlue, 23, 95, 44, 44);
 
         // Draw right stats
         pea.Graphics.FillRectangle(coolRed, 84, 69, 44, 50);
+        pea.Graphics.FillEllipse(coolRed, 84, 95, 44, 44);
+        if (!this.play1Turn)
+        {
+            pea.Graphics.FillEllipse(coolRed, 77, 40, 56, 56);
+        }
         pea.Graphics.FillEllipse(Brushes.White, 79, 42, 52, 52);
         pea.Graphics.FillEllipse(coolRed, 83, 46, 44, 44);
-        pea.Graphics.FillEllipse(coolRed, 84, 95, 44, 44);
     }
 
 
@@ -407,6 +415,7 @@ class ReversiForm : Form
 
         // Draw field and invalidate panel only
         this.panelGame.Invalidate();
+        this.Invalidate();
 
         // Give each player the possibility to turn help off. (Uncomment the next line to enable)
         // this.helpOn = false;
