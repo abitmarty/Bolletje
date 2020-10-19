@@ -117,7 +117,6 @@ class ReversiForm : Form
         pea.Graphics.FillEllipse(Brushes.White, 79, 42, 52, 52);
         pea.Graphics.FillEllipse(coolRed, 83, 46, 44, 44);
         pea.Graphics.FillEllipse(coolRed, 84, 95, 44, 44);
-
     }
 
 
