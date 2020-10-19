@@ -309,6 +309,7 @@ class ReversiForm : Form
         if (!this.possibleMovesAvailable())
         {
             this.play1Turn = !this.play1Turn;
+            this.calculatePossibleMoves();
         }
         else
         {
