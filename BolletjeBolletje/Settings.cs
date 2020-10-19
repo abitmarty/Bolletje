@@ -16,7 +16,7 @@ class Settingsform : Form
     private TextBox textBoxXTiles;
     private TextBox textBoxYTiles;
     private ComboBox comboBox1;
-    private Label label1;
+    private Label labelPlayer1;
     private ComboBox comboBox2;
 
     // Variables
@@ -123,7 +123,7 @@ class Settingsform : Form
             this.textBoxXTiles = new System.Windows.Forms.TextBox();
             this.textBoxYTiles = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelPlayer1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -136,7 +136,7 @@ class Settingsform : Form
             // 
             // textBoxPlayer2
             // 
-            this.textBoxPlayer2.Location = new System.Drawing.Point(147, 38);
+            this.textBoxPlayer2.Location = new System.Drawing.Point(147, 43);
             this.textBoxPlayer2.Name = "textBoxPlayer2";
             this.textBoxPlayer2.Size = new System.Drawing.Size(100, 22);
             this.textBoxPlayer2.TabIndex = 1;
@@ -145,12 +145,13 @@ class Settingsform : Form
             // 
             this.labelPlayer2.AutoSize = true;
             this.labelPlayer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPlayer2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
-            this.labelPlayer2.Location = new System.Drawing.Point(144, 22);
+            this.labelPlayer2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.labelPlayer2.Location = new System.Drawing.Point(147, 15);
             this.labelPlayer2.Name = "labelPlayer2";
-            this.labelPlayer2.Size = new System.Drawing.Size(112, 17);
+            this.labelPlayer2.Size = new System.Drawing.Size(69, 18);
             this.labelPlayer2.TabIndex = 3;
-            this.labelPlayer2.Text = "Player 2 name";
+            this.labelPlayer2.Text = "Player 2";
+            this.labelPlayer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonSave
             // 
@@ -159,9 +160,9 @@ class Settingsform : Form
             this.buttonSave.FlatAppearance.BorderSize = 0;
             this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.Location = new System.Drawing.Point(261, 153);
+            this.buttonSave.Location = new System.Drawing.Point(261, 152);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(100, 26);
+            this.buttonSave.Size = new System.Drawing.Size(100, 22);
             this.buttonSave.TabIndex = 4;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -207,16 +208,17 @@ class Settingsform : Form
             this.comboBox1.TabIndex = 9;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1GetString);
             // 
-            // label1
+            // labelPlayer1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
-            this.label1.Location = new System.Drawing.Point(27, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 18);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Player 1";
+            this.labelPlayer1.AutoSize = true;
+            this.labelPlayer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPlayer1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+            this.labelPlayer1.Location = new System.Drawing.Point(11, 15);
+            this.labelPlayer1.Name = "labelPlayer1";
+            this.labelPlayer1.Size = new System.Drawing.Size(69, 18);
+            this.labelPlayer1.TabIndex = 10;
+            this.labelPlayer1.Text = "Player 1";
+            this.labelPlayer1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBox2
             // 
@@ -230,9 +232,9 @@ class Settingsform : Form
             // Settingsform
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(384, 253);
+            this.ClientSize = new System.Drawing.Size(384, 193);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelPlayer1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.labelXTiles);
             this.Controls.Add(this.labelYTiles);
@@ -242,7 +244,7 @@ class Settingsform : Form
             this.Controls.Add(this.labelPlayer2);
             this.Controls.Add(this.textBoxPlayer2);
             this.Controls.Add(this.textBoxPlayer1);
-            this.MinimumSize = new System.Drawing.Size(400, 200);
+            this.MinimumSize = new System.Drawing.Size(300, 200);
             this.Name = "Settingsform";
             this.RightToLeftLayout = true;
             this.ShowIcon = false;
