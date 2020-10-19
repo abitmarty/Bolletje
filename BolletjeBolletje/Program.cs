@@ -19,8 +19,8 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 + Flat design in de knoppen, on hover en in het speelbord
 
 [ ] Game mechanics finished (mistakes in allowed fields)
-[ ] Turn indication background circle
 [ ] Set variables private and  test all functionalities; NOT THE PRESET AND FIELD
+[X] Turn indication background circle
 [X] Winner indication
 [X] Make player2 in settings red
 [X] Make Player 1 name label != label1
@@ -72,20 +72,20 @@ class ReversiForm : Form
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish");
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY(), defaultSettings.getP1Icon(), defaultSettings.getP2Icon());
 
-    public int tileWidth = 51;
-    public int tileHeight = 51;
+    private int tileWidth = 51;
+    private int tileHeight = 51;
 
-    public int player1Score = 0;
-    public int player2Score = 0;
-    public Boolean helpOn = false;
+    private int player1Score = 0;
+    private int player2Score = 0;
+    private Boolean helpOn = false;
 
-    public Boolean player1CanPlay = true;
-    public Boolean player2CanPlay = true;
+    private Boolean player1CanPlay = true;
+    private Boolean player2CanPlay = true;
 
     // public int diskWidth = 24;
     // public int diskHeight = diskWidth;
-    Brush coolBlue = new SolidBrush(Color.FromArgb(107, 200, 252));
-    Brush coolRed = new SolidBrush(Color.FromArgb(252, 107, 107));
+    private Brush coolBlue = new SolidBrush(Color.FromArgb(107, 200, 252));
+    private Brush coolRed = new SolidBrush(Color.FromArgb(252, 107, 107));
 
     private int rectangleX = 150;
     private int rectangleY = 50;
@@ -354,7 +354,6 @@ class ReversiForm : Form
         try
         {
             SoundPlayer victoryLap = new SoundPlayer(BolletjeBolletje.Properties.Resources.fortnite);
-            Console.WriteLine("Play victory");
             victoryLap.Play();
         }
         catch (Exception ex)
@@ -648,19 +647,6 @@ class ReversiForm : Form
         int tempY = y * this.tileHeight + offsetY;
         this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
     }
-    
-    //int[][] playField = new int [tilesx];
-
-    // Declaring a value to a position in the playField
-    //playField [1][3] == 2
-
-    // tilesx * tilesy == totalTiles Ex. x6 * x6 = 36 tiles
-    // totalTiles == total number of tiles
-    // TODO totalTiles aanmaken
-
-    // New game start position
-
-    // 1 turn
 
     private void InitializeComponent()
     {
