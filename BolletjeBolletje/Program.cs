@@ -34,6 +34,8 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 [ ] Game mechanics finished (mistakes in allowed fields)
 [ ] Less invalidation ont the form's paint event: this.invalidate();
 [ ] Show logbook with moves with the list. Add to list. Get last tree moves from list. Show those moves
+[ ] Fix tab index
+
 
 
 Extra
