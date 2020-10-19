@@ -277,8 +277,8 @@ class ReversiForm : Form
     {
         // All draw methods that are performed on the label
         this.drawGrid();
-        this.drawField();
         this.calculatePossibleMoves();
+        this.drawField();
         this.setTurnName();
     }
 
@@ -316,7 +316,6 @@ class ReversiForm : Form
         {
             Console.WriteLine("Playing");
         }
-
         // Set player turn
         if (this.play1Turn)
         {
@@ -430,20 +429,6 @@ class ReversiForm : Form
 
     // In progress
     // TODO: Store possible move elipses in array
-    public void drawPossibleMoves()
-    {
-        for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
-        {
-            for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
-            {
-                // If a move is possible its 1
-                if (this.field[x, y] == 3 && this.helpOn)
-                {
-                    this.drawDisk(Brushes.Gray, x, y);
-                }
-            }
-        }
-    }
 
     private void removePossibleMoves()
     {
@@ -492,9 +477,6 @@ class ReversiForm : Form
                 }
             }
         }
-
-        this.drawPossibleMoves();
-        //TODO: Als geen possible moves dan skip beurt :) #anglicismen
     }
 
     private Boolean isValidMove(int xCoord, int xMove, int yCoord, int yMove)
@@ -586,6 +568,10 @@ class ReversiForm : Form
                 if (this.field[x, y] == 2)
                 {
                     this.drawDisk(this.coolRed, x, y);
+                }
+                if (this.field[x, y] == 3 && this.helpOn)
+                {
+                    this.drawDisk(Brushes.Gray, x, y);
                 }
             }
             //Console.WriteLine(temp + "\n");
