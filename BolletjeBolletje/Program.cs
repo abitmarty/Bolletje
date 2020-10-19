@@ -4,17 +4,34 @@
 | |\/| || |\/| | 
 |_|  |_||_|  |_|
 
-[X] Make player2 in settings red
-[X] Make Player 1 name label != label1
+// Reversi Game by MM
+// Authors: Martijn Totté and Maarten Gerritse
+// Studentnumbers: 1235002 and 8845874
+// C# Imperatief Programmeren
+
+De standaard functionaliteiten als de huidige score, de status/beurtindicator, schaalbaarheid van het bord,
+het in het midden plaatsen van de startstenen, beurt overslaan de knoppen voor een nieuw spel en de help knop met de mogelijke stappen staan allemaal in het programma.
+
+Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het volgende toegevoegd:
++ Een settings knop waar de instellingen mooi in een apart pop-up scherm zitten.
++ Spelers kunnen zelf een naam kiezen
++ Spelers kunnen zelf een emoji kiezen om mee te spelen uit een lijst van 10 opties.
++ Flat design in de knoppen, on hover en in het speelbord
+
+
+
+
 [ ] Winner indication
 [ ] Game mechanics finished (mistakes in allowed fields)
+[X] Make player2 in settings red
+[X] Make Player 1 name label != label1
 [X] Score centre
 [X] Settings screen -> pretty
 [X] Emoji for player 2
 [X] Background emoji
 [-] Gray dot => Colour of player who's turn it is
 [X] Settings buttons alignen
-[X] Dropdown player twomad
+[X] Dropdown player two
 [X] Scalable buttons fall of when 3×3
 
 
