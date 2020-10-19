@@ -152,15 +152,16 @@ class ReversiForm : Form
                 if (this.field[x, y] == 1)
                 {
                     this.player1Score++;
-                    this.labelP1Points.Text = this.player1Score.ToString();
                 }
                 if (this.field[x, y] == 2)
                 {
                     this.player2Score++;
-                    this.labelP2Points.Text = this.player2Score.ToString();
                 }
             }
         }
+
+        this.labelP1Points.Text = this.player1Score.ToString();
+        this.labelP2Points.Text = this.player2Score.ToString();
     }
 
 
@@ -293,11 +294,11 @@ class ReversiForm : Form
     // Panel event handeler
     private void createPanelGameField(object sender, PaintEventArgs e)
     {
-        // Updates player scores on click
-        this.keepPlayerScore();
-
         // First calculate the possible moves for the current player
         this.calculatePossibleMoves();
+
+        // Updates player scores on click
+        this.keepPlayerScore();
 
         // If there are no possible moves for the current player
         if (!this.possibleMovesAvailable())
