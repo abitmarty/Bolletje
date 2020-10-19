@@ -18,11 +18,10 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 + Spelers kunnen zelf een emoji kiezen om mee te spelen uit een lijst van 10 opties.
 + Flat design in de knoppen, on hover en in het speelbord
 
-
-
-
 [ ] Winner indication
 [ ] Game mechanics finished (mistakes in allowed fields)
+[ ] Turn indication background circle
+[ ] Set variables private and  test all functionalities; NOT THE PRESET AND FIELD
 [X] Make player2 in settings red
 [X] Make Player 1 name label != label1
 [X] Score centre
@@ -79,6 +78,9 @@ class ReversiForm : Form
     public int player1Score = 0;
     public int player2Score = 0;
     public Boolean helpOn = false;
+
+    public Boolean player1CanPlay = true;
+    public Boolean player2CanPlay = true;
 
     // public int diskWidth = 24;
     // public int diskHeight = diskWidth;
@@ -188,7 +190,6 @@ class ReversiForm : Form
         this.panelGraphics = panelGame.CreateGraphics();
         this.panelGraphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-
         // Set variables
         this.setPlayerIcons();
         this.createFieldArray();
@@ -289,18 +290,31 @@ class ReversiForm : Form
         }
     }
 
+    // Panel event handeler
     private void createPanelGameField(object sender, PaintEventArgs e)
     {
-        /*// TODO: If there are no possible moves. Next person is at turn
+        // TODO: If there are no possible moves. Next person is at turn
         if (!this.possibleMovesAvailable())
         {
-            this.play1Turn = !this.play1Turn;
-            this.calculatePossibleMoves();
+            /*if (this.play1Turn)
+            {
+                this.player1CanPlay = false;
+            } else
+            {
+                this.player2CanPlay = false;
+            }
+            this.play1Turn = !this.play1Turn;*/
         }
         else
         {
-            Console.WriteLine("Playing");
-        }*/
+            this.player1CanPlay = true;
+            this.player1CanPlay = true;
+        }
+
+        if (!this.player2CanPlay && !this.player1CanPlay)
+        {
+            Console.WriteLine("Its game over");
+        }
 
         // All draw methods that are performed on the label
         this.drawGrid();
@@ -314,8 +328,8 @@ class ReversiForm : Form
 
     public bool possibleMovesAvailable()
     {
-        //Console.WriteLine("New field");
-        //Console.WriteLine("=========");
+        Console.WriteLine("New field");
+        Console.WriteLine("=========");
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
             String temp = "";
@@ -324,12 +338,13 @@ class ReversiForm : Form
                 temp += this.field[x, y];
                 if (this.field[x, y] == 3)
                 {
-                    //Console.WriteLine("Found a 3");
+                    Console.WriteLine("Move available");
                     return true;
                 }
             }
-            //Console.WriteLine(temp + "\n");
+            Console.WriteLine(temp + "\n");
         }
+        Console.WriteLine("No more moves");
         return false;
 
     }

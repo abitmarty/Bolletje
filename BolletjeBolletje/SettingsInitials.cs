@@ -73,7 +73,7 @@ namespace BolletjeBolletje
 
         public void setTilesY(int tilesY)
         {
-            if (tilesY < this.tilesY)
+            if (tilesY < this.minimalY)
             {
                 this.tilesY = this.minimalY;
             }
