@@ -90,6 +90,8 @@ class Settingsform : Form
 
         this.currentSettings.setTilesX(Convert.ToInt32(this.textBoxXTiles.Text) - 1);
         this.currentSettings.setTilesY(Convert.ToInt32(this.textBoxYTiles.Text) - 1);
+
+        this.Close();
     }
 
     private void setTextboxes()
