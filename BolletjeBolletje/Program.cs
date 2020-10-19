@@ -69,11 +69,8 @@ class ReversiForm : Form
     private PictureBox pictureBox2;
 
     // Variables
-    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish");
-    private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY(), defaultSettings.getP1Icon(), defaultSettings.getP2Icon());
-
-    private int tileWidth = 51;
-    private int tileHeight = 51;
+    private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish", 51, 51);
+    private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY(), defaultSettings.getP1Icon(), defaultSettings.getP2Icon(), defaultSettings.getTileSizeX(), defaultSettings.getTileSizeY());
 
     private int player1Score = 0;
     private int player2Score = 0;
@@ -256,8 +253,8 @@ class ReversiForm : Form
         int xTiles = this.currentSettings.getTilesX();
         int yTiles = this.currentSettings.getTilesY();
    
-        int rectangleWidth = this.tileWidth * (xTiles + 1);
-        int rectangleHeight = this.tileHeight * (yTiles + 1);
+        int rectangleWidth = this.currentSettings.getTileSizeX() * (xTiles + 1);
+        int rectangleHeight = this.currentSettings.getTileSizeY() * (yTiles + 1);
 
         // Panel do + 1 for the last line of the grid
         this.panelGame.Location = new Point(this.rectangleX, this.rectangleY);
@@ -270,18 +267,18 @@ class ReversiForm : Form
     public void drawGrid()
     {
         // Vertical lines
-        for (int x = 0; x <= (this.currentSettings.getTilesX() + 1) * this.tileWidth; x++)
+        for (int x = 0; x <= (this.currentSettings.getTilesX() + 1) * this.currentSettings.getTileSizeX(); x++)
         {
-            if (x % this.tileWidth == 0)
+            if (x % this.currentSettings.getTileSizeX() == 0)
             {
                 this.panelGraphics.DrawLine(Pens.Black, x, 0, x, this.panelGame.Height);
             }
         }
 
         // Horizontal lines
-        for (int y = 0; y <= (this.currentSettings.getTilesY() + 1) * this.tileHeight; y++)
+        for (int y = 0; y <= (this.currentSettings.getTilesY() + 1) * this.currentSettings.getTileSizeY(); y++)
         {
-            if (y % this.tileHeight == 0)
+            if (y % this.currentSettings.getTileSizeY() == 0)
             {
                 this.panelGraphics.DrawLine(Pens.Black, 0, y, this.panelGame.Width + this.rectangleX, y);
             }
@@ -396,17 +393,17 @@ class ReversiForm : Form
         int y = e.Y;
 
         // Only allow move if value is empty and eligible for a move (3)
-        if (field[x / this.tileWidth, y / this.tileHeight] == 3)
+        if (field[x / this.currentSettings.getTileSizeX(), y / this.currentSettings.getTileSizeY()] == 3)
         {
             if (play1Turn)
             {
-                field[x / this.tileWidth, y / this.tileHeight] = 1;
+                field[x / this.currentSettings.getTileSizeX(), y / this.currentSettings.getTileSizeY()] = 1;
                 this.setOverTakenDisk(x, y);
                 this.play1Turn = false;
             }
             else
             {
-                field[x / this.tileWidth, y / this.tileHeight] = 2;
+                field[x / this.currentSettings.getTileSizeX(), y / this.currentSettings.getTileSizeY()] = 2;
                 this.setOverTakenDisk(x, y);
                 this.play1Turn = true;
             }
@@ -423,8 +420,8 @@ class ReversiForm : Form
     public void setOverTakenDisk(int x, int y)
     {
         // Setting pixels to the corresponding array position
-        x = x / this.tileWidth;
-        y = y / this.tileHeight;
+        x = x / this.currentSettings.getTileSizeX();
+        y = y / this.currentSettings.getTileSizeY();
 
         // Similar to calculating surrounding disks
         // But now we overtake the disks
@@ -643,8 +640,8 @@ class ReversiForm : Form
         int offsetX = 5;
         int offsetY = offsetX;
 
-        int tempX = x * this.tileWidth + offsetX;
-        int tempY = y * this.tileHeight + offsetY;
+        int tempX = x * this.currentSettings.getTileSizeX() + offsetX;
+        int tempY = y * this.currentSettings.getTileSizeY() + offsetY;
         this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, 40, 40);
     }
 
