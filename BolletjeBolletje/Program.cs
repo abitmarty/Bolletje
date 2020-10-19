@@ -18,10 +18,10 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 + Spelers kunnen zelf een emoji kiezen om mee te spelen uit een lijst van 10 opties.
 + Flat design in de knoppen, on hover en in het speelbord
 
-[ ] Winner indication
 [ ] Game mechanics finished (mistakes in allowed fields)
 [ ] Turn indication background circle
 [ ] Set variables private and  test all functionalities; NOT THE PRESET AND FIELD
+[X] Winner indication
 [X] Make player2 in settings red
 [X] Make Player 1 name label != label1
 [X] Score centre
@@ -167,17 +167,6 @@ class ReversiForm : Form
 
     private void newGame(Object obj, EventArgs ea)
     {
-        try
-        {
-            //SoundPlayer victoryLap = new SoundPlayer(BolletjeBolletje.Properties.Resources.fortnite);
-            //Console.WriteLine("Play victory");
-            //victoryLap.Play();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("No workey");
-        }
-
         this.play1Turn = true;
         this.startAMatch();
     }
@@ -352,6 +341,17 @@ class ReversiForm : Form
         else
         {
             this.labelTurn.Text = "Unfortunately a tie has occurred";
+        }
+
+        try
+        {
+            SoundPlayer victoryLap = new SoundPlayer(BolletjeBolletje.Properties.Resources.fortnite);
+            Console.WriteLine("Play victory");
+            victoryLap.Play();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("No workey");
         }
     }
 
