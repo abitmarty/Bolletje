@@ -93,7 +93,9 @@ class ReversiForm : Form
     private int[,] validMoveField;
     private Graphics panelGraphics;
     private Boolean play1Turn = true;
-
+    private Label label1;
+    private Label label2;
+    private Label label3;
     List<String[]> stepList = new List<String[]>();
 
     public ReversiForm()
@@ -159,16 +161,62 @@ class ReversiForm : Form
         pea.Graphics.FillRectangle(coolRed, this.rectangleX + this.panelGame.Width + 20, this.rectangleY + lengthP1, 5, lengthP2);
         pea.Graphics.FillRectangle(coolBlue, this.rectangleX + this.panelGame.Width + 20, this.rectangleY, 5, lengthP1);
 
-        // Set last moves
-        this.setLastMoves();
+        this.label1.Location = new Point(150, this.panelGame.Height + 55);
+        this.label2.Location = new Point(200, this.panelGame.Height + 55);
+        this.label3.Location = new Point(250, this.panelGame.Height + 55);
     }
 
     public void setLastMoves()
     {
-        foreach (String[] step in this.stepList)
+        try
+        {
+            string[] madeStepArr = this.stepList[this.stepList.Count - 1];
+            this.label1.Text = madeStepArr[1];
+            if (madeStepArr[0] == "False")
+            {
+                this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+            }
+            else
+            {
+                this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            }
+        }
+        catch (Exception e) { }
+
+        try
+        {
+            string[] madeStepArr = this.stepList[this.stepList.Count - 2];
+            this.label2.Text = madeStepArr[1];
+            if (madeStepArr[0] == "False")
+            {
+                this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+            }
+            else
+            {
+                this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            }
+        }
+        catch (Exception e) { }
+
+        try
+        {
+            string[] madeStepArr = this.stepList[this.stepList.Count - 3];
+            this.label3.Text = madeStepArr[1];
+            if (madeStepArr[0] == "False")
+            {
+                this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+            }
+            else
+            {
+                this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            }
+        }
+        catch (Exception e) { }
+
+/*        foreach (String[] step in this.stepList)
         {
             Console.WriteLine(step[0] + " made " + step[1] );
-        }
+        }*/
     }
 
     public void keepPlayerScore()
@@ -205,6 +253,17 @@ class ReversiForm : Form
 
     private void startAMatch()
     {
+        // Set labels to default
+        this.label1.Text = "Last";
+        this.label2.Text = "previous";
+        this.label3.Text = "Before";
+        this.label1.ForeColor = System.Drawing.Color.Black;
+        this.label2.ForeColor = System.Drawing.Color.Black;
+        this.label3.ForeColor = System.Drawing.Color.Black;
+
+        // Clear list 
+        this.stepList.Clear();
+
         // Build panel with graphics
         this.buildPanel();
 
@@ -437,9 +496,11 @@ class ReversiForm : Form
             }
 
             // Add step to step list
-            String[] moveBy = { this.play1Turn.ToString(), (x + ", " + y) };
+            String[] moveBy = { this.play1Turn.ToString(), (((x / this.currentSettings.getTileSizeX()) + 1) + ", " + ((y / this.currentSettings.getTileSizeY()) + 1)) };
             this.stepList.Add(moveBy);
         }
+        // Set last moves
+        this.setLastMoves();
 
         // Draw field and invalidate panel only
         this.panelGame.Invalidate();
@@ -693,6 +754,9 @@ class ReversiForm : Form
             this.panelGame = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -821,10 +885,40 @@ class ReversiForm : Form
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(237, 342);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(289, 342);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(340, 342);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "label3";
+            // 
             // ReversiForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(490, 367);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelGame);
@@ -846,6 +940,7 @@ class ReversiForm : Form
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
     }
 
