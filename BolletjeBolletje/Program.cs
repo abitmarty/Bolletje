@@ -161,7 +161,7 @@ class ReversiForm : Form
         pea.Graphics.FillRectangle(coolBlue, this.rectangleX + this.panelGame.Width + 20, this.rectangleY, 5, lengthP1);
 
         this.label1.Location = new Point(150, this.panelGame.Height + 55);
-        this.label2.Location = new Point(250, this.panelGame.Height + 55);
+        this.label2.Location = new Point(240, this.panelGame.Height + 55);
         this.label3.Location = new Point(350, this.panelGame.Height + 55);
     }
 
