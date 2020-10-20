@@ -22,6 +22,7 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 + Anti alliassing op alle getekende objecten
 + Het veld en scherm zijn schaalbaar op basis van de bij de settings ingevoerde informatie
 + Speciale speler indicatie rondom de emoticons
++ De laatste drie bewegingen staan onder aan het scherm
 + Zet u geluid aan :) (Victory royale geluids effect bij winst)
 + U vind het project op github https://github.com/abitmarty/Bolletje
 
