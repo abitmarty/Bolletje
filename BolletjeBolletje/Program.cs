@@ -185,7 +185,7 @@ class ReversiForm : Form
         try
         {
             string[] madeStepArr = this.stepList[this.stepList.Count - 2];
-            this.label2.Text = "Privious move: " + madeStepArr[1];
+            this.label2.Text = "Previous move: " + madeStepArr[1];
             if (madeStepArr[0] == "False")
             {
                 this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
@@ -254,7 +254,7 @@ class ReversiForm : Form
     {
         // Set labels to default
         this.label1.Text = "Last move: ";
-        this.label2.Text = "previous move: ";
+        this.label2.Text = "Previous move: ";
         this.label3.Text = "Former move: ";
         this.label1.ForeColor = System.Drawing.Color.Black;
         this.label2.ForeColor = System.Drawing.Color.Black;
