@@ -52,6 +52,7 @@ using System.Drawing.Drawing2D;
 using System.Threading;
 using System.Media;
 using BolletjeBolletje.Properties;
+using System.Collections.Generic;
 
 class ReversiForm : Form
 {
@@ -92,6 +93,8 @@ class ReversiForm : Form
     private int[,] validMoveField;
     private Graphics panelGraphics;
     private Boolean play1Turn = true;
+
+    List<String[]> stepList = new List<String[]>();
 
     public ReversiForm()
     {
@@ -155,6 +158,17 @@ class ReversiForm : Form
 
         pea.Graphics.FillRectangle(coolRed, this.rectangleX + this.panelGame.Width + 20, this.rectangleY + lengthP1, 5, lengthP2);
         pea.Graphics.FillRectangle(coolBlue, this.rectangleX + this.panelGame.Width + 20, this.rectangleY, 5, lengthP1);
+
+        // Set last moves
+        this.setLastMoves();
+    }
+
+    public void setLastMoves()
+    {
+        foreach (String[] step in this.stepList)
+        {
+            Console.WriteLine(step[0] + " made " + step[1] );
+        }
     }
 
     public void keepPlayerScore()
@@ -421,6 +435,10 @@ class ReversiForm : Form
                 this.setOverTakenDisk(x, y);
                 this.play1Turn = true;
             }
+
+            // Add step to step list
+            String[] moveBy = { this.play1Turn.ToString(), (x + ", " + y) };
+            this.stepList.Add(moveBy);
         }
 
         // Draw field and invalidate panel only
