@@ -161,8 +161,8 @@ class ReversiForm : Form
         pea.Graphics.FillRectangle(coolBlue, this.rectangleX + this.panelGame.Width + 20, this.rectangleY, 5, lengthP1);
 
         this.label1.Location = new Point(150, this.panelGame.Height + 55);
-        this.label2.Location = new Point(200, this.panelGame.Height + 55);
-        this.label3.Location = new Point(250, this.panelGame.Height + 55);
+        this.label2.Location = new Point(250, this.panelGame.Height + 55);
+        this.label3.Location = new Point(350, this.panelGame.Height + 55);
     }
 
     public void setLastMoves()
@@ -170,7 +170,7 @@ class ReversiForm : Form
         try
         {
             string[] madeStepArr = this.stepList[this.stepList.Count - 1];
-            this.label1.Text = madeStepArr[1];
+            this.label1.Text = "Last move: " + madeStepArr[1];
             if (madeStepArr[0] == "False")
             {
                 this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
@@ -185,7 +185,7 @@ class ReversiForm : Form
         try
         {
             string[] madeStepArr = this.stepList[this.stepList.Count - 2];
-            this.label2.Text = madeStepArr[1];
+            this.label2.Text = "Privious move: " + madeStepArr[1];
             if (madeStepArr[0] == "False")
             {
                 this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
@@ -200,7 +200,7 @@ class ReversiForm : Form
         try
         {
             string[] madeStepArr = this.stepList[this.stepList.Count - 3];
-            this.label3.Text = madeStepArr[1];
+            this.label3.Text = "Former move: " + madeStepArr[1];
             if (madeStepArr[0] == "False")
             {
                 this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
@@ -253,9 +253,9 @@ class ReversiForm : Form
     private void startAMatch()
     {
         // Set labels to default
-        this.label1.Text = "Last";
-        this.label2.Text = "previous";
-        this.label3.Text = "Before";
+        this.label1.Text = "Last move: ";
+        this.label2.Text = "previous move: ";
+        this.label3.Text = "Former move: ";
         this.label1.ForeColor = System.Drawing.Color.Black;
         this.label2.ForeColor = System.Drawing.Color.Black;
         this.label3.ForeColor = System.Drawing.Color.Black;
