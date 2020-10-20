@@ -32,8 +32,6 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 
 @Maarten zie de commits https://github.com/abitmarty/Bolletje
 [ ] Game mechanics finished (mistakes in allowed fields)
-[ ] Less invalidation ont the form's paint event: this.invalidate();
-[ ] Show logbook with moves with the list. Add to list. Get last tree moves from list. Show those moves
 [ ] Fix tab index
 
 
