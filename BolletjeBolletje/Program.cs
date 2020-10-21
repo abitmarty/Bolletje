@@ -32,9 +32,7 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 
 
 @Maarten zie de commits https://github.com/abitmarty/Bolletje
-[ ] Game mechanics finished (mistakes in allowed fields)
 [ ] Fix tab index
-
 
 
 Extra
@@ -658,7 +656,6 @@ class ReversiForm : Form
             return false;
         }
          
-        //TODO: test following code
         // If two moves is out of field x
         if ((xCoord + xMove + xMove < 0) || (xCoord + xMove + xMove > this.currentSettings.getTilesX()))
         {
@@ -690,6 +687,12 @@ class ReversiForm : Form
 
         // If placed of the board y
         if ((yCoord + yMove < 0) || (yCoord + yMove > this.currentSettings.getTilesY()))
+        {
+            return false;
+        }
+
+        // If the move is zero stop iterating
+        if (this.field[xCoord + xMove, yCoord + yMove] == 0)
         {
             return false;
         }
