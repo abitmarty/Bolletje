@@ -8,6 +8,7 @@ namespace BolletjeBolletje
 {
     class SettingsInitials
     {
+        // Set values
         private String p1Name;
         private String p2Name;
         private string p1Icon;
@@ -17,6 +18,9 @@ namespace BolletjeBolletje
         private int tileSizeX;
         private int tileSizeY;
 
+        // Minmal values
+        // These come back in the setters
+        // If the values are too small these values will take place
         private int minimalX = 2;
         private int minimalY = 2;
         private int minimalTileSizeX = 51;

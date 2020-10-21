@@ -23,8 +23,9 @@ class Settingsform : Form
     private TextBox textBoxTileWidth;
     private TextBox textBoxTileHeight;
 
+    // Colors
     private Color colorNormal = default(Color);
-    private Color colorError = Color.Red;
+    private Color colorError = Color.FromArgb(245, 74, 74);
 
     // Variables
     private SettingsInitials currentSettings;
@@ -36,7 +37,7 @@ class Settingsform : Form
         this.BackColor = Color.FromArgb(251, 239, 217);
         this.Paint += drawingSettingsLine;
    
-
+        // Create icon name array for comboboxes
         Object[] allThings = new object[] {
                         "Balloon",
                         "Carrot",
@@ -50,26 +51,27 @@ class Settingsform : Form
                         "Rocket",
         };
 
-        // Select player icons from dropdown
+        // Set combobox values to allThings icon array
         this.comboBox1.Items.AddRange(allThings);
         this.comboBox2.Items.AddRange(allThings);
 
         // So the code can overwrite the currentsettings from the program.cs
         this.currentSettings = currentSettings;
 
+        // Set al textboxes default values
         this.setTextboxes();
 
+        // Click event on save (eventhandler). So the screen closes
         this.buttonSave.Click += this.saveSettings;
     }
 
     private void drawingSettingsLine(object obj, PaintEventArgs pea)
     {
-        pea.Graphics.DrawLine(Pens.Black, 10, 120, 360, 120);
+        pea.Graphics.DrawLine(Pens.Black, 10, 120, 245, 120);
     }
 
     private void comboBox1GetString(object obj, EventArgs e)
     {
-
         // When selected in dropdown, change to chosen name
         // Set the chosen image as player name
         Object selectedItem = comboBox1.SelectedItem;
@@ -88,8 +90,13 @@ class Settingsform : Form
 
     public void saveSettings(Object obj, EventArgs ea)
     {
+        // If there is an error the screen doesnt close on save
         Boolean noErrors = true;
 
+        // Set all values in textboxes
+        // And backcolors to default
+        // In case of exceptoin set background to error color
+        // Minimum comes from the minimum values in settings. There will be no red screen shown if the value is to low
         try
         {
             this.currentSettings.setP1Name(this.textBoxPlayer1.Text);
@@ -155,6 +162,7 @@ class Settingsform : Form
             noErrors = false;
         }
 
+        // If there are no errors close the screen on save
         if (noErrors)
         {
             this.Close();
@@ -163,8 +171,6 @@ class Settingsform : Form
 
     private void setTextboxes()
     {
-        //TODO: If smaller than 3 give red error
-
         // Player names
         this.textBoxPlayer1.Text = this.currentSettings.getP1Name();
         this.textBoxPlayer2.Text = this.currentSettings.getP2Name();
@@ -189,6 +195,7 @@ class Settingsform : Form
         Application.Run(screen);
     }
 
+    // Set all default component values
     private void InitializeComponent()
     {
             this.textBoxPlayer1 = new System.Windows.Forms.TextBox();
@@ -241,7 +248,7 @@ class Settingsform : Form
             this.buttonSave.FlatAppearance.BorderSize = 0;
             this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.Location = new System.Drawing.Point(260, 152);
+            this.buttonSave.Location = new System.Drawing.Point(263, 215);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(100, 22);
             this.buttonSave.TabIndex = 4;
@@ -277,7 +284,7 @@ class Settingsform : Form
             // 
             // textBoxYTiles
             // 
-            this.textBoxYTiles.Location = new System.Drawing.Point(143, 153);
+            this.textBoxYTiles.Location = new System.Drawing.Point(147, 153);
             this.textBoxYTiles.Name = "textBoxYTiles";
             this.textBoxYTiles.Size = new System.Drawing.Size(100, 20);
             this.textBoxYTiles.TabIndex = 5;
@@ -318,7 +325,7 @@ class Settingsform : Form
             this.labelXTileWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelXTileWidth.Location = new System.Drawing.Point(8, 195);
             this.labelXTileWidth.Name = "labelXTileWidth";
-            this.labelXTileWidth.Size = new System.Drawing.Size(104, 15);
+            this.labelXTileWidth.Size = new System.Drawing.Size(69, 15);
             this.labelXTileWidth.TabIndex = 15;
             this.labelXTileWidth.Text = "Tile width";
             // 
@@ -328,7 +335,7 @@ class Settingsform : Form
             this.labelYTileWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelYTileWidth.Location = new System.Drawing.Point(144, 195);
             this.labelYTileWidth.Name = "labelYTileWidth";
-            this.labelYTileWidth.Size = new System.Drawing.Size(86, 15);
+            this.labelYTileWidth.Size = new System.Drawing.Size(75, 15);
             this.labelYTileWidth.TabIndex = 14;
             this.labelYTileWidth.Text = "Tile height";
             // 
@@ -341,7 +348,7 @@ class Settingsform : Form
             // 
             // textBoxTileHeight
             // 
-            this.textBoxTileHeight.Location = new System.Drawing.Point(143, 215);
+            this.textBoxTileHeight.Location = new System.Drawing.Point(147, 215);
             this.textBoxTileHeight.Name = "textBoxTileHeight";
             this.textBoxTileHeight.Size = new System.Drawing.Size(100, 20);
             this.textBoxTileHeight.TabIndex = 12;
@@ -370,14 +377,7 @@ class Settingsform : Form
             this.RightToLeftLayout = true;
             this.ShowIcon = false;
             this.Text = "Reversi Settings";
-            this.Load += new System.EventHandler(this.Settingsform_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
-    }
-
-    private void Settingsform_Load(object sender, EventArgs e)
-    {
-
     }
 }
