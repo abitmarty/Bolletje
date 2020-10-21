@@ -18,32 +18,22 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 + Spelers kunnen zelf een emoji kiezen om mee te spelen uit een lijst van 10 opties.
 + Spelers kunnen zelf de grootte van de tiles bepalen
 + De invoer van de settings velden wordt gechecked. Op het moment dat een foutieve waarde wordt ingevoerd sluit het settings scherm niet na het klikken op de save knop. Bij juiste waardes sluit de settings wel na het klikken op de save knop.
++ Een perfecte tab index in het settings formulier
 + Flat design in de knoppen, on hover en in het speelbord
 + Anti alliassing op alle getekende objecten
 + Het veld, scherm én de hokjes zijn schaalbaar op basis van de bij de settings ingevoerde informatie
 + Speciale speler indicatie rondom de emoji voor de speler die aan de beurt is
-+ De laatste drie bewegingen staan onder aan het scherm
-+ Zet u geluid aan :) (Victory royale geluids effect bij winst)
-+ U vind het project op github https://github.com/abitmarty/Bolletje
-
-+ Scorebar
-
-
-
-
-
-@Maarten zie de commits https://github.com/abitmarty/Bolletje
-[ ] Fix tab index
-
++ Scorebar aan de rechterkant. Die de dominante speler laat zien
++ De laatste drie bewegingen staan onder aan het scherm in de kleur van de speler die de beweging heeft gemaakt
++ Zet u geluid aan :) (Victory geluidseffect bij winst)
++ U vindt het project op github https://github.com/abitmarty/Bolletje
 */
 
 using BolletjeBolletje;
 using System;
 using System.Drawing;
-using System.Windows;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using System.Threading;
 using System.Media;
 using BolletjeBolletje.Properties;
 using System.Collections.Generic;

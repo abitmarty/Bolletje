@@ -1,7 +1,6 @@
 ﻿using BolletjeBolletje;
 using System;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Windows.Forms;
 
 class Settingsform : Form
@@ -251,7 +250,7 @@ class Settingsform : Form
             this.buttonSave.Location = new System.Drawing.Point(263, 215);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(100, 22);
-            this.buttonSave.TabIndex = 4;
+            this.buttonSave.TabIndex = 9;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
@@ -280,14 +279,14 @@ class Settingsform : Form
             this.textBoxXTiles.Location = new System.Drawing.Point(11, 153);
             this.textBoxXTiles.Name = "textBoxXTiles";
             this.textBoxXTiles.Size = new System.Drawing.Size(100, 20);
-            this.textBoxXTiles.TabIndex = 6;
+            this.textBoxXTiles.TabIndex = 5;
             // 
             // textBoxYTiles
             // 
             this.textBoxYTiles.Location = new System.Drawing.Point(147, 153);
             this.textBoxYTiles.Name = "textBoxYTiles";
             this.textBoxYTiles.Size = new System.Drawing.Size(100, 20);
-            this.textBoxYTiles.TabIndex = 5;
+            this.textBoxYTiles.TabIndex = 6;
             // 
             // comboBox1
             // 
@@ -295,7 +294,7 @@ class Settingsform : Form
             this.comboBox1.Location = new System.Drawing.Point(11, 71);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 9;
+            this.comboBox1.TabIndex = 3;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1GetString);
             // 
             // labelPlayer1
@@ -316,7 +315,7 @@ class Settingsform : Form
             this.comboBox2.Location = new System.Drawing.Point(147, 71);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(100, 21);
-            this.comboBox2.TabIndex = 11;
+            this.comboBox2.TabIndex = 4;
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2GetString);
             // 
             // labelXTileWidth
@@ -344,14 +343,14 @@ class Settingsform : Form
             this.textBoxTileWidth.Location = new System.Drawing.Point(11, 215);
             this.textBoxTileWidth.Name = "textBoxTileWidth";
             this.textBoxTileWidth.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTileWidth.TabIndex = 13;
+            this.textBoxTileWidth.TabIndex = 7;
             // 
             // textBoxTileHeight
             // 
             this.textBoxTileHeight.Location = new System.Drawing.Point(147, 215);
             this.textBoxTileHeight.Name = "textBoxTileHeight";
             this.textBoxTileHeight.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTileHeight.TabIndex = 12;
+            this.textBoxTileHeight.TabIndex = 8;
             // 
             // Settingsform
             // 
@@ -379,5 +378,6 @@ class Settingsform : Form
             this.Text = "Reversi Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
+
     }
 }
