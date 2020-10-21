@@ -26,6 +26,7 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 + Zet u geluid aan :) (Victory royale geluids effect bij winst)
 + U vind het project op github https://github.com/abitmarty/Bolletje
 
++ Scorebar
 
 
 
@@ -33,10 +34,6 @@ Naast de vereiste functionaliteiten hebben wij aan ons Reversi programma het vol
 
 @Maarten zie de commits https://github.com/abitmarty/Bolletje
 [ ] Fix tab index
-
-
-Extra
-[ ] Turn indicator -> pretty
 
 */
 
@@ -70,6 +67,10 @@ class ReversiForm : Form
     private PictureBox pictureBox1;
     private PictureBox pictureBox2;
 
+    private Label labelLastMove;
+    private Label labelPreviousMove;
+    private Label labelFormerMove;
+
     // Variables
     private static SettingsInitials defaultSettings = new SettingsInitials("Player 1", "Player 2", 5, 5, "Man", "Fish", 1, 1);
     private SettingsInitials currentSettings = new SettingsInitials(defaultSettings.getP1Name(), defaultSettings.getP2Name(), defaultSettings.getTilesX(), defaultSettings.getTilesY(), defaultSettings.getP1Icon(), defaultSettings.getP2Icon(), defaultSettings.getTileSizeX(), defaultSettings.getTileSizeY());
@@ -90,9 +91,6 @@ class ReversiForm : Form
     private int[,] validMoveField;
     private Graphics panelGraphics;
     private Boolean play1Turn = true;
-    private Label label1;
-    private Label label2;
-    private Label label3;
     List<String[]> stepList = new List<String[]>();
 
     public ReversiForm()
@@ -117,6 +115,8 @@ class ReversiForm : Form
 
     public void sethelp(object obj, EventArgs ea)
     {
+        // If the players turn help on the helper will be on
+        // until they turn it off hence !this.helpOn
         this.helpOn = !this.helpOn;
         this.panelGame.Invalidate();
     }
@@ -158,24 +158,26 @@ class ReversiForm : Form
         pea.Graphics.FillRectangle(coolRed, this.rectangleX + this.panelGame.Width + 20, this.rectangleY + lengthP1, 5, lengthP2);
         pea.Graphics.FillRectangle(coolBlue, this.rectangleX + this.panelGame.Width + 20, this.rectangleY, 5, lengthP1);
 
-        this.label1.Location = new Point(150, this.panelGame.Height + 55);
-        this.label2.Location = new Point(240, this.panelGame.Height + 55);
-        this.label3.Location = new Point(350, this.panelGame.Height + 55);
+        this.labelLastMove.Location = new Point(150, this.panelGame.Height + 55);
+        this.labelPreviousMove.Location = new Point(240, this.panelGame.Height + 55);
+        this.labelFormerMove.Location = new Point(350, this.panelGame.Height + 55);
     }
 
     public void setLastMoves()
     {
+        // Write the last three moves on the screen
+        // The move will have the corresponding's players color
         try
         {
             string[] madeStepArr = this.stepList[this.stepList.Count - 1];
-            this.label1.Text = "Last move: " + madeStepArr[1];
+            this.labelLastMove.Text = "Last move: " + madeStepArr[1];
             if (madeStepArr[0] == "False")
             {
-                this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+                this.labelLastMove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             }
             else
             {
-                this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+                this.labelLastMove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
             }
         }
         catch (Exception e) { }
@@ -183,14 +185,14 @@ class ReversiForm : Form
         try
         {
             string[] madeStepArr = this.stepList[this.stepList.Count - 2];
-            this.label2.Text = "Previous move: " + madeStepArr[1];
+            this.labelPreviousMove.Text = "Previous move: " + madeStepArr[1];
             if (madeStepArr[0] == "False")
             {
-                this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+                this.labelPreviousMove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             }
             else
             {
-                this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+                this.labelPreviousMove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
             }
         }
         catch (Exception e) { }
@@ -198,29 +200,27 @@ class ReversiForm : Form
         try
         {
             string[] madeStepArr = this.stepList[this.stepList.Count - 3];
-            this.label3.Text = "Former move: " + madeStepArr[1];
+            this.labelFormerMove.Text = "Former move: " + madeStepArr[1];
             if (madeStepArr[0] == "False")
             {
-                this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
+                this.labelFormerMove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(200)))), ((int)(((byte)(252)))));
             }
             else
             {
-                this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+                this.labelFormerMove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
             }
         }
         catch (Exception e) { }
-
-/*        foreach (String[] step in this.stepList)
-        {
-            Console.WriteLine(step[0] + " made " + step[1] );
-        }*/
     }
 
     public void keepPlayerScore()
     {
+        // Set scores to 0 to avoid calculation errors
         this.player1Score = 0;
         this.player2Score = 0;
 
+        // Go through the field
+        // Count both players points
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
@@ -237,6 +237,7 @@ class ReversiForm : Form
             }
         }
 
+        // Draw the points on the field
         this.labelP1Points.Text = this.player1Score.ToString();
         this.labelP2Points.Text = this.player2Score.ToString();
     }
@@ -244,6 +245,7 @@ class ReversiForm : Form
 
     private void newGame(Object obj, EventArgs ea)
     {
+        // Player one always gets to start
         this.play1Turn = true;
         this.startAMatch();
     }
@@ -251,12 +253,12 @@ class ReversiForm : Form
     private void startAMatch()
     {
         // Set labels to default
-        this.label1.Text = "Last move: ";
-        this.label2.Text = "Previous move: ";
-        this.label3.Text = "Former move: ";
-        this.label1.ForeColor = System.Drawing.Color.Black;
-        this.label2.ForeColor = System.Drawing.Color.Black;
-        this.label3.ForeColor = System.Drawing.Color.Black;
+        this.labelLastMove.Text = "Last move: ";
+        this.labelPreviousMove.Text = "Previous move: ";
+        this.labelFormerMove.Text = "Former move: ";
+        this.labelLastMove.ForeColor = System.Drawing.Color.Black;
+        this.labelPreviousMove.ForeColor = System.Drawing.Color.Black;
+        this.labelFormerMove.ForeColor = System.Drawing.Color.Black;
 
         // Clear list 
         this.stepList.Clear();
@@ -270,7 +272,7 @@ class ReversiForm : Form
 
         // Set variables
         this.setPlayerIcons();
-        this.createFieldArray();
+        field = new int[this.currentSettings.getTilesX() + 1, this.currentSettings.getTilesY() + 1];
         this.startEnvironment();
         this.keepPlayerScore();
 
@@ -281,41 +283,34 @@ class ReversiForm : Form
     
     private void startEnvironment()
     {
+        // Sets the four starting disks
         int startX = this.currentSettings.getTilesX() / 2;
         int startY = this.currentSettings.getTilesY() / 2;
 
+        // Set the field values in the array
         this.field[startX , startY ] = 1;
         this.field[startX , startY + 1] = 2;
         this.field[startX + 1 , startY] = 2;
         this.field[startX +1 , startY +1 ] = 1;
     }
 
-    public void createFieldArray()
-    {
-        field = new int[this.currentSettings.getTilesX() + 1, this.currentSettings.getTilesY() + 1];
-    }
-
     private void setPlayerIcons()
     {
-        /*this.labelP1Name.Text = this.currentSettings.getP1Name();
-        this.labelP2Name.Text = this.currentSettings.getP2Name();*/
-
+        // Set player names
         this.labelP1Name.Text = this.currentSettings.getP1Name();
         this.labelP2Name.Text = this.currentSettings.getP2Name();
 
-
-        // Load corresponding image
-
+        // Load corresponding players image by string value
         string player1Icon = this.currentSettings.getP1Icon();
         string player2Icon = this.currentSettings.getP2Icon();
 
+        // Set player 1 image
         object O = Resources.ResourceManager.GetObject(player1Icon);
         this.pictureBox1.Image = (Image)O;
 
+        // Set player 2 image
         object B = Resources.ResourceManager.GetObject(player2Icon);
         this.pictureBox2.Image = (Image)B;
-
-
     }
 
     public void openSettings(object obj, EventArgs pea)
@@ -326,6 +321,7 @@ class ReversiForm : Form
 
     public void setScreenSize()
     {
+        // Make the screen responsive
         int width = this.panelGame.Width + 200;
         int height = this.panelGame.Height + 100;
         this.ClientSize = new System.Drawing.Size(width, height);
@@ -333,6 +329,7 @@ class ReversiForm : Form
 
     public void buildPanel()
     {
+        // Get values from settings
         int xTiles = this.currentSettings.getTilesX();
         int yTiles = this.currentSettings.getTilesY();
    
@@ -393,7 +390,7 @@ class ReversiForm : Form
 
             // In case either player 1 or player 2 can move invalidate the field
             // This is a recursing function. Since createPanelGameField is the paint method called on invalidate
-            if ((!this.player2CanPlay && this.player1CanPlay)|| (!this.player1CanPlay && this.player2CanPlay))
+            if ((!this.player2CanPlay && this.player1CanPlay) || (!this.player1CanPlay && this.player2CanPlay))
             {
                 this.panelGame.Invalidate();
             }
@@ -419,6 +416,7 @@ class ReversiForm : Form
 
     public void gameOver()
     {
+        // Check which player has the most points
         if (this.player1Score > this.player2Score)
         {
             this.labelTurn.Text = this.currentSettings.getP1Name() + " won the game!";
@@ -429,9 +427,10 @@ class ReversiForm : Form
         }
         else
         {
-            this.labelTurn.Text = "Unfortunately a tie has occurred";
+            this.labelTurn.Text = "It's a tie!";
         }
 
+        // Play victory sound
         try
         {
             SoundPlayer victoryLap = new SoundPlayer(BolletjeBolletje.Properties.Resources.fortnite);
@@ -445,6 +444,7 @@ class ReversiForm : Form
 
     public bool possibleMovesAvailable()
     {
+        // Checks if there is at least one possible move available
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
@@ -477,6 +477,7 @@ class ReversiForm : Form
         int y = e.Y;
 
         // Only allow move if value is empty and eligible for a move (3)
+        // After moving set the field value to the player's corresponding integer. Either 1 or 2.
         if (field[x / this.currentSettings.getTileSizeX(), y / this.currentSettings.getTileSizeY()] == 3)
         {
             if (play1Turn)
@@ -530,21 +531,21 @@ class ReversiForm : Form
     public Boolean overtakeLine(int xCoord, int xMove, int yCoord, int yMove)
     {
         // Its always player 1's turn
-        // Exept if its not
+        // Except if its not
         int currentPlayer = 1;
         if (!this.play1Turn)
         {
             currentPlayer = 2;
         }
 
-        // Go to each line to check if its the opps
-        // If placed off the board x
+        // Go through each line to check if it is the opposition
+        // If placed off the board x out of bounds
         if ((xCoord + xMove < 0) || (xCoord + xMove > this.currentSettings.getTilesX()))
         {
             return false;
         }
 
-        // If placed of the board y
+        // If placed of the board y out of bounds
         if ((yCoord + yMove < 0) || (yCoord + yMove > this.currentSettings.getTilesY()))
         {
             return false;
@@ -556,6 +557,7 @@ class ReversiForm : Form
             return false;
         }
 
+        // Check if after moving ist one of the current players possitions
         if (this.field[xCoord + xMove, yCoord + yMove] == currentPlayer)
         {
             return true;
@@ -574,11 +576,11 @@ class ReversiForm : Form
         return false;
     }
 
-    // In progress
-    // TODO: Store possible move elipses in array
-
     private void removePossibleMoves()
     {
+        // After each player made a move
+        // The privious players possible moves have to be removed from the field
+        // 3 == a posible move. 0 == an empty tile
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
@@ -593,10 +595,10 @@ class ReversiForm : Form
 
     private void calculatePossibleMoves()
     {
-        // Removes all 3 values
+        // Removes all 3 values (possible moves)
         this.removePossibleMoves();
 
-        // Loop through actual field
+        // Loop through the field
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
@@ -629,7 +631,7 @@ class ReversiForm : Form
     private Boolean isValidMove(int xCoord, int xMove, int yCoord, int yMove)
     {
         // Its always player 1's turn. That makes player 2 is the opposition
-        // Exept if its not
+        // Exept if its not player 1's turn
         int opposition = 2;
         int currentPlayer = 1;
         if (!this.play1Turn)
@@ -638,31 +640,31 @@ class ReversiForm : Form
             currentPlayer = 2;
         }
 
-        // If placed off the board x
+        // If placed off the board x (out of bounds)
         if ((xCoord + xMove < 0) || (xCoord + xMove > this.currentSettings.getTilesX()))
         {
             return false;
         }
 
-        // If placed of the board y
+        // If placed of the board y (out of bounds)
         if ((yCoord + yMove < 0) || (yCoord + yMove > this.currentSettings.getTilesY()))
         {
             return false;
         }
 
-        // Check if current value is the opps
+        // Check if current value is the opposition
         if (this.field[xCoord + xMove, yCoord + yMove] != opposition)
         {
             return false;
         }
-         
-        // If two moves is out of field x
+
+        // If two moves is out of field x (out of bounds)
         if ((xCoord + xMove + xMove < 0) || (xCoord + xMove + xMove > this.currentSettings.getTilesX()))
         {
             return false;
         }
 
-        // If two moves is out of field y
+        // If two moves is out of field y (out of bounds)
         if ((yCoord + yMove + yMove < 0) || (yCoord + yMove + yMove > this.currentSettings.getTilesY()))
         {
             return false;
@@ -679,13 +681,13 @@ class ReversiForm : Form
             return true;
         }
 
-        // If placed off the board x
+        // If placed off the board x (out of bounds)
         if ((xCoord + xMove < 0) || (xCoord + xMove > this.currentSettings.getTilesX()))
         {
             return false;
         }
 
-        // If placed of the board y
+        // If placed of the board y (out of bounds)
         if ((yCoord + yMove < 0) || (yCoord + yMove > this.currentSettings.getTilesY()))
         {
             return false;
@@ -697,22 +699,18 @@ class ReversiForm : Form
             return false;
         }
 
-        // Keep recursing function until either the player is found. Or we moved of th
+        // Keep recursing function until either the player is found. Or we moved of the field
         return checkLine(currentPlayer, xCoord + xMove, xMove, yCoord + yMove, yMove);
     }
-    // In progress
 
-    // TODO: Remove visualisers (console)
     public void drawField()
     {
-        //Console.WriteLine("New field");
-        //Console.WriteLine("=========");
+        // Draw all disks on the panel
+        // Player 1, player 2, possible move
         for (int y = 0; y < this.currentSettings.getTilesY() + 1; y++)
         {
-            //String temp = "";
             for (int x = 0; x < this.currentSettings.getTilesX() + 1; x++)
             {
-                //temp += this.field[x, y];
                 if (this.field[x, y] == 1)
                 {
                     this.drawDisk(this.coolBlue, x, y);
@@ -726,15 +724,16 @@ class ReversiForm : Form
                     this.drawDisk(Brushes.Gray, x, y);
                 }
             }
-            //Console.WriteLine(temp + "\n");
         }
     }
 
     public void drawDisk(Brush currentBrush, int x, int y)
     {
+        // Get 1/10th of the tile
         int offsetX = this.currentSettings.getTileSizeX() / 10;
         int offsetY = this.currentSettings.getTileSizeY() / 10;
 
+        // Position of the disk
         int tempX = x * this.currentSettings.getTileSizeX() + offsetX;
         int tempY = y * this.currentSettings.getTileSizeY() + offsetY;
 
@@ -743,6 +742,8 @@ class ReversiForm : Form
         this.panelGraphics.FillEllipse(currentBrush, tempX, tempY, (this.currentSettings.getTileSizeX() - 1) - (2 * offsetX), (this.currentSettings.getTileSizeY() - 1) - (2 * offsetY));
     }
 
+    // All form components
+    // Set default values
     private void InitializeComponent()
     {
             this.buttonNewGame = new System.Windows.Forms.Button();
@@ -756,9 +757,9 @@ class ReversiForm : Form
             this.panelGame = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelLastMove = new System.Windows.Forms.Label();
+            this.labelPreviousMove = new System.Windows.Forms.Label();
+            this.labelFormerMove = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -887,43 +888,43 @@ class ReversiForm : Form
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             // 
-            // label1
+            // labelLastMove
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(237, 342);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "label1";
+            this.labelLastMove.AutoSize = true;
+            this.labelLastMove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLastMove.Location = new System.Drawing.Point(237, 342);
+            this.labelLastMove.Name = "labelLastMove";
+            this.labelLastMove.Size = new System.Drawing.Size(41, 13);
+            this.labelLastMove.TabIndex = 11;
+            this.labelLastMove.Text = "labelLastMove";
             // 
-            // label2
+            // labelPreviousMove
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(289, 342);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "label2";
+            this.labelPreviousMove.AutoSize = true;
+            this.labelPreviousMove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPreviousMove.Location = new System.Drawing.Point(289, 342);
+            this.labelPreviousMove.Name = "labelPreviousMove";
+            this.labelPreviousMove.Size = new System.Drawing.Size(41, 13);
+            this.labelPreviousMove.TabIndex = 12;
+            this.labelPreviousMove.Text = "labelPreviousMove";
             // 
-            // label3
+            // labelFormerMove
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(340, 342);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "label3";
+            this.labelFormerMove.AutoSize = true;
+            this.labelFormerMove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFormerMove.Location = new System.Drawing.Point(340, 342);
+            this.labelFormerMove.Name = "labelFormerMove";
+            this.labelFormerMove.Size = new System.Drawing.Size(41, 13);
+            this.labelFormerMove.TabIndex = 13;
+            this.labelFormerMove.Text = "labelFormerMove";
             // 
             // ReversiForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(490, 367);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelFormerMove);
+            this.Controls.Add(this.labelPreviousMove);
+            this.Controls.Add(this.labelLastMove);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelGame);
@@ -946,7 +947,5 @@ class ReversiForm : Form
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
     }
-
 }
